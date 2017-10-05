@@ -32,43 +32,43 @@ Nên nhớ những điều trên nhé, bởi vì có khi cần dùng hoặc debu
 
 ```smart header="engines hoạt động như thế nào?"
 
-Engines are complicated. But the basics are easy.
+Để tìm hiểu sâu về Engine thì phức tạp vãi lúa. Nhưng nôm na thì có ba bước cơ bản sau khi bạn chạy code.
 
-1. Engine (embedded if it's a browser) đọc và phân tích code của bạn.
-2. Then it converts ("compiles") the script to the machine language.
-3. And then the machine code runs, pretty fast.
+1. Engine đọc và phân tích code của bạn.
+2. Biên dịch code sang ngôn ngữ máy.
+3. Và chạy thôi. Khá là nhanh.
 
-The engine applies optimizations on every stage of the process. It even watches the compiled script as it runs, analyzes the data that flows through it and applies optimizations to the machine code based on that knowledge. At the end, scripts are quite fast.
+Quá trình này được Engine tối ưu hóa theo từng giai đoạn bên trên. Nó theo dõi code được biên dịch và chạy như thế nào, phân tích các dữ liệu này để tối ưu. Cuối cùng thì cho ra kết quả là code JavaScript thường chạy rất là nhanh.
 ```
 
-## What can in-browser JavaScript do?
+## JavaScript trên trình duyệt Web có thể làm gì?
 
-The modern JavaScript is a "safe" programming language. It does not provide low-level access to memory or CPU, because it was initially created for browsers which do not require it.
+JavaScript là một ngôn ngữ an toàn. Nó không cho truy nhập vào CPU và bộ nhớ máy, bởi vì ban đầu nó được tạo ra để chỉ làm việc với trình duyệt Web.
 
-The capabilities greatly depend on the environment that runs JavaScript. For instance, [Node.JS](https://wikipedia.org/wiki/Node.js) supports functions that allow JavaScript to read/write arbitrary files, perform network requests etc.
+Khả năng của JavaScript phụ thuộc rất nhiều vào môi trường chạy JavaScript. Ví dụ, , [Node.JS](https://wikipedia.org/wiki/Node.js) hỗ trợ các chức năng cho phép JavaScript đọc / ghi các tập tin tùy ý, thực hiện các yêu cầu mạng, vv
 
-In-browser JavaScript can do everything related to webpage manipulation, interaction with the user and the webserver.
+Trên trình duyệt Web, JavaScript có thể làm bất cứ thứ gì liên quan đến trang web, cũng như tương tác với người dùng và máy chủ Web.
 
-For instance, in-browser JavaScript is able to:
+Ví dụ, trên trình duyệt JavaScript có thể:
 
-- Add new HTML to the page, change the existing content, modify styles.
-- React to user actions, run on mouse clicks, pointer movements, key presses.
-- Send requests over the network to remote servers, download and upload files (so-called [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) and [COMET](https://en.wikipedia.org/wiki/Comet_(programming)) technologies).
-- Get and set cookies, ask questions to the visitor, show messages.
-- Remember the data on the client-side ("local storage").
+- Tạo các thẻ HTML vào trang web, thay đổi nội dung, chỉnh sửa styles.
+- Phản hồi các thao tác của người dùng, chạy các hành động khi click chuột, di chuyển con trỏ, nhấn phím.
+- Gửi các yêu cầu đến máy chủ nào đó qua mạng, download và upload files (Cái mà người ta hay gọi là [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) và [COMET](https://en.wikipedia.org/wiki/Comet_(programming)) ).
+- Truy vấn và cài đặt cookies, hỏi người dùng vài câu hỏi, đưa ra các thông báo trên trang web....
+- Lưu trữ dữ liệu (username, password, form mẫu....) trên trình duyệt Web của bạn.
 
-## What CAN'T in-browser JavaScript do?
+## JavaScript không thể làm được gì trên trình duyệt Web?
 
-JavaScript's abilities in the browser are limited for the sake of the user's safety. The aim is to prevent an evil webpage from accessing private information or harming the user's data.
+Khả năng của JavaScript trong trình duyệt được giới hạn vì sự an toàn của người dùng. Mục đích là để ngăn chặn các trang web độc hại truy cập thông tin cá nhân hoặc đánh cắp dữ liệu của người dùng.
 
-The examples of such restrictions are:
+Ví dụ:
 
-- JavaScript on a webpage may not read/write arbitrary files on the hard disk, copy them or execute programs. It has no direct access to OS system functions.
+- JavaScript trên Website không thể đọc / ghi / copy các tập tin trên ổ đĩa, không thể thực thi các chương trình. Và không có quyền truy cập trực tiếp vào các chức năng của hệ điều hành.
 
-    Modern browsers allow it to work with files, but the access is limited and only provided if the user does certain actions, like "dropping" a file into a browser window or selecting it via an `<input>` tag.
+    Các trình duyệt hiện đại cho phép JavaScript làm việc với các tệp, nhưng quyền truy cập bị hạn chế và chỉ được cung cấp nếu người dùng thực hiện các hành động nhất định, như kéo-thả (dropping) một file vào cửa sổ trình duyệt hoặc chọn file qua thẻ `<input>`.
 
-    There are ways to interact with camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
-- Different tabs/windows generally do not know about each other. Sometimes they do, for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other if they come from different sites (from a different domain, protocol or port).
+    Có nhiều cách để tương tác với webcam/ camera/ micro và các thiết bị khác nhưng chúng cần có sự cho phép rõ ràng của người dùng. Vì vậy, một trang Web kích hoạt JavaScript không thể lén kích hoạt webcam, ghi hình và gửi thông tin cho [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
+- Các tabs/windows không nhận biết lẫn nhau. Kể cả trong trường hợp từ Tab này bạn chạy JavaScript mở ra một tab khác. But even in this case, JavaScript from one page may not access the other if they come from different sites (from a different domain, protocol or port).
 
     This is called the "Same Origin Policy". To work around that, *both pages* must contain a special JavaScript code that handles data exchange.
 
