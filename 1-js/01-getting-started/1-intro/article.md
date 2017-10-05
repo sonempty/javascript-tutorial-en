@@ -1,40 +1,40 @@
-# An Introduction to JavaScript
+# Giới thiệu về ngôn ngữ JavaScript
 
-Let's see what's so special about JavaScript, what we can achieve with it and which other technologies play well with it.
+Hãy xem những điểm đặc biệt về JavaScript, và chúng ta sẽ làm được gì với JavaScript.
 
-## What is JavaScript?
+## JavaScript là cái méo gì?
 
-*JavaScript* was initially created to *"make webpages alive"*.
+*JavaScript* ban đầu được tạo ra để *"Làm cho trang web sống động hơn (make webpages alive)"*.
 
-The programs in this language are called *scripts*. They can be written right in the HTML and execute automatically as the page loads.
+Các chương trình trong ngôn ngữ này được gọi là *kịch bản(scripts)*. Chúng được nhúng trong HTML và được thực thi một cách tự động khi trang web được tải.
 
-Scripts are provided and executed as a plain text. They don't need a special preparation or a compilation to run.
+Scripts được viết và thực thi như văn bản thuần túy (plain text) mà không cần trình biên dịch, hay bất cứ sự chuẩn bị nào như các ngôn ngữ lập trình khác.
 
-In this aspect, JavaScript is very different from another language called [Java](http://en.wikipedia.org/wiki/Java).
+Về khía cạnh này, JavaScript rất khác với [Java](http://en.wikipedia.org/wiki/Java).
 
-```smart header="Why <u>Java</u>Script?"
-When JavaScript was created, it initially had another name: "LiveScript". But Java language was very popular at that time, so it was decided that positioning a new language as a "younger brother" of Java would help.
+```smart header="Tại sao là <u>Java</u>Script?"
+Khi JavaScript được tạo ra, ban đầu nó có tên là "LiveScript". Nhưng tại thời điểm đó, ngôn ngữ Java đang rất thông dụng và nổi tiếng, vì vậy nó được đặt lại tên là JavaSctips để ăn hôi tên tuổi của Java. Này gọi là thấy sang bắt quàng làm họ ấy mà.
 
-But as it evolved, JavaScript became a fully independent language, with its own specification called [ECMAScript](http://en.wikipedia.org/wiki/ECMAScript), and now it has no relation to Java at all.
+Nhưng khi phát triển, JavaScript đã trở thành một ngôn ngữ hoàn toàn độc lập, với các đặc tả riêng được gọi là [ECMAScript ](http://en.wikipedia.org/wiki/ECMAScript), và nói chung thì JavaScript và Java chẳng có liên quan gì đến nhau.
 ```
 
-At present, JavaScript can execute not only in the browser, but also on the server, or actually on any device where there exists a special program called [the JavaScript engine](https://en.wikipedia.org/wiki/JavaScript_engine).
+Hiện nay, JavaScript không chỉ chạy trên trình duyệt (front-end), mà còn chạy được trên máy chủ (back-end), hoặc trên bất kỳ thiết bị nào có hỗ trợ một chương trình đặc biệt được gọi nôm na là cỗ máy JavaScript [the JavaScript engine](https://en.wikipedia.org/wiki/JavaScript_engine).
 
-The browser has an embedded engine, sometimes it's also called a "JavaScript virtual machine".
+Trên trình duyệt bạn sử dụng như Chrome, FireFox, Edge...đã nhúng sẵn JavaScript Engine rồi, đôi lúc người ta cũng hay gọi là "JavaScript virtual machine" (Máy ảo JavaScript) - Dịch ra nghe chuối VCL
 
-Different engines have different "codenames", for example:
+Engine nó cũng có nhiều loại. Mỗi engines khác nhau lại có "kiểu code" khác nhau, Ví dụ:
 
-- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
-- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
-- ...There are other codenames like "Trident", "Chakra" for different versions of IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari etc.
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- trên Chrome và Opera.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- trên Firefox.
+- ...và một số engine khác như "Trident", "Chakra" cho các phiên bản IE, "ChakraCore" cho Microsoft Edge, "Nitro" và "SquirrelFish" cho Safari, vân vân.
 
-The terms above are good to remember, because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome and Opera.
+Nên nhớ những điều trên nhé, bởi vì có khi cần dùng hoặc debug. Ví dụ "tính năng X nào đó được hỗ trợ bởi Engine V8", thì sẽ chạy được trên Chrome và Opera.
 
-```smart header="How engines work?"
+```smart header="engines hoạt động như thế nào?"
 
 Engines are complicated. But the basics are easy.
 
-1. The engine (embedded if it's a browser) reads ("parses") the script.
+1. Engine (embedded if it's a browser) đọc và phân tích code của bạn.
 2. Then it converts ("compiles") the script to the machine language.
 3. And then the machine code runs, pretty fast.
 
