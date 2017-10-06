@@ -68,54 +68,51 @@ Ví dụ:
     Các trình duyệt hiện đại cho phép JavaScript làm việc với các tệp, nhưng quyền truy cập bị hạn chế và chỉ được cung cấp nếu người dùng thực hiện các hành động nhất định, như kéo-thả (dropping) một file vào cửa sổ trình duyệt hoặc chọn file qua thẻ `<input>`.
 
     Có nhiều cách để tương tác với webcam/ camera/ micro và các thiết bị khác nhưng chúng cần có sự cho phép rõ ràng của người dùng. Vì vậy, một trang Web kích hoạt JavaScript không thể lén kích hoạt webcam, ghi hình và gửi thông tin cho [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
-- Các tabs/windows không nhận biết lẫn nhau. Kể cả trong trường hợp từ Tab này bạn chạy JavaScript mở ra một tab khác. But even in this case, JavaScript from one page may not access the other if they come from different sites (from a different domain, protocol or port).
+- Các tabs/windows không nhận biết lẫn nhau. Kể cả trong trường hợp từ Tab này bạn chạy JavaScript mở ra một tab khác, cũng không thể nếu mở các trang web khác nhai (khác địa chỉ, protocol hoặc port).
 
-    This is called the "Same Origin Policy". To work around that, *both pages* must contain a special JavaScript code that handles data exchange.
+    Để có thể trao đổi dữ liệu giữa hai tab với nhau thì 2 trang web mở trên 2 tab này phải có các đoạn script đặc biệt để trao đổi dữ liệu qua lại.
 
-    The limitation is again for user's safety. A page from `http://anysite.com` which a user has opened must not be able to access another browser tab with the URL `http://gmail.com` and steal information from there.
-- JavaScript can easily communicate over the net to the server where the current page came from. But its ability to receive data from other sites/domains is crippled. Though possible, it requires explicit agreement (expressed in HTTP headers) from the remote side. Once again, that's safety limitations.
+    Sự giới hạn này đảm bảo an toàn cho người dùng. Ví dụ bạn mở trang web `http://anysite.com` ở một tab và vào `http://gmail.com` ở tab khác. Sẽ ko thể đọc trộm gmail được.
+- JavaScript có thể dễ dàng truyền tải dữ liệu với máy chủ Web đang mở. Còn khả năng nhận dữ liệu từ các trang web / tên miền khác bị chặn. Nếu muốn mở, đòi hỏi sự đồng ý rõ ràng (thể hiện trong tiêu đề HTTP) từ phía xa. Một lần nữa, đó là những hạn chế về an toàn và bảo mật.
 
 ![](limitations.png)
 
-Such limits do not exist if JavaScript is used outside of the browser, for example on a server. Modern browsers also allow installing plugin/extensions which may get extended permissions.
+Các giới hạn đó không tồn tại nếu JavaScript được sử dụng bên ngoài trình duyệt, ví dụ trên máy chủ. Các trình duyệt hiện đại cũng cho phép cài đặt plugin / tiện ích mở rộng có thể nhận được giấy phép mở rộng.
 
-## What makes JavaScript unique?
+## Điều gì làm cho JavaScript trở nên độc nhất vô nhị?
 
-There are at least *three* great things about JavaScript:
+Có ít nhất ba điều sau:
 
 ```compare
-+ Full integration with HTML/CSS.
-+ Simple things done simply.
-+ Supported by all major browsers and enabled by default.
++ Tích hợp hoàn toàn với HTML/CSS.
++ Những việc đơn giản được thực hiện một cách đơn giản.
++ Được hỗ trợ bởi hầu hết các trình duyệt ở cấu hình mặc định.
 ```
+Ba điều này chỉ tồn tại trong JavaScript mà không phải là một công nghệ nào khác trên trình duyệt..
 
-Combined, these three things exist only in JavaScript and no other browser technology.
+Điều này làm cho JavaScript trở nên độc nhất vô nhị. Và đó là lý do tại sao JavaScript là công cụ phổ biến nhất để tạo các giao diện trình duyệt web.
 
-That's what makes JavaScript unique. That's why it's the most widespread tool to create browser interfaces.
-
-While planning to learn a new technology, it's beneficial to check its perspectives. So let's move on to the modern trends that include new languages and browser abilities.
+Khi lên kế hoạch học tập một công nghệ mới, điều này có lợi cho việc kiểm tra nhu cầu sử dụng, đặc điểm công nghệ. Vì vậy để bắt kịp với thế giới, hãy chuyển sang các xu hướng hiện đại nhất bao gồm đặc tả mới (như ES6, ES7...) và khả năng tương thích trình duyệt hiện tại cũng như tương lai.
 
 
-## Languages "over" JavaScript
+## Các ngôn ngữ dựa trên JavaScript
 
-The syntax of JavaScript does not suit everyone's needs. Different people want different features.
+Cú pháp của JavaScript không phải luôn phù hợp với nhu cầu của mọi người. Vì mỗi người lại muốn có những tính năng khác nhau, làm các dự án khác nhau.
 
-That's to be expected, because projects and requirements are different for everyone.
+Gần đây có rất nhiều ngôn ngữ mới xuất hiện, code của chúng được được chuyển đổi sang JavaScript trước khi chạy trong trình duyệt.
 
-So recently a plethora of new languages appeared, which are *transpiled* (converted) to JavaScript before they run in the browser.
+Các công cụ hiện đại làm cho quá trình chuyển đổi tự động và rất nhanh, thực sự cho phép các nhà phát triển code mã bằng một ngôn ngữ khác và nó sẽ được hệ thống dịch sang JavaScript tự động hoàn toàn.
 
-Modern tools make the transpilation very fast and transparent, actually allowing developers to code in another language and autoconverting it "under the hood".
+Ví dụ về các ngôn ngữ này:
 
-Examples of such languages:
+- [CoffeeScript](http://coffeescript.org/) cú pháp tương tự JavaScript nhưng ngắn hơn, cho phép để viết code chính xác hơn và rõ ràng. Giống như Rub vậy.
+- [TypeScript](http://www.typescriptlang.org/) tập trung vào việc "gõ dữ liệu một cách chặt chẽ", để đơn giản hóa sự phát triển và hỗ trợ của các hệ thống phức tạp. Nó được phát triển bởi Microsoft.
+- [Dart](https://www.dartlang.org/) là một ngôn ngữ độc lập có Engine riêng chạy ở môi trường không phải trình duyệt (như ứng dụng dành cho thiết bị di động). Nó ban đầu được cung cấp bởi Google như là một sự thay thế cho JavaScript, nhưng đến nay, các trình duyệt yêu cầu nó chuyển đổi sang JavaScript trước khi chạy.
 
-- [CoffeeScript](http://coffeescript.org/) is a "syntax sugar" for JavaScript, it introduces shorter syntax, allowing to write more precise and clear code. Usually Ruby devs like it.
-- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing", to simplify development and support of complex systems. It is developed by Microsoft.
-- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps). It was initially offered by Google as a replacement for JavaScript, but as of now, browsers require it to be transpiled to JavaScript just like the ones above.
+Còn có nhiều nữa. Tất nhiên ngay cả khi chúng ta sử dụng một trong những ngôn ngữ đó, chúng ta cũng nên biết JavaScript, để thực sự hiểu những gì chúng ta đang làm.
 
-There are more. Of course even if we use one of those languages, we should also know JavaScript, to really understand what we're doing.
+## Tóm tắt lại
 
-## Summary
-
-- JavaScript was initially created as a browser-only language, but now it is used in many other environments as well.
-- At this moment, JavaScript has a unique position as the most widely-adopted browser language with full integration with HTML/CSS.
-- There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
+- JavaScript ban đầu được tạo ra như là một ngôn ngữ duy nhất của trình duyệt, nhưng bây giờ nó được sử dụng trong nhiều môi trường khác nữa.
+- Tại thời điểm này, JavaScript là ngôn ngữ duy nhất, phổ biến nhất mà các trình duyệt đều sử dụng và tích hợp hoàn toàn với HTML / CSS.
+- Có nhiều ngôn ngữ được chuyển tải từ JavaScript và cung cấp một số tính năng nhất định. Chúng tôi khuyên bạn nên xem xét chúng, ít nhất một thời gian ngắn, sau khi đã pro JavaScript rồi.
