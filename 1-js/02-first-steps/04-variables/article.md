@@ -8,7 +8,7 @@ Biến sẽ được sử dụng để lưu trữ tất cả các thông tin tr�
 
 [cut]
 
-## biến số
+## Biến số
 
 Một biến [variable](https://en.wikipedia.org/wiki/Variable_(computer_science)) là một cái tên và lưu trữ thông tin nào đó.
 
