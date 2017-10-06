@@ -24,39 +24,38 @@ Tất cả các IDE được liệt kê ở trên dùng được trên Windows v
 
 Hầu hết các IDE đều phải trả phí, nhưng có cho thời gian dùng thử. Chi phí của họ thường không đáng kể so với mức lương của nhà phát triển đủ điều kiện, vì vậy chỉ cần chọn mức giá tốt nhất cho bạn. (Lừa đó, mắc lòi ra :D)
 
-## Lightweight editors
+## Lightweight editors - trình biên tập nhẹ
 
-"Lightweight editors" are not as powerful as IDEs, but they're fast, elegant and simple.
+"Lightweight editors" không mạnh mẽ như IDE, nhưng mà nó nhẹ, nhanh và đơn giản.
 
-They are mainly used to instantly open and edit a file.
+Chủ yếu dùng để mở và chỉnh sửa file.
 
-The main difference between a "lightweight editor" and an "IDE" is that an IDE works on a project-level, so it loads much more data on start, analyzes the project structure if needed and so on. A lightweight editor is much faster if we need only one file.
+Sự khác biệt chính giữa "Lightweight editors" và "IDE" là một IDE hoạt động ở cấp độ dự án, vì vậy nó sẽ tải nhiều dữ liệu hơn khi bắt đầu, phân tích cấu trúc dự án nếu cần thiết. Lightweight editors nhanh hơn nhiều vì load tệp riêng lẽ.
+Trong thực tế, các Lightweight editors có thể có rất nhiều plugin bao gồm cả phân tích cú pháp, tự động hoàn thành lệnh, vì vậy không có ranh giới rõ ràng giữa Lightweight editors và IDE.
 
-In practice, lightweight editors may have a lot of plugins including directory-level syntax analyzers and autocompleters, so there's no strict border between a lightweight editor and an IDE.
-
-The following options deserve your attention:
+Một số Lightweight editors đáng được chú ý:
 
 - [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
 - [Atom](https://atom.io/) (cross-platform, free).
 - [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
 - [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
-- Vim and Emacs are also cool, if you know how to use them.
+- Vim và Emacs cũng tàm tạm, nếu bạn quen với style của Linux
 
-## My favorites
+## Tác giả dùng cái gì ?
 
-The personal preference of the author is to have both an IDE for projects and a lightweight editor for quick and easy file editing.
+Sở thích cá nhân của tác giả là có cả một IDE cho các dự án và một trình soạn thảo nhẹ để chỉnh sửa tập tin nhanh chóng và dễ dàng.
 
-I'm using:
+Tôi dùng:
 
-- [WebStorm](http://www.jetbrains.com/webstorm/) for JS, and if there is one more language in the project, then I switch to other Jetbrains editors like [PHPStorm](http://www.jetbrains.com/phpstorm/) (PHP), [IDEA](http://www.jetbrains.com/idea/) (Java), [RubyMine](http://www.jetbrains.com/ruby/) (Ruby). There are editors for other languages too, but I haven't used them.
-- As a lightweight editor -- [Sublime Text](http://www.sublimetext.com) or [Atom](https://atom.io/).
+- [WebStorm](http://www.jetbrains.com/webstorm/) cho JS, và nếu trong dự án có cả ngôn ngữ khác nữa thì tôi dùng thêm các sản phẩm của Jetbrains như [PHPStorm](http://www.jetbrains.com/phpstorm/) (PHP), [IDEA](http://www.jetbrains.com/idea/) (Java), [RubyMine](http://www.jetbrains.com/ruby/) (Ruby).
+- lightweight editor -- tôi dùng [Sublime Text](http://www.sublimetext.com) hoặc [Atom](https://atom.io/).
 
-If you don't know what to choose, you can consider these ones.
+Nếu bạn không biết chọn gì, thì chọn đại Atom đi :D.
 
-## Let's not argue
+## Đừng tranh luận chọn dùng Editor nào nhé
 
-The editors in the lists above are those that either I or my friends who I consider good developers have been using for a long time and are happy with.
+Các Code Editor trong danh sách ở trên là được tôi hoặc bạn bè của tôi cho rằng các nhà phát triển giỏi đã và đang sử dụng trong một thời gian dài và họ khuyến khích người khác sử dụng.
 
-There are other great editors in our big world. Please choose the one you like the most.
+Có nhiều Editor vĩ đại khác trong thế giới lập trình rộng lớn của chúng ta. Vui lòng chọn một trong những bạn thích nhất.
 
-The choice of an editor, like any other tool, is individual and depends on your projects, habits, personal preferences.
+Việc lựa chọn một trình soạn thảo, giống như bất kỳ công cụ nào khác, là một việc cá nhân và phụ thuộc vào các dự án, thói quen, sở thích cá nhân của bạn.
