@@ -1,21 +1,21 @@
-First, the variable for the name of our planet.
+Có bố nào đặt tên biến là `earth` không đó ?
 
-That's simple:
+Đơn giản đáp án là:
 
 ```js
 let ourPlanetName = "Earth";
 ```
 
-Note, we could use a shorter name `planet`, but it might be not obvious what planet it refers to. It's nice to be more verbose. At least until the variable isNotTooLong.
+Có thể đơn giản dùng `planet`, nhưng hành tinh gì, vẫn thiếu ý nghĩa, đặt ourPlanerName cũng không dài.
 
-Second, the name of the current visitor:
+Thứ hai là Người ghé thăm hiện thời trang web:
 
 ```js
 let currentUserName = "John";
 ```
 
-Again, we could shorten that to `userName` if we know for sure that the user is current.
+Có thể dùng `userName` nếu chắc chắn là hiện thời "current".
 
-Modern editors and autocomplete make long variable names easy to write. Don't save on them. A name with 3 words in it is fine.
+Các Editor có thể auto-complete cho bạn. Nên đừng tiết kiệm, cứ đặt tên dài không sao.
 
-And if your editor does not have proper autocompletion, get [a new one](/editors).
+Và nếu Editor không có chức năng autocompletion, dùng cái khác nhé [a new one](/editors).
