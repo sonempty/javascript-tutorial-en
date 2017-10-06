@@ -4,7 +4,7 @@ importance: 4
 
 # Uppercase const?
 
-Examine the following code:
+Kiểm tra đoạn mã sau đây:
 
 ```js
 const birthday = '18.04.1982';
@@ -12,9 +12,9 @@ const birthday = '18.04.1982';
 const age = someCode(birthday);
 ```
 
-Here we have a constant `birthday` date and the `age` is calculated from `birthday` with the help of some code (it is not provided for shortness, and because details don't matter here).
+Hằng số `birthday` và `age` được tính toán từ `birthday` từ một vài tính toán nào đó `someCode`.
 
-Would it be right to use upper case for `birthday`? For `age`? Or even for both?
+Có nên đặt tên kiểu viết hoa cho `birthday`? và `age`? hay cả hai?
 
 ```js
 const BIRTHDAY = '18.04.1982'; // make uppercase?
