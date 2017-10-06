@@ -1,4 +1,4 @@
-# Chế độ hiện đại Strict mode, "use strict"
+# Chế độ nghiêm ngặt Strict mode, "use strict"
 
 Trong một thời gian dài JavaScript đã được phát triển mà không có vấn đề gì về tương thích. Các tính năng mới được thêm vào ngôn ngữ, đồng thời chức năng cũ không thay đổi.
 
