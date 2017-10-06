@@ -2,7 +2,7 @@ importance: 3
 
 ---
 
-# Giving the right name
+# Đặt tên đúng
 
-1. Create the variable with the name of our planet. How would you name such a variable?
-2. Create the variable to store the name of the current visitor. How would you name that variable?
+1. Đặt tên biến là hành tinh chúng ta đang sống.
+2. Đặt tên biến là người dùng đang ghé thăm trang web.
