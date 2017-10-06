@@ -1,28 +1,28 @@
-# Code editors
+# Trình biên soạn - Code editors
 
-A code editor is the place where a programmer spends most of his time.
+Là nơi chiếm nhiều thời gian nhất của lập trình viên. Với một dự án lớn, nhiều file nhiều ngôn ngữ, cần tích hợp đủ thứ, cần chạy thử, debug, kiểm tra lỗi chính tả....tất nhiên là bạn không thể làm tay, mở từng file, kiểm tra từng code được rồi đúng không. Rất tốn thời gian và công sức. Vì vậy cần Coder Editor.
 
-There are two archetypes: IDE and lightweight editors. Many people feel comfortable choosing one tool of each type.
+Có 2 loại chính: IDE và lightweight editors. Ai thích dùng loại nào thì dùng.
 
 [cut]
 
 ## IDE
 
-The term [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) (Integrated Development Environment) means a powerful editor with many features that usually operates on a "whole project". As said, that's not just an editor, but a full-scale "development environment".
+Thuật ngữ [IDE] (https://en.wikipedia.org/wiki/Integrated_development_environment) (Môi trường phát triển tích hợp) có nghĩa là một trình soạn thảo mạnh mẽ với nhiều tính năng thường hoạt động trên "toàn bộ dự án". Như đã nói, đó không chỉ là một biên tập viên, mà còn là một "môi trường phát triển" đầy đủ.
 
-An IDE loads the project (can be many files), and then allows navigation between files, provides autocompletion based on the whole project, integrates with a version management system (like [git](https://git-scm.com/)), a testing environment and other "project-level" stuff.
+IDE tải dự án (có thể là nhiều tệp, file), và sau đó cho phép điều hướng giữa các tệp tin, cung cấp tự động hoàn thành dựa trên toàn bộ dự án, tích hợp với hệ thống quản lý phiên bản (như [git] (https://git-scm.com/) ), một môi trường thử nghiệm và công cụ khác.
 
-If you haven't considered selecting an IDE yet, look at the following variants:
+Có thể tham khảo một số IDE bên dưới:
 
-- IntelliJ editors: [WebStorm](http://www.jetbrains.com/webstorm/) for frontend development and [PHPStorm (PHP)](http://www.jetbrains.com/phpstorm/), [IDEA (Java)](http://www.jetbrains.com/idea/), [RubyMine (Ruby)](http://www.jetbrains.com/ruby/) and others if you need additional languages.
-- Visual Studio is fine if you're a .NET developer, and a free version is available ([Visual Studio Community](https://www.visualstudio.com/vs/community/))
-- Eclipse-based products, like [Aptana](http://www.aptana.com/) and Zend Studio.
-- [Komodo IDE](http://www.activestate.com/komodo-ide) and its lightweight free version [Komodo Edit](http://www.activestate.com/komodo-edit).
+- IntelliJ editors: [WebStorm](http://www.jetbrains.com/webstorm/) cho phát triển frontend và [PHPStorm (PHP)](http://www.jetbrains.com/phpstorm/), [IDEA (Java)](http://www.jetbrains.com/idea/), [RubyMine (Ruby)](http://www.jetbrains.com/ruby/) nếu muốn dùng thêm các ngôn ngữ khác.
+- Visual Studio nếu bạn là lập trình viên .NET, bản này miễn phí nhé ([Visual Studio Community](https://www.visualstudio.com/vs/community/))
+- Bộ IDE của Eclipse, như [Aptana](http://www.aptana.com/) và Zend Studio.
+- [Komodo IDE](http://www.activestate.com/komodo-ide) nhẹ và miễn phí [Komodo Edit](http://www.activestate.com/komodo-edit).
 - [Netbeans](http://netbeans.org/).
 
-All of the IDEs listed above are available on both Windows and Mac, and the IDEs other than Visual Studio are also available on Linux.
+Tất cả các IDE được liệt kê ở trên dùng được trên Windows và Mac và các IDE khác ngoài ra Visual Studio dùng được trên Linux.
 
-Most IDEs are paid, but have a trial period. Their cost is usually negligible compared to a qualified developer's salary, so just choose the best one for you.
+Hầu hết các IDE đều phải trả phí, nhưng có cho thời gian dùng thử. Chi phí của họ thường không đáng kể so với mức lương của nhà phát triển đủ điều kiện, vì vậy chỉ cần chọn mức giá tốt nhất cho bạn. (Lừa đó, mắc lòi ra :D)
 
 ## Lightweight editors
 
