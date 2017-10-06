@@ -1,60 +1,57 @@
 # Developer console
 
-Code is prone to errors. You are quite likely to make errors... Oh, what am I talking about? You are *absolutely* going to make errors, at least if you're a human, not a [robot](https://en.wikipedia.org/wiki/Bender_(Futurama)).
+Code thì thường hay có lỗi. Có thể sai lỗi chính tả, thiếu code, không hỗ trợ chức năng....và khi lỗi thường sẽ có thông báo là lỗi gì trên màn hình console.
 
-But in the browser, a user doesn't see the errors by default. So, if something goes wrong in the script, we won't see what's broken and can't fix it.
+Tuy nhiên trên trình duyệt thì sẽ không thấy được các thông báo lỗi này để mà từ đó chúng ta có được thông tin và đi tìm xem đang lỗi chỗ nào. Vậy phải làm sao đây ?
 
-To see errors and get a lot of other useful information about scripts, browsers have embedded "developer tools".
+Để xem các thông tin lỗi này trên trình duyệt có nhúng sẵn chức năng gọi là "công cụ cho nhà phát triển" "developer tools".
 
-Most often developers lean towards Chrome or Firefox for development, because those browsers have the best developer tools. Other browsers also provide developer tools, sometimes with special features, but are usually playing "catch-up" to Chrome or Firefox. So most people have a "favorite" browser and switch to others if a problem is browser-specific.
+Các lập trình viên thường chọn Developer Tool trên Chrome hoặc FireFox. Vì 2 thằng này pro nhất so với tất cả Developer tool khác.
 
-Developer tools are really powerful, there are many features. To start, we'll learn how to open them, look at errors and run JavaScript commands.
+Developer tools thực sự mạnh mẽ và có nhiều chức năng. Chúng ta sẽ học cách sử dụng Developer Tool bên dưới.
 
 [cut]
 
 ## Google Chrome
 
-Open the page [bug.html](bug.html).
+Mở trang này lên [bug.html](bug.html). Yên tâm, méo có Virus đâu
 
-There's an error in the JavaScript code on it. It's hidden from a regular visitor's eyes, so let's open developer tools to see it.
+Có lỗi xảy ra trên trang này tuy nhiên chúng ta chẳng thấy được. Giờ mở Developer Tool lên xem nào.
 
-Press `key:F12` or, if you're on Mac, then `key:Cmd+Opt+J`.
+Nhấn `key:F12` hoặc chuột phải và chọn `inspect`.
 
-The developer tools will open on the Console tab by default.
-
-It looks somewhat like this:
+Nhìn nó sẽ như này:
 
 ![chrome](chrome.png)
 
-The exact look of developer tools depends on your version of Chrome. It changes from time to time, but should be similar.
+Ở tab console sẽ thấy nó thông báo lỗi.
 
-- Here we can see the red-colored error message. In this case the script contains an unknown "lalala" command.
-- On the right, there is a clickable link to the source `bug.html:12` with the line number where the error has occurred.
+- Cái dòng thông báo màu đỏ đó chính là 1 cái lỗi. Nó nói là "lalala" không được định nghĩa.
+- Tiếp, click vào cái link màu xanh `bug.html:12` 12 ở đây là dòng code đang lỗi.
 
-Below the error message there is a blue `>` symbol. It marks a "command line" where we can type JavaScript commands and press `key:Enter` to run them (`key:Shift+Enter` to input multi-line commands).
+Bên dưới thông báo lỗi là dấu nhắc lệnh màu xanh `>` . Gõ các câu lệnh JavaScript vào đây và nhấn `key:Enter` để chạy (`key:Shift+Enter` để nhập nhiều dòng lệnh).
 
-Now we can see errors and that's enough for the start. We'll be back to developer tools later and cover debugging more in-depth in the chapter <info:debugging-chrome>.
+Ok thấy lỗi rồi thì quay lại Code Editor và sửa lại dòng code số 12 trong file bug.html đi.
+Sau này sẽ tìm hiểu sâu hơn về debug trên Chrome tại <info:debugging-chrome>.
 
 
-## Firefox, Edge and others
+## Firefox, Edge và những thằng khác
 
-Most other browsers use `key:F12` to open developer tools.
-
-The look & feel of them is quite similar. Once you know how to use one of them (you can start with Chrome), you can easily switch to another.
+Nói chung là tương tự thôi, có thể nhìn giao diện nó hơi khác chút.
 
 ## Safari
 
-Safari (Mac browser, not supported by Windows/Linux) is a little bit special here. We need to enable the "Develop menu" first.
+Safari (Trình duyệt của máy MAC) thì hơi khác chút. Cần mở chức năng "Develop menu" trước.
 
-Open Preferences and go to "Advanced" pane. There's a checkbox at the bottom:
+Mở Preferences --> "Advanced" Đánh dấu vào cái checkbox như hình:
 
 ![safari](safari.png)
 
-Now `key:Cmd+Opt+C` can toggle the console. Also note that the new top menu item named "Develop" has appeared. It has many commands and options.
+Nhấn `key:Cmd+Opt+C` để mở Developer Tool nhé. Thân ái.
 
-## Summary
+## Tóm tắt
 
-- Developer tools allow us to see errors, run commands, examine variables and much more.
-- They can be opened with `key:F12` for most browsers under Windows. Chrome for Mac needs `key:Cmd+Opt+J`, Safari: `key:Cmd+Opt+C` (need to enable first).
+- Developer tools giúp chúng ta thấy được lỗi, chạy lệnh và nhiều chức năng khác.
+- Mở Developer tool bằng cách nhấn `key:F12` đối với đa số trình duyệt trên Windows. Chrome cho Mac nhấn `key:Cmd+Opt+J`, Safari: `key:Cmd+Opt+C` (nhớ mở chức năng này lên đã).
 
-Now we have the environment ready. In the next section we'll get down to JavaScript.
+Bây giờ chúng ta đã có công cụ và môi trường sẵn sàng để học tập. Trong phần kế tiếp, chúng ta sẽ đến với JavaScript.
