@@ -1,4 +1,4 @@
-# Kiểu dữ liệu - Data types
+# Các kiểu dữ liệu - Data types
 
 Biến trong JavaScript có thể chứa dữ liệu nào đó và đồng thời có thể thay đổi giá trị:
 
