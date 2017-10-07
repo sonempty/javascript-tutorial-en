@@ -1,6 +1,6 @@
-# Data types
+# Kiểu dữ liệu - Data types
 
-A variable in JavaScript can contain any data. A variable can at one moment be a string and later receive a numeric value:
+Biến trong JavaScript có thể chứa dữ liệu nào đó và đồng thời có thể thay đổi giá trị:
 
 ```js
 // no error
@@ -8,65 +8,65 @@ let message = "hello";
 message = 123456;
 ```
 
-Programming languages that allow such things are called "dynamically typed", meaning that there are data types, but variables are not bound to any of them.
+Ngôn ngữ lập trình như vậy được gọi là động "dynamically typed", có nghĩa là có nhiều kiểu dữ liệu trong ngôn ngữ, nhưng các biến không bị ràng buộc bởi chúng.
 
-There are seven basic data types in JavaScript. Here we'll study the basics, and in the next chapters we'll talk about each of them in detail.
+có 7 kiểu dữ liệu cơ bản trong JavaScript. Chúng ta học sơ qua về từng loại dữ liệu sau đó sẽ tìm hiểu kỹ mỗi loại ở các chương tiếp theo.
 
 [cut]
 
-## A number
+## Kiểu số - number
 
 ```js
 let n = 123;
 n = 12.345;
 ```
 
-The *number* type serves both for integer and floating point numbers.
+Kiểu *number* bao gồm số nguyên và số thực.
 
-There are many operations for numbers, e.g. multiplication `*`, division `/`, addition `+`, subtraction `-` and so on.
+Trên kiểu số có các phép toán như: nhân `*`, chia `/`, cộng `+`, trừ `-` và một số phép toán khác nữa.
 
-Besides regular numbers, there are so-called "special numeric values" which also belong to that type: `Infinity`, `-Infinity` and `NaN`.
+Bên cạnh các số cụ thể còn có các số đặc biệt như: dương vô cùng - `Infinity`, âm vô cùng - `-Infinity` và số không xác định `NaN`.
 
-- `Infinity` represents the mathematical [Infinity](https://en.wikipedia.org/wiki/Infinity) ∞. It is a special value that's greater than any number.
+- `Infinity` dương vô cùng [Infinity](https://en.wikipedia.org/wiki/Infinity) ∞. là một số dương lớn vô cùng.
 
-    We can get it as a result of division by zero:
+    Chúng ta nhận được nó khi chia một số dương cho số 0:
 
     ```js run
     alert( 1 / 0 ); // Infinity
     ```
 
-    Or just mention it in the code directly:
+    Hoặc có thể dùng trực tiếp như này:
 
     ```js run
     alert( Infinity ); // Infinity
     ```
-- `NaN` represents a computational error. It is a result of an incorrect or an undefined mathematical operation, for instance:
+- `NaN` là số không xác định, hay là kết quả của một phép toán vô nghĩa trong toán học, hoặc phép toán lỗi:
 
     ```js run
     alert( "not a number" / 2 ); // NaN, such division is erroneous
     ```
 
-    `NaN` is sticky. Any further operation on `NaN` would give `NaN`:
+    Một phép toán bất kỳ có chứa `NaN` sẽ trả về kết quả là `NaN`:
 
     ```js run
     alert( "not a number" / 2 + 5 ); // NaN
     ```
 
-    So, if there's `NaN` somewhere in a mathematical expression, it propagates to the whole result.
+    Cho nên chỉ cần thấy `NaN` trong bất kỳ biểu thức nào thì kết quả trả về sẽ là Nan.
 
-```smart header="Mathematical operations are safe"
-Doing maths is safe in JavaScript. We can do anything: divide by zero, treat non-numeric strings as numbers, etc.
+```smart header="Các phép toán là an toàn"
+Tính toán toán học trong JavaScript là an toàn. Hơi khác với trong toán học, vì nó tồn tai các phép toán như: chia cho 0, phép toán trên các giá trị không phải là số.
 
-The script will never stop with a fatal error ("die"). At worst we'll get `NaN` as the result.
+Script sẽ không bao giờ lỗi và stop chương trình bởi các phép toán, vì cùng lắm là trả về `NaN`.
 ```
 
-Special numeric values formally belong to the "number" type. Of course they are not numbers in a common sense of this word.
+Các số đặc biệt cũng là kiểu số đấy nhé. Tất nhiên là trong JS chứ không phải trong thế giới thực.
 
-We'll see more about working with numbers in the chapter <info:number>.
+Chúng ta sẽ học kỹ hơn ở chương <info:number>.
 
-## A string
+## Chuỗi - string
 
-A string in JavaScript must be quoted.
+Chuỗi trong JavaScript phải đặt trong dấu nháy đơn hoặc nháy kép.
 
 ```js
 let str = "Hello";
@@ -74,15 +74,15 @@ let str2 = 'Single quotes are ok too';
 let phrase = `can embed ${str}`;
 ```
 
-In JavaScript, there are 3 types of quotes.
+Trong JavaScript, Có ba kiểu dấu nháy.
 
-1. Double quotes: `"Hello"`.
-2. Single quotes: `'Hello'`.
-3. Backticks: <code>&#96;Hello&#96;</code>.
+1. Nháy kép: `"Hello"`.
+2. Nháy đơn: `'Hello'`.
+3. và dấu nháy Backticks: <code>&#96;Hello&#96;</code>.
 
-Double and single quotes are "simple" quotes. There's no difference between them in JavaScript.
+Nháy đơn và nháy kép là dấu nháy đơn giản, có ý nghĩa như nhau trong JavaScript.
 
-Backticks are "extended functionality" quotes. They allow us to embed variables and expressions into a string by wrapping them in `${…}`, for example:
+Backticks dấu nháy "chức năng mở rộng". Dạng như template vậy, nó cho phép nhúng biến vào trong biểu thức `${…}`, Ví dụ:
 
 ```js run
 let name = "John";
@@ -94,35 +94,35 @@ alert( `Hello, *!*${name}*/!*!` ); // Hello, John!
 alert( `the result is *!*${1 + 2}*/!*` ); // the result is 3
 ```
 
-The expression inside `${…}` is evaluated and the result becomes a part of the string. We can put anything there: a variable like `name` or an arithmetical expression like `1 + 2` or something more complex.
+Biểu thức trong `${…}` sẽ được đánh giá và tính toán, sau đó kết quả sẽ là một phần của chuỗi. chúng ta có thể để vào bất cứ thứ gì: một biến `name` hoặc một biểu thức đơn giản như `1 + 2` hay nhiều thứ phức tạp hơn.
 
-Please note that this can only be done in backticks. Other quotes do not allow such embedding!
+Chỉ backticks mới được nhé, nháy đơn hay nháy kép không chấp nhận kiểu nhúng này
 ```js run
 alert( "the result is ${1 + 2}" ); // the result is ${1 + 2} (double quotes do nothing)
 ```
 
-We'll cover strings more thoroughly in the chapter <info:string>.
+Chúng ta sẽ học kỹ hơn trong chương <info:string>.
 
-```smart header="There is no *character* type."
-In some languages, there is a special "character" type for a single character. For example, in the C language and in Java it is `char`.
+```smart header="Không có kiểu ký tự - *character*."
+Trong các ngôn ngữ khác như C sẽ có kiểu ký tự đơn `char`.
 
-In JavaScript, there is no such type. There's only one type: `string`. A string may consist of only one character or many of them.
+Trong JavaScript, Không có kiểu char như vậy mà chỉ có một kiểu `string` cho ký tự đơn hay một chuỗi dài nhiều ký tự.
 ```
 
-## A boolean (logical type)
+## Kiểu logic - boolean
 
-The boolean type has only two values: `true` and `false`.
+Kiểu boolean chỉ có hai giá trị là đúng: `true` và sai: `false`.
 
-This type is commonly used to store yes/no values: `true` means "yes, correct", and `false` means "no, incorrect".
+Thường được dùng để lưu các giá trị yes/no.
 
-For instance:
+Ví dụ:
 
 ```js
 let nameFieldChecked = true; // yes, name field is checked
 let ageFieldChecked = false; // no, age field is not checked
 ```
 
-Boolean values also come as a result of comparisons:
+Giá trị kiểu Boolean cũng là kết quả của một phép so sánh:
 
 ```js run
 let isGreater = 4 > 1;
@@ -130,31 +130,32 @@ let isGreater = 4 > 1;
 alert( isGreater ); // true (the comparison result is "yes")
 ```
 
-We'll cover booleans more deeply later in the chapter <info:logical-operators>.
+Sẽ học kỹ hơn về Boolean trong chương <info:logical-operators>.
 
-## The "null" value
+## Giá trị "null"
 
-The special `null` value does not belong to any type of those described above.
+Giá trị đặc biệt `null` Không thuộc bất cứ một kiểu dữ liệu nào ở trên.
 
-It forms a separate type of its own, which contains only the `null` value:
+`null` thuộc kiểu null, hay nói cách khác kiểu null chỉ gồm một giá trị là `null` .
+Có nhiều bạn nói null là kiểu Object, các bạn cứ đọc tiếp sẽ có phần giải thích nhé:
 
 ```js
 let age = null;
 ```
 
-In JavaScript `null` is not a "reference to a non-existing object" or a "null pointer" like in some other languages.
+Trong JavaScript `null` không phải là "tham chiếu đến một đối tượng không tồn tại" hoặc "con trỏ mà không trỏ đến bất cứ cái gì" như các ngôn ngữ khác.
 
-It's just a special value which has the sense of "nothing", "empty" or "value unknown".
+Nó chỉ là một giá trị thể hiện sự không có gì: "nothing", trống rỗng: "empty" hoặc không biết giá trị: "value unknown".
 
-The code above states that the `age` is unknown or empty for some reason.
+Code bên trên người ta khai báo biến `age` là chưa biết hoặc không chứa giá trị vì một lý do nào đó.
 
-## The "undefined" value
+## Giá trị chưa được định ngĩa - "undefined"
 
-The special value `undefined` stands apart. It makes a type of its own, just like `null`.
+`undefined` thuộc kiểu undefined, kiểu như `null`.
 
-The meaning of `undefined` is "value is not assigned".
+`undefined` để thể hiện cho "chưa được gán giá trị".
 
-If a variable is declared, but not assigned, then its value is exactly `undefined`:
+Nếu một biến được khai báo nhưng chưa được gán giá trị nào, thì giá trị của biến đó chính là `undefined`:
 
 ```js run
 let x;
@@ -162,7 +163,7 @@ let x;
 alert(x); // shows "undefined"
 ```
 
-Technically, it is possible to assign `undefined` to any variable:
+Về mặt kỹ thuật, có thể gán giá trị `undefined` cho bất cứ biến nào:
 
 ```js run
 let x = 123;
@@ -172,28 +173,28 @@ x = undefined;
 alert(x); // "undefined"
 ```
 
-...But it's not recommended to do that. Normally, we use `null` to write an "empty" or an "unknown" value into the variable, and `undefined` is only used for checks, to see if the variable is assigned or similar.
+...Nhưng không khuyến khích làm như thế. Bình thường chúng ta dùng `null` để thể hiện một biến có giá trị là trống "empty" hoặc chưa biết, và `undefined` chỉ để kiểm tra là biến đã được gán giá trị hay chưa.
 
-## Objects and Symbols
+## Kiểu đối tượng - Object và kiểu Symbol (méo biết dịch ra là gì)
 
-The `object` type is special.
+Kiểu `object` là kiểu đặc biệt.
 
-All other types are called "primitive", because their values can contain only a single thing (be it a string or a number or whatever). In contrast, objects are used to store collections of data and more complex entities. We'll deal with them later in the chapter <info:object> after we know enough about primitives.
+Tất cả các kiểu dữ liệu khác được gọi là kiểu nguyên thủy "primitive", bởi vì giá trị của chúng chưa những thành phần đơn lẽ. Ngược lại Objects chứa một bộ giá trị phức tạp. Chúng ta sẽ học thêm ở chương <info:object> sau khi có đủ hiểu biết về các kiểu primitives.
 
-The `symbol` type is used to create unique identifiers for objects. We have to mention it here for completeness, but it's better to study them after objects.
+Kiểu `symbol` để tạo ra các giá trị duy nhất - unique identifiers cho Objects. Chúng ta chỉ nhắc đến tên nó ở đây cho biết vậy thôi, để sau khi học xong về kiểu Objects sẽ quay lại học về nó sẽ dễ hiểu hơn.
 
-## The typeof operator [#type-typeof]
+## Phép toán typeof [#type-typeof]
 
-The `typeof` operator returns the type of the argument. It's useful when we want to process values of different types differently, or just want to make a quick check.
+Phép toán `typeof` trả về kiểu dữ liệu của tham số. Người ta hay dùng để kiểm tra hay so kiểu dữ liệu.
 
-It supports two forms of syntax:
+Có thể dùng theo hai cách:
 
-1. As an operator: `typeof x`.
-2. Function style: `typeof(x)`.
+1. Như một phép toán: `typeof x`.
+2. Như hàm: `typeof(x)`.
 
-In other words, it works both with parentheses or without them. The result is the same.
+Hai cách này cho kết quả như nhau.
 
-The call to `typeof x` returns a string with the type name:
+Gọi `typeof x` trả về một *String* là tên kiểu dữ liệu:
 
 ```js
 typeof undefined // "undefined"
@@ -221,27 +222,27 @@ typeof alert // "function"  (3)
 
 The last three lines may need additional explanations:
 
-1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here it serves just as an example of an object.
-2. The result of `typeof null` is `"object"`. That's wrong. It is an officially recognized error in `typeof`, kept for compatibility. Of course, `null` is not an object. It is a special value with a separate type of its own. So, again, that's an error in the language.
-3. The result of `typeof alert` is `"function"`, because `alert` is a function of the language. We'll study functions in the next chapters, and we'll see that there's no special "function" type in the language. Functions belong to the object type. But `typeof` treats them differently. Formally, it's incorrect, but very convenient in practice.
+1. `Math` là một đối tượng được JS xây dựng sẵn, chứa các phép tính toán học. Chúng ta sẽ tìm hiểu ở chương <info:number>. Lấy ra làm ví dụ ở đây cho kiểu Object thôi.
+2. Kết quả của `typeof null` là `"object"`. Điều này là sai. Đó là lỗi chính thức được thừa nhận trong `typeof`, để giữ cho sự tương thích của nó. Tất nhiên, `null` không phải là một Object. Nó là một giá trị đặc biệt và thuộc kiểu null. Một lần nữa, khẳng định là tồn tại lỗi này trong JS nhé.
+3. Kết quả của `typeof alert` là `"function"`, bởi vì `alert` là một hàm. Chúng ta sẽ học về hàm trong chương tiếp theo, và chúng ta sẽ thấy không có kiểu hàm đặc biệt nào trong JS. fuction là kiểu Object. Nhưng `typeof` xác định nó hơi khác. Thực sự thì là không đúng, nhưng như thế thì sẽ tiện lợi hơn khi dùng.
 
 
-## Summary
+## Tóm tắt
 
-There are 7 basic types in JavaScript.
+Có 7 kiểu dữ liệu cơ bản trong JavaScript.
 
-- `number` for numbers of any kind: integer or floating-point.
-- `string` for strings. A string may have one or more characters, there's no separate single-character type.
-- `boolean` for `true`/`false`.
-- `null` for unknown values -- a standalone type that has a single value `null`.
-- `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
-- `object` for more complex data structures.
-- `symbol` for unique identifiers.
+- `number` cho số nguyên và số thực.
+- `string` cho chuỗi và ký tự.
+- `boolean` cho đúng/sai `true`/`false`.
+- `null` cho giá trị chưa rõ -- có kiểu là chính nó, giống thằng `null`.
+- `undefined` cho chưa gán giá trị -- cũng là kiểu `undefined`.
+- `object` cho các cấu trúc dữ liệu phức tạp.
+- `symbol` cho định danh duy nhất.
 
-The `typeof` operator allows us to see which type is stored in the variable.
+Phép toán `typeof` cho chúng ta biết kiểu dữ liệu của tham số.
 
-- Two forms: `typeof x` or `typeof(x)`.
-- Returns a string with the name of the type, like `"string"`.
-- For `null` returns `"object"` -- that's an error in the language, it's not an object in fact.
+- có thể dùng theo hai cách: `typeof x` or `typeof(x)`.
+- Trả về một string với hai dấu nháy kép, ví dụ: `"string"`.
+- typeof `null` trả về `"object"` -- Đây là lỗi trong JS, thực sự nó không phải là Object.
 
-In the next chapters we'll concentrate on primitive values and once we're familiar with them, then we'll move on to objects.
+Chương tiếp chúng ta sẽ tập trung vào các kiểu primitive sau khi đã quen thuộc sẽ nghiên cứu tiếp về objects.
