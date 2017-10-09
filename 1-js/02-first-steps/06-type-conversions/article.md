@@ -1,24 +1,24 @@
-# Type Conversions
+# Ép kiểu
 
-Most of the time, operators and functions automatically convert a value to the right type. That's called "type conversion".
+Trong JS, các phép toán và hàm thường thực hiện chuyển đổi giá trị về đúng kiểu dữ liệu trước khi thực hiện tính toán. Chúng ta gọi đó là ép kiểu hay "type conversion".
 
-For example, `alert` automatically converts any value to a string to show it. Mathematical operations convert values to numbers.
+Ví dụ, `alert` sẽ tự động chuyển đổi bất cứ giá trị nào thành `string` trước khi show ra màn hình. Hay các phép tính toán toán học thì convert giá trị về kiểu số.
 
-There are also cases when we need to explicitly convert a value to put things right.
+Trong nhiều trường hợp chúng ta cần sự chuyển đổi này một cách rõ ràng để code được chính xác.
 
 [cut]
 
-```smart header="Not talking about objects yet"
-In this chapter we don't cover objects yet. Here we study primitives first. Later, after we learn objects, we'll see how object conversion works in the chapter <info:object-toprimitive>.
+```smart header="Chưa nói về Object"
+Chương này chưa nói về Object. Học về các kiểu primitives trước. Sau đó sẽ học về Object và học luôn ép kiểu trên Object ở chương <info:object-toprimitive>.
 ```
 
 ## ToString
 
-String conversion happens when we need the string form of a value.
+Ép kiểu string xảy ra khi cần một giá trị đưa vào là string.
 
-For example, `alert(value)` does it to show the value.
+Ví dụ, `alert(value)` sẽ show lên giá trị của `value`.
 
-We can also use a call `String(value)` function for that:
+Chúng ta cũng có thể dùng `String(value)` để ép kiểu sang string:
 
 ```js run
 let value = true;
@@ -30,19 +30,19 @@ alert(typeof value); // string
 */!*
 ```
 
-String conversion is mostly obvious. A `false` becomes `"false"`, `null` becomes `"null"` etc.
+Ép kiểu string là chuyển đổi nguyên dạng. VD: `false` thành `"false"`, `null` thành `"null"` vv.
 
 ## ToNumber
 
-Numeric conversion happens in mathematical functions and expressions automatically.
+Ép kiểu number xảy ra trong các hàm hoặc biểu thức toán học.
 
-For example, when division `/` is applied to non-numbers:
+Ví dụ khi dùng phép chia `/` trên các giá trị không phải number:
 
 ```js run
 alert( "6" / "2" ); // 3, strings are converted to numbers
 ```
 
-We can use a `Number(value)` function to explicitly convert a `value`:
+Cũng có thể dùng `Number(value)` để chuyển đổi `value` sang kiểu number một cách rõ ràng:
 
 ```js run
 let str = "123";
@@ -53,9 +53,9 @@ let num = Number(str); // becomes a number 123
 alert(typeof num); // number
 ```
 
-Explicit conversion is usually required when we read a value from a string-based source like a text form, but we expect a number to be entered.
+Chuyển đổi number một cách rõ ràng thường được dùng khi input dạng text và chúng ta mong muốn nhận được là một giá trị số.
 
-If the string is not a valid number, the result of such conversion is `NaN`, for instance:
+Nếu chuỗi nhập vào là không phải "dạng số" thì sẽ trả về `NaN`, Ví dụ:
 
 ```js run
 let age = Number("an arbitrary string instead of a number");
@@ -63,16 +63,16 @@ let age = Number("an arbitrary string instead of a number");
 alert(age); // NaN, conversion failed
 ```
 
-Numeric conversion rules:
+Quy tắc ép kiểu number:
 
 | Value |  Becomes... |
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
-|<code>true&nbsp;and&nbsp;false</code> | `1` and `0` |
-| `string` | Whitespaces from the start and the end are removed. Then, if the remaining string is empty, the result is `0`. Otherwise, the number is "read" from the string. An error gives `NaN`. |
+|<code>true&nbsp;and&nbsp;false</code> | `1` và `0` |
+| `string` | Dấu space bắt đầu chuỗi bị loại bõ. Nếu chuỗi là rỗng thì trả về `0`. Ngược lại sẽ tiến hành chuyển đổi. Nếu có lỗi sẽ trả về `NaN`. |
 
-Examples:
+Ví dụ:
 
 ```js run
 alert( Number("   123   ") ); // 123
@@ -81,33 +81,33 @@ alert( Number(true) );        // 1
 alert( Number(false) );       // 0
 ```
 
-Please note that `null` and `undefined` behave differently here: `null` becomes a zero, while `undefined` becomes `NaN`.
+Lưu ý rằng `null` và `undefined` sẽ được chuyển đổi khác nhau: `null` trả về 0, trong khi `undefined` trả về `NaN`.
 
-````smart header="Addition '+' concatenates strings"
-Almost all mathematical operations convert values to numbers. With a notable exception of the addition `+`. If one of the added values is a string, then another one is also converted to a string.
+````smart header="Phép '+' nối chuỗi"
+Hầu hết các phép tính toán học sẽ chuyển đổi giá trị sang số. ngoại truwfp phép `+`. Nếu có một số hạng là string, thì sẽ chuyển đổi sang string, và tiến hành nối chuỗi.
 
-Then it concatenates (joins) them:
+Ví dụ:
 
 ```js run
 alert( 1 + '2' ); // '12' (string to the right)
 alert( '1' + 2 ); // '12' (string to the left)
 ```
 
-That only happens when one of the arguments is a string. Otherwise, values are converted to numbers.
+Điều này xảy ra chỉ khi một trong hai số hạng là string.
 ````
 
 ## ToBoolean
 
-Boolean conversion is the simplest one.
+Ép kiểu logic thì đơn giản hơn.
 
-It happens in logical operations (later we'll meet condition tests and other kinds of them), but also can be performed manually with the call of `Boolean(value)`.
+Xảy ra trong các phép logic, hoặc chuyển đổi một cách rõ ràng với `Boolean(value)`.
 
-The conversion rule:
+Quy ước:
 
-- Values that are intuitively "empty", like `0`, an empty string, `null`, `undefined` and `NaN` become `false`.
-- Other values become `true`.
+- Các giá trị thể hiện sự trống rỗng như `0`, một chuỗi rỗng, `null`, `undefined` và `NaN` sẽ trả về `false`.
+- Các giá trị khác trả về `true`.
 
-For instance:
+Ví dụ:
 
 ```js run
 alert( Boolean(1) ); // true
@@ -117,8 +117,8 @@ alert( Boolean("hello") ); // true
 alert( Boolean("") ); // false
 ```
 
-````warn header="Please note: the string with zero `\"0\"` is `true`"
-Some languages (namely PHP) treat `"0"` as `false`. But in JavaScript a non-empty string is always `true`.
+````warn header="Chú ý là chuỗi `\"0\"` trả về `true`"
+Một số NNLT (như PHP) thì chuỗi `"0"` trả về `false`, khác với JavaScript nhé.
 
 ```js run
 alert( Boolean("0") ); // true
@@ -127,36 +127,36 @@ alert( Boolean(" ") ); // spaces, also true (any non-empty string is true)
 ````
 
 
-## Summary
+## Tóm tắt
 
-There are three most widely used type conversions: to string, to number and to boolean.
+Có ba kiểu ép kiểu phổ biến: to string, to number và to boolean.
 
-**`ToString`** -- Occurs when we output something, can be performed with `String(value)`. The conversion to string is usually obvious for primitive values.
+**`ToString`** -- xảy ra khi cần output dạng string. hoặc có thể dùng `String(value)`. Sự chuyển đổi là nguyên bản.
 
-**`ToNumber`** -- Occurs in math operations, can be performed with `Number(value)`.
+**`ToNumber`** -- Xảy ra trong các phép tính toán toán học . hoặc có thể dùng `Number(value)`.
 
-The conversion follows the rules:
+Sự chuyển đổi  number tuân theo nguyên tắc:
 
 | Value |  Becomes... |
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
 |<code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
-| `string` | The string is read "as is", whitespaces from both sides are ignored. An empty string becomes `0`. An error gives `NaN`. |
+| `string` | chuyển đổi như sô được nhập vào dạng text, bỏ qua khoảng trắng hai đầu. Chuỗi rỗng "" trả về `0`. Có lỗi trả về `NaN`. |
 
-**`ToBoolean`** -- Occurs in logical operations, or can be performed with `Boolean(value)`.
+**`ToBoolean`** -- Xảy ra trong các tính toán logic, hoặc có thể dùng `Boolean(value)`.
 
-Follows the rules:
+Theo nguyên tắc:
 
 | Value |  Becomes... |
 |-------|-------------|
 |`0`, `null`, `undefined`, `NaN`, `""` |`false`|
-|any other value| `true` |
+|Giá trị khác| `true` |
 
 
-Most of these rules are easy to understand and memorize. The notable exceptions where people usually make mistakes are:
+Hầu hết các quy tắc đều dễ hiểu và dễ nhớ, nhưng có một vài điểm mà mọi người hay nhầm lẫn như sau:
 
-- `undefined` is `NaN` as a number, not `0`.
-- `"0"` and space-only strings like `"   "` are true as a boolean.
+- `undefined` trả về `NaN` là một số, cứ không phải trả về `0`.
+- `"0"` và chuỗi toàn dấu space `"   "` trả `true` trong ép kiểu boolean.
 
-Objects are not covered here, we'll return to them later in the chapter <info:object-toprimitive> that is devoted exclusively to objects, after we learn more basic things about JavaScript.
+Ép kiểu Object không nói ở bài này, chúng ta sẽ học ở chương <info:object-toprimitive>.
