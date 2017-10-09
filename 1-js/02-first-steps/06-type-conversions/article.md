@@ -124,8 +124,8 @@ Một số NNLT (như PHP) thì chuỗi `"0"` trả về `false`, khác với Ja
 alert( Boolean("0") ); // true
 alert( Boolean(" ") ); // spaces, also true (any non-empty string is true)
 ```
+Các bạn cẩn thận nhầm chỗ này
 ````
-
 
 ## Tóm tắt
 
