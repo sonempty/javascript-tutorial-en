@@ -190,18 +190,18 @@ alert( a ); // 3
 alert( c ); // 0
 ```
 
-In the example above, the result of `(a = b + 1)` is the value which is assigned to `a` (that is `3`). It is then used to subtract from `3`.
+Ở ví dụ trên, kết quả `(a = b + 1)` là giá trị gán cho `a` (đó là `3`). sau đó thực hiện phép trừ  `3 - 3`.
 
-Funny code, isn't it? We should understand how it works, because sometimes we can see it in 3rd-party libraries, but shouldn't write anything like that ourselves. Such tricks definitely don't make the code clearer and readable.
+Code trên cho vui để hiểu thêm thôi, chứ không nên viết kiểu thách đố như vậy không hay lắm.
 ````
 
-## Remainder %
+## Phép thặng dư %
 
-The remainder operator `%` despite its look does not have a relation to percents.
+Phép thặng dư `%` , không phải là phần trăm đâu nhé :D .
 
-The result of `a % b` is the remainder of the integer division of `a` by `b`.
+Kết quả của `a % b` là phân dư của phép chia nguyên `a` cho `b`.
 
-For instance:
+ví dụ:
 
 ```js run
 alert( 5 % 2 ); // 1 is a remainder of 5 divided by 2
@@ -209,13 +209,13 @@ alert( 8 % 3 ); // 2 is a remainder of 8 divided by 3
 alert( 6 % 3 ); // 0 is a remainder of 6 divided by 3
 ```
 
-## Exponentiation **
+## Lũy thừa **
 
-The exponentiation operator `**` is a recent addition to the language.
+Phép lũy thừa `**` vừa được thêm vào JS mới đây.
 
-For a natural number `b`, the result of `a ** b` is `a` multiplied by itself `b` times.
+Với số nguyên `b`, kết quả của `a ** b` là `a` lũy thừa `b`.
 
-For instance:
+Ví dụ:
 
 ```js run
 alert( 2 ** 2 ); // 4  (2 * 2)
@@ -223,7 +223,7 @@ alert( 2 ** 3 ); // 8  (2 * 2 * 2)
 alert( 2 ** 4 ); // 16 (2 * 2 * 2 * 2)
 ```
 
-The operator works for non-integer numbers of `a` and `b` as well, for instance:
+Cũng có thể thực hiện trên các số không nguyên `a` và `b` như ví dụ:
 
 ```js run
 alert( 4 ** (1/2) ); // 2 (power of 1/2 is the same as a square root, that's maths)
@@ -234,18 +234,18 @@ alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
 
 <!-- Can't use -- in title, because built-in parse turns it into – -->
 
-Increasing or decreasing a number by one is among the most common numerical operations.
+Tăng một đơn vị ++ và giảm 1 đơn vị -- .
 
-So, there are special operators for that:
+Ví dụ:
 
-- **Increment** `++` increases a variable by 1:
+- **Increment** `++` tăng giá trị biến lên 1:
 
     ```js run no-beautify
     let counter = 2;
     counter++;      // works same as counter = counter + 1, but shorter
     alert( counter ); // 3
     ```
-- **Decrement** `--` decreases a variable by 1:
+- **Decrement** `--` giảm giá trị đi 1:
 
     ```js run no-beautify
     let counter = 2;
@@ -254,21 +254,21 @@ So, there are special operators for that:
     ```
 
 ```warn
-Increment/decrement can be applied only to a variable. An attempt to use it on a value like `5++` will give an error.
+Increment/decrement chỉ tác động lên biến. Nếu dùng vào hằng VD `5++` sẽ báo lỗi.
 ```
 
-Operators `++` and `--` can be placed both after and before the variable.
+Phép `++` và `--` có thể dùng trước hoặc sau biến.
 
-- When the operator goes after the variable, it is called a "postfix form": `counter++`.
-- The "prefix form" is when the operator stands before the variable: `++counter`.
+- Nếu dùng sau thì gọi là "postfix form": `counter++`.
+- gọi là "prefix form" nếu dùng trước `++counter`.
 
-Both of these records do the same: increase `counter` by `1`.
+Cả hai cách đều là tăng `counter` lên `1`.
 
-Is there any difference? Yes, but we can only see it if we use the returned value of `++/--`.
+Hai cách dùng `++/--` có gì khác nhau không? Có khác, nhưng chúng ta chỉ thây sự khác biệt này khi dùng với `return` .
 
-Let's clarify. As we know, all operators return a value. Increment/decrement is not an exception here. The prefix form returns the new value, while the postfix form returns the old value (prior to increment/decrement).
+Như chúng ta đã biết, phép toán nào cũng trả về giá trị nào đó. Increment/decrement cũng không ngoại lệ. Dùng kiểu prefix form trả về giá trị mới, trong khi postfix form trả về giá trị cũ (trước khi tăng/giảm).
 
-To see the difference, here's the example:
+Để xem sự khác biệt này, cùng xem ví dụ sau:
 
 ```js run
 let counter = 1;
@@ -277,9 +277,9 @@ let a = ++counter; // (*)
 alert(a); // *!*2*/!*
 ```
 
-Here in the line `(*)` the prefix call `++counter` increments `counter` and returns the new value that is `2`. So the `alert` shows `2`.
+Dòng `(*)` Dùng kiểu  prefix form `++counter` tăng `counter` lên một đơn vị và trả về *giá trị mới* là `2` và sau đó gán cho `a`. nên `alert` show ra `2`.
 
-Now let's use the postfix form:
+Bây giờ dùng thử postfix form:
 
 ```js run
 let counter = 1;
@@ -288,11 +288,11 @@ let a = counter++; // (*) changed ++counter to counter++
 alert(a); // *!*1*/!*
 ```
 
-In the line `(*)` the *postfix* form `counter++` also increments `counter`, but returns the *old* value (prior to increment). So the `alert` shows `1`.
+Dòng `(*)` Dùng kiểu *postfix* form `counter++` cũng tăng `counter` lên 1, nhưng trả về *giá trị cũ* (trước khi tăng). Nên `alert` show ra `1`.
 
-To summarize:
+Tổng kết:
 
-- If the result of increment/decrement is not used, then there is no difference in which form to use:
+- Nếu kết quả của phép increment/decrement không được sử dụng ngay thì không thấy sự khác biệt giữa hai kiểu dùng:
 
     ```js run
     let counter = 0;
@@ -300,41 +300,39 @@ To summarize:
     ++counter;
     alert( counter ); // 2, the lines above did the same
     ```
-- If we'd like to increase the value *and* use the result of the operator right now, then we need the prefix form:
+- Nếu muốn tăng/giảm giá trị của biến và *dùng ngay* lập tức kết quả mới này thì dùng kiểu prefix form:
 
     ```js run
     let counter = 0;
     alert( ++counter ); // 1
     ```
-- If we'd like to increment, but use the previous value, then we need the postfix form:
+- Nếu tăng/giảm giá trị của biến nhưng vẫn sử dụng giá trị của nó khi chưa tăng/giảm thì dùng kiểu postfix form:
 
     ```js run
     let counter = 0;
     alert( counter++ ); // 0
     ```
 
-````smart header="Increment/decrement among other operators"
-Operators `++/--` can be used inside an expression as well. Their precedence is higher than most other arithmetical operations.
+````smart header="Increment/decrement giữa các phép toán khác"
+Phép `++/--` có thể sử dụng trong biểu thức. Độ ưu tiên của nó cao hơn các phép tính toán toán học.
 
-For instance:
+Ví dụ:
 
 ```js run
 let counter = 1;
 alert( 2 * ++counter ); // 4
 ```
 
-Compare with:
+So sánh với:
 
 ```js run
 let counter = 1;
 alert( 2 * counter++ ); // 2, because counter++ returns the "old" value
 ```
 
-Though technically allowable, such notation usually makes the code less readable. One line does multiple things -- not good.
+Mặc dù không có lỗi gì, nhưng tính toán nhiều thứ trên một dòng thì khó đọc - not good. Nên viết tách ra.
 
-While reading the code, a fast "vertical" eye-scan can easily miss such `counter++`, and it won't be obvious that the variable increases.
-
-The "one line -- one action" style is advised:
+Nên dùng code kiểu "one line -- one action" - một dòng một hành động:
 
 ```js run
 let counter = 1;
@@ -343,13 +341,13 @@ counter++;
 ```
 ````
 
-## Bitwise operators
+## Phép toán nhị phân
 
-Bitwise operators treat arguments as 32-bit integer numbers and work on the level of their binary representation.
+Phép toán nhị phân đưa các tham số về dạng 32 bits số nguyên và thực hiện trên các bits đó.
 
-These operators are not JavaScript-specific. They are supported in most programming languages.
+Phép toán nhị phân không phải là đặc trưng của JS, nó chủ yếu cho các ngôn ngữ khác.
 
-The list of operators:
+Các phép toán nhị phân:
 
 - AND ( `&` )
 - OR ( `|` )
@@ -359,13 +357,13 @@ The list of operators:
 - RIGHT SHIFT ( `>>` )
 - ZERO-FILL RIGHT SHIFT ( `>>>` )
 
-These operators are used very rarely. To understand them, we should delve into low-level number representation, and it would not be optimal to do that right now. Especially because we won't need them any time soon. If you're curious, you can read the [Bitwise Operators](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) article in MDN. It would be more practical to do that when a real need arises.
+Trong JS hiếm khi bạn dùng đến các phép toán nhị phân. Nếu muốn hiểu thêm, có thể đọc tài liệu này [Bitwise Operators](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators).
 
 ## Modify-in-place
 
-We often need to apply an operator to a variable and store the new result in it.
+Chúng ta thường cần sử dụng giá trị của biến sau một phép tính toán ở trên biến đó.
 
-For example:
+Ví dụ:
 
 ```js
 let n = 2;
@@ -373,7 +371,7 @@ n = n + 5;
 n = n * 2;
 ```
 
-This notation can be shortened using operators `+=` and `*=`:
+Có thể thực hiện nhanh việc này bằng `+=` và `*=`:
 
 ```js run
 let n = 2;
@@ -383,9 +381,9 @@ n *= 2; // now n = 14 (same as n = n * 2)
 alert( n ); // 14
 ```
 
-Short "modify-and-assign" operators exist for all arithmetical and bitwise operators: `/=`, `-=` etc.
+Kiểu như trên gọi là phép "modify-and-assign" , nó cũng hỗ trợ hầu hết các phép toán khác như: `/=`, `-=` etc.
 
-Such operators have the same precedence as a normal assignment, so they run after most other calculations:
+Các phép toán kiểu này có độ ưu tiên như phép gán, VD:
 
 ```js run
 let n = 2;
@@ -395,13 +393,13 @@ n *= 3 + 5;
 alert( n ); // 16  (right part evaluated first, same as n *= 8)
 ```
 
-## Comma
+## Dấu phẩy - Comma
 
-The comma operator `','` is one of most rare and unusual operators. Sometimes it's used to write shorter code, so we need to know it in order to understand what's going on.
+Dấu `','` là một phép toán hiếm khi được dùng. Nhưng thỉnh thoảng vẫn được sử dụng để viết code ngắn hơn
 
-The comma operator allows us to evaluate several expressions, dividing them with a comma `','`. Each of them is evaluated, but the result of only the last one is returned.
+Phép comma `','` để chia cách các biểu thức, nhưng sẽ chỉ lấy giá trị cuối cùng.
 
-For example:
+Ví dụ:
 
 ```js run
 *!*
@@ -411,19 +409,19 @@ let a = (1 + 2, 3 + 4);
 alert( a ); // 7 (the result of 3 + 4)
 ```
 
-Here, the first expression `1 + 2` is evaluated, and its result is thrown away, then `3 + 4` is evaluated and returned as the result.
+Ở đây, biểu thức `1 + 2` được tính toán nhưng kq bị bõ đi, sau đó `3 + 4` được tính toán và trả về.
 
-```smart header="Comma has a very low precedence"
-Please note that the comma operator has very low precedence, lower than `=`, so parentheses are important in the example above.
+```smart header="Comma có độ ưu tiên rất thấp"
+thấp hơn cả phép gán `=`, nên cần cặp dấu ngoặc như bạn thấy ở trên.
 
-Without them: `a = 1 + 2, 3 + 4` evaluates `+` first, summing the numbers into `a = 3, 7`, then the assignment operator `=` assigns    `a = 3`, and then the number after the comma `7` is not processed anyhow, so it's ignored.
+Nếu không có cặp dấu ngoặc: `a = 1 + 2, 3 + 4` thực hiện `+` trước, và sẽ thành `a = 3, 7`, sau đó `=` gán `a = 3`, và cuối cùng số `7` được trả về cho biểu thức này. (a vẫn = 3 nhé)
 ```
 
-Why do we need such an operator which throws away everything except the last part?
+Vậy tại sao lại dùng comma, đằng nào kq cũng bị bõ đi trừ biểu thức cuối cùng mà?
 
-Sometimes people use it in more complex constructs to put several actions in one line.
+Thỉnh thoảng người ta dùng nó để đưa vào những biểu thức phức tạp, thực hiện một loạt hành động trên một dòng.
 
-For example:
+ví dụ:
 
 ```js
 // three operations in one line
@@ -432,4 +430,4 @@ for (*!*a = 1, b = 3, c = a * b*/!*; a < 10; a++) {
 }
 ```
 
-Such tricks are used in many JavaScript frameworks, that's why we mention them. But usually they don't improve the code readability, so we should think well before writing like that.
+Mẹo này hay được dùng trong các JS FrameWork hiện nay, nên mình đưa ra đây cho các bạn biết.
