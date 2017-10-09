@@ -1,17 +1,17 @@
-# Operators
+# Các phép toán
 
-Many operators are known to us from school. They are addition `+`, a multiplication `*`, a subtraction `-` and so on.
+Một vài phép toán chúng ta đã biết khi học ở trường. Như `+`, `-`, `*`, `/`, và vv.
 
-In this chapter we concentrate on aspects that are not covered by school arithmetic.
+Trong chương này chúng ta sẽ tập trung vào các ngoại lệ, hay sự khác biệt trong các phép toán trong JS và toán học.
 
 [cut]
 
-## Terms: "unary", "binary", "operand"
+## Quy tắc: Một ngôi "unary", hai ngôi "binary" và toán hạng "operand"
 
-Before we move on, let's grasp the common terminology.
+Trước khi tiếp tục, chúng ta hãy nắm bắt các thuật ngữ phổ biến.
 
-- *An operand* -- is what operators are applied to. For instance in multiplication `5 * 2` there are two operands: the left operand is `5`, and the right operand is `2`. Sometimes people say "arguments" instead of "operands".
-- An operator is *unary* if it has a single operand. For example, the unary negation `"-"` reverses the sign of the number:
+- *Toán hạng - An operand* -- là đối tượng của phép toán. Ví dụ trong phép nhân `5 * 2` có hai toán hạng: toán hạng bên trái là `5`, và toán hạng bên phải là `2`. Thỉnh thoảng người ta cũng gọi là tham số "arguments" thay vì toán hạng "operands".
+- Phép toán là một ngôi *unary* nếu chỉ có 1 toán hạng. Ví dụ phép `"-"` đổi dấu một số:
 
     ```js run
     let x = 1;
@@ -21,55 +21,53 @@ Before we move on, let's grasp the common terminology.
     */!*
     alert( x ); // -1, unary negation was applied
     ```
-- An operator is *binary* if it has two operands. The same minus exists in the binary form as well:
+- Phép toán là hai ngôi *binary* nếu có 2 toán hạng, tương tự n ngôi nếu có n toán hạng:
 
     ```js run no-beautify
     let x = 1, y = 3;
     alert( y - x ); // 2, binary minus subtracts values
     ```
 
-    Formally, we're talking about two different operators here: the unary negation (single operand, reverses the sign) and the binary subtraction (two operands, subtracts).
+    Chúng ta chủ yếu nói đến sự khác nhau giữa hai phép toán: the unary negation (phép đổi dấu) và the binary subtraction (phép trừ hai số).
 
-## Strings concatenation, binary +
+## phép + là một phép toán hai ngôi - binary +
 
-Now let's see special features of JavaScript operators that are beyond school arithmetics.
+Chúng ta sẽ xem xem JS khác tóa học như thế nào.
 
-Usually the plus operator `'+'` sums numbers.
+Thông thường phép `'+'` để cộng các số.
 
-But if the binary `+` is applied to strings, it merges (concatenates) them:
+nhưng nếu binary `+` mà có 1 toán hạng là string, thì thành phép nối chuỗi:
 
 ```js
 let s = "my" + "string";
 alert(s); // mystring
 ```
 
-Note that if any of operands is a string, then the other one is converted to a string too.
+Chú ý là nếu có 1 toán hạng là string thì toán hạng kia sẽ được chuyển đổi thành string.
 
-For example:
+Ví dụ:
 
 ```js run
 alert( '1' + 2 ); // "12"
 alert( 2 + '1' ); // "21"
 ```
 
-See, it doesn't matter whether the first operand is a string or the second one. The rule is simple: if either operand is a string, then convert the other one into a string as well.
+Trong JS phép `"+"` hơi đặc biệt. Các phép toán học khác chỉ làm việc với number, Còn phép + có thể làm việc với number và string.
 
-String concatenation and conversion is a special feature of the binary plus `"+"`. Other arithmetic operators work only with numbers. They always convert their operands to numbers.
-
-For instance, subtraction and division:
+Ví dụ phép trừ và phép chia:
 
 ```js run
 alert( 2 - '1' ); // 1
 alert( '6' / '2' ); // 3
 ```
 
-## Numeric conversion, unary +
+## Ép kiểu number, unary +
 
-The plus `+` exist in two forms. The binary form that we used above and the unary form.
+Phép `+` có thể là phép toán 2 ngôi hoặc cũng có thể là 1 ngôi.
 
-The unary plus or, in other words, the plus operator `+` applied to a single value, doesn't do anything with numbers, but if the operand is not a number, then it is converted into it.
+Phép `+` một ngôi đơn giản là chính nó. Tương tự như toán học vậy.
 
-For example:
+Ví dụ:
 
 ```js run
 // No effect on numbers
@@ -86,13 +84,11 @@ alert( +"" );   // 0
 */!*
 ```
 
-It actually does the same as `Number(...)`, but shorter.
+Nó tương đương với `Number(...)`, nhưng viết ngắn hơn.
 
-A need to convert string to number arises very often. For example, if we are getting values from HTML form fields, then they are usually strings.
+Nhu cầu chuyển đổi string sang số là khá nhiều. VD: Viết chương trình cộng 2 số được nhập từ bàn phím. Hay chuyển đổi giá trị nào đó từ form HTML
 
-What if we want to sum them?
-
-The binary plus would add them as strings:
+VD:
 
 ```js run
 let apples = "2";
@@ -101,7 +97,7 @@ let oranges = "3";
 alert( apples + oranges ); // "23", the binary plus concatenates strings
 ```
 
-If we want to treat them as numbers, then we can convert and then sum:
+Nếu muốn là number thì ta làm như sau:
 
 ```js run
 let apples = "2";
@@ -116,42 +112,42 @@ alert( +apples + +oranges ); // 5
 // alert( Number(apples) + Number(oranges) ); // 5
 ```
 
-From a mathematician's standpoint the abundance of pluses may seem strange. But from a programmer's standpoint, there's nothing special: unary pluses are applied first, they convert strings to numbers, and then the binary plus sums them up.
+Theo quan điểm toán học, viết các dấu + như vậy có vẻ là lạ, nhưng trên quan điểm tin học, điều đó là bình thường: unary + được ưu tiên trước, chuyển đổi strings sang numbers, và sau đó binary + sẽ cộng chúng lại.
 
-Why are unary pluses applied to values before the binary one? As we're going to see, that's because of their *higher precedence*.
+Tại sao phép toán một ngôi lại được tính trước phép toán hai ngôi? Vì theo quy ước nó được ưu tiên hơn *higher precedence*.
 
-## Operators precedence
+## Độ ưu tiên của các phép toán
 
-If an expression has more than one operator, the execution order is defined by their *precedence*, or, in other words, there's an implicit priority order among the operators.
+Nếu một biểu thức có nhiều phép toán thì thằng nào tính trước, thằng nào tính sau?
 
-From school we all know that the multiplication in the expression `1 + 2 * 2` should be calculated before the addition. That's exactly the precedence thing. The multiplication is said to have *a higher precedence* than the addition.
+Ở trường các bạn được học là nhân chia trước, cộng trừ sau. Ví dụ `1 + 2 * 2` cho ra kết quả là 5, ta nói phép nhân có độ ưu tiên cao hơn phép cộng.
 
-Parentheses override any precedence, so if we're not satisfied with the order, we can use them, like: `(1 + 2) * 2`.
+Biểu thức trong ngoặc thì sẽ tính trước, Ví dụ trên nếu muốn phép cộng tính trước thì ta viết `(1 + 2) * 2`.
 
-There are many operators in JavaScript. Every operator has a corresponding precedence number. The one with the bigger number executes first. If the precedence is the same, the execution order is from left to right.
+Trong JavaScript. Phép toán có độ ưu tiên cao hơn thì được thực thi trước, nếu có độ ưu tiên bằng nhau thì thực thi từ trái sang phải.
 
-An extract from the [precedence table](https://developer.mozilla.org/en/JavaScript/Reference/operators/operator_precedence) (you don't need to remember this, but note that unary operators are higher than corresponding binary ones):
+Chi tiết độ ưu tiên các bạn có thể xem tại [precedence table](https://developer.mozilla.org/en/JavaScript/Reference/operators/operator_precedence) Không cần bạn phải nhớ chi tiết, Đơn giản chỉ cần nhớ là phép toán một ngôi sẽ có độ ưu tiên cao hơn phép toán hai ngôi:
 
-| Precedence | Name | Sign |
+| Độ ưu tiên | Phép toán | ký tự |
 |------------|------|------|
 | ... | ... | ... |
-| 16 | unary plus | `+` |
-| 16 | unary negation | `-` |
-| 14 | multiplication | `*` |
-| 14 | division | `/` |
-| 13 | addition | `+` |
-| 13 | subtraction | `-` |
+| 16 | Cộng một ngôi | `+` |
+| 16 | đổi dấu | `-` |
+| 14 | nhân | `*` |
+| 14 | chia | `/` |
+| 13 | cộng | `+` |
+| 13 | trừ | `-` |
 | ... | ... | ... |
-| 3 | assignment | `=` |
+| 3 | gán | `=` |
 | ... | ... | ... |
 
-As we can see, the "unary plus" has a priority of `16`, which is higher than `13` for the "addition" (binary plus). That's why in the expression `"+apples + +oranges"` unary pluses work first, and then the addition.
+Ta có thể thấy "Phép cộng một ngôi" có độ ưu tiên là `16`, cao hơn phép cộng hai ngôi có độ ưu tiên `13` . Đó là lý do tại sao trong biểu thức `"+apples + +oranges"` Phép cộng một ngôi được tính trước.
 
-## Assignment
+## Phép gán
 
-Let's note that an assignment `=` is also an operator. It is listed in the precedence table with the very low priority of `3`.
+Chú ý rằng phép gán `=` cũng là một phép toán. Và nó có độ ưu tiên khá thấp là `3`.
 
-That's why when we assign a variable, like `x = 2 * 2 + 1`, then the calculations are done first, and afterwards the `=` is evaluated, storing the result in `x`.
+Đó là lý do tại sao khi ta gán, ví dụ `x = 2 * 2 + 1`, thì giá trị được tính toán trước rồi mới gán `=` cho `x`.
 
 ```js
 let x = 2 * 2 + 1;
@@ -159,7 +155,7 @@ let x = 2 * 2 + 1;
 alert( x ); // 5
 ```
 
-It is possible to chain assignments:
+Cũng có thể gán chồng nhau nhiều lần như thế nào:
 
 ```js run
 let a, b, c;
@@ -173,14 +169,14 @@ alert( b ); // 4
 alert( c ); // 4
 ```
 
-Chained assignments evaluate from right to left. First the rightmost expression `2 + 2` is evaluated then assigned to the variables on the left: `c`, `b` and `a`. At the end, all variables share a single value.
+Gán chồng nhau sẽ thực hiện từ phải qua trái `2 + 2` ra `4` gán cho `c`, `b` rồi đến `a`.
 
-````smart header="The assignment operator `\"=\"` returns a value"
-An operator always returns a value. That's obvious for most of them like an addition `+` or a multiplication `*`. But the assignment operator follows that rule too.
+````smart header="Phép gán `\"=\"` trả về giá trị"
+Các phép toán trả về giá trị là kết quả của phép toán đó. ví dụ `5 + 5` kết quả là 10, và cũng là `return 10`. Tương tự phép gán cũng thế.
 
-The call `x = value` writes the `value` into `x` *and then returns it*.
+Ví dụ `x = value` gán `value` cho `x` *và cũng: return value*.
 
-Here's the demo that uses an assignment as part of a more complex expression:
+Ví dụ phức tạp hơn:
 
 ```js run
 let a = 1;
