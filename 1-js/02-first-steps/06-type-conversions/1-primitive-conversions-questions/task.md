@@ -4,7 +4,7 @@ importance: 5
 
 # Type conversions
 
-What are results of these expressions?
+Kết quả của các biểu thức sau là?
 
 ```js no-beautify
 "" + 1 + 0
@@ -23,4 +23,4 @@ null + 1
 undefined + 1
 ```
 
-Think well, write down and then compare with the answer.
+Làm và so sánh với đáp án nhé.
