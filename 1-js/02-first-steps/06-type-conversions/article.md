@@ -153,7 +153,6 @@ Theo nguyên tắc:
 |`0`, `null`, `undefined`, `NaN`, `""` |`false`|
 |Giá trị khác| `true` |
 
-
 Hầu hết các quy tắc đều dễ hiểu và dễ nhớ, nhưng có một vài điểm mà mọi người hay nhầm lẫn như sau:
 
 - `undefined` trả về `NaN` là một số, cứ không phải trả về `0`.
