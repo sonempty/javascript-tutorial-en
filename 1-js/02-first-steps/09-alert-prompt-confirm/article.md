@@ -1,50 +1,48 @@
-# Interaction: alert, prompt, confirm
+# Một số lệnh tương tác: alert, prompt, confirm
 
-This part of the tutorial aims to cover JavaScript "as is", without environment-specific tweaks.
-
-But still we use a browser as the demo environment. So we should know at least a few user-interface functions. In this chapter we'll get familiar with the browser functions `alert`, `prompt` and `confirm`.
+Bài này chúng ta học về các hàm `alert`, `prompt` and `confirm`.
 
 [cut]
 
 ## alert
 
-Syntax:
+Cú pháp:
 
 ```js
 alert(message);
 ```
 
-This shows a message and pauses the script execution until the user presses "OK".
+Show một tin nhắn lên màn hình cho đến khi người dùng nhấn "OK".
 
-For example:
+Ví dụ:
 
 ```js run
 alert("Hello");
 ```
 
-The mini-window with the message is called a *modal window*. The word "modal" means that the visitor can't interact with the rest of the page, press other buttons etc, until they have dealt with the window. In this case -- until they press "OK".
+Một cửa sổ nhỏ với dòng chữ `hello` xuất hiện, nó được gọi là *modal window*. Từ "modal" có nghĩa là người dùng không thể tương tác với các thành phần khác của trang web, vd như nhấn phím bất kỳ, cho đến khi click vào nút "OK".
 
 ## prompt
 
-Function `prompt` accepts two arguments:
+Hàm `prompt` có hai tham số:
 
 ```js no-beautify
 result = prompt(title[, default]);
 ```
 
-It shows a modal window with a text message, an input field for the visitor and buttons OK/CANCEL.
+Nó cũng show một modal window với một tin nhắn và một input field để nhập liệu và nút OK/CANCEL.
 
 `title`
-: The text to show to the visitor.
+: Tin nhắn show lên có người dùng.
 
 `default`
-: An optional second parameter, the initial value for the input field.
+: tham số phụ, giá trị mặc định của input field.
 
-The visitor may type something in the prompt input field and press OK. Or they can cancel the input by pressing the CANCEL button or hitting the `key:Esc` key.
+Người dùng gõ bất kỳ cái gì và nhấn OK. Hoặc thoát bằng nút CANCEL hoặc phím `key:Esc`.
 
-The call to `prompt` returns the text from the field or `null` if the input was canceled.
+Khi gọi `prompt` sẽ trả về text được nhập vào trong input form hoặc trả về `null` nếu bị canceled.
 
-For instance:
+Ví dụ:
 
 ```js run
 let age = prompt('How old are you?', 100);
@@ -52,16 +50,16 @@ let age = prompt('How old are you?', 100);
 alert(`You are ${age} years old!`); // You are 100 years old!
 ```
 
-````warn header="IE: always supply a `default`"
-The second parameter is optional. But if we don't supply it, Internet Explorer would insert the text `"undefined"` into the prompt.
+````warn header="IE: Luôn luôn đặt giá trị `default`"
+Tham số này là phụ, nhưng chúng ta nên gán giá trị cho nó vì nếu không Internet Explorer sẽ insert chuỗi `"undefined"`vào prompt.
 
-Run this code in Internet Explorer to see that:
+Chạy code này trên Internet Explorer để xem:
 
 ```js run
 let test = prompt("Test");
 ```
 
-So, to look good in IE, it's recommended to always provide the second argument:
+Do đó để ngọt hơn trên IE, cần bõ default vào:
 
 ```js run
 let test = prompt("Test", ''); // <-- for IE
@@ -70,17 +68,17 @@ let test = prompt("Test", ''); // <-- for IE
 
 ## confirm
 
-The syntax:
+Cú pháp:
 
 ```js
 result = confirm(question);
 ```
 
-Function `confirm` shows a modal window with a `question` and two buttons: OK and CANCEL.
+Hàm `confirm` show ra một modal window với `câu hỏi` và hai nút OK và CANCEL.
 
-The result is `true` if OK is pressed and `false` otherwise.
+Kết quả là `true` nếu click OK và `false` cho CANCEL.
 
-For example:
+Ví dụ:
 
 ```js run
 let isBoss = confirm("Are you the boss?");
@@ -88,24 +86,24 @@ let isBoss = confirm("Are you the boss?");
 alert( isBoss ); // true if OK is pressed
 ```
 
-## Summary
+## Tóm tắt
 
-We covered 3 browser-specific functions to interact with the visitor:
+Chúng ta đã học về 3 hàm đặc trưng của trình duyệt để tương tác với người dùng:
 
 `alert`
-: shows a message.
+: show một tin nhắn.
 
 `prompt`
-: shows a message asking the user to input text. It returns the text or, if CANCEL or `key:Esc` is clicked, all browsers return `null`.
+: Hỏi người dùng nhập vào dữ liệu, nếu CANCEL hoặc `key:Esc` trình duyệt trả về `null`.
 
 `confirm`
-: shows a message and waits for the user to press "OK" or "CANCEL". It returns `true` for OK and `false` for CANCEL/`key:Esc`.
+: Show một tin nhắn và đợi người dùng nhấn "OK" hoặc "CANCEL". returns `true` nếu nhấn OK và `false` nếu CANCEL/`key:Esc`.
 
-All these methods are modal: they pause the script execution and don't allow the visitor to interact with the rest of the page until the message has been dismissed.
+Tất cả 3 hàm trên đều là modal: Dừng lại sự thực thi của chương trình cho đến khi tin nhắn được xử lý xong.
 
-There are two limitations shared by all the methods above:
+Có hai sự giới hạn:
 
-1. The exact location of the modal window is determined by the browser. Usually it's in the center.
-2. The exact look of the window also depends on the browser. We can't modify it.
+1. Vị trí của modal window do trình duyệt quyết định. thường là chính giữa màn hình.
+2. Giao diện của modal windown do trình duyệt quyết định, chúng ta không sửa được.
 
-That is the price for simplicity. There are other ways to show nicer windows and richer interaction with the visitor, but if "bells and whistles" do not matter much, these methods work just fine.
+Đây là ba cách đơn giản nhất, còn nhiều cách tương tác với người dùng nữa, nhưng chỉ màu mè hơn chút thôi. Cơ bản dùng 3 thằng này là đủ rồi.
