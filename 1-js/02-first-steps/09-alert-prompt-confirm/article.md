@@ -1,4 +1,4 @@
-# Một số lệnh tương tác: alert, prompt, confirm
+# Một số lệnh tương tác với user trên trình duyệt: alert, prompt, confirm
 
 Bài này chúng ta học về các hàm `alert`, `prompt` and `confirm`.
 
