@@ -1,26 +1,24 @@
-# Logical operators
+# Các phép logic
 
-There are three logical operators in JavaScript: `||` (OR), `&&` (AND), `!` (NOT).
+Có ba phép logic trong JavaScript: `||` (OR), `&&` (AND), `!` (NOT).
 
-Although they are called "logical", they can be applied to values of any type, not only boolean. The result can also be of any type.
-
-Let's see the details.
+Mặc dù được gọi là "logic", nhưng có thể dùng trên bất cứ kiểu dữ liệu nào không riêng gì Boolean. Kết quả trả về cũng có thể là bất cứ kiểu dữ liệu nào.
 
 [cut]
 
 ## || (OR)
 
-The "OR" operator is represented with two vertical line symbols:
+Phép hoặc "OR" được thể hiện bằng hai dấu gạch thẳng đứng như bên dưới:
 
 ```js
 result = a || b;
 ```
 
-In classical programming, logical OR is meant to manipulate boolean values only. If any of its arguments are `true`, then it returns `true`, otherwise it returns `false`.
+Trong lập trình cổ điển, phép OR chỉ sử dụng trên kiểu Boolean. nếu có bất cứ tham số nào có giá trị là `true`, thì trả về `true`, ngược lại trả về `false`.
 
-In JavaScript the operator is a little bit more tricky and powerful. But first let's see what happens with boolean values.
+Trong JavaScript phép OR có chút khác biệt và mạnh mẽ hơn. Nhưng trước hết ta tìm hiểu OR sử dụng trên Boolean.
 
-There are four possible logical combinations:
+Có bốn khả năng như bên dưới:
 
 ```js run
 alert( true || true );   // true
@@ -29,11 +27,11 @@ alert( true || false );  // true
 alert( false || false ); // false
 ```
 
-As we can see, the result is always `true` except for the case when both operands are `false`.
+Giá trị trả về là `true` trừ trường hợp tất cả toán hạng đều là `false`.
 
-If an operand is not boolean, then it's converted to boolean for the evaluation.
+Nếu có toán hạng không phải kiểu Boolean, nó sẽ được chuyển đổi thành Boolean.
 
-For instance, a number `1` is treated as `true`, a number `0` -- as `false`:
+Ví dụ number `1` chuyển thành `true`, và number `0` -- là `false`:
 
 ```js run
 if (1 || 0) { // works just like if( true || false )
@@ -41,9 +39,9 @@ if (1 || 0) { // works just like if( true || false )
 }
 ```
 
-Most of the time, OR `||` is used in an `if` statement to test if *any* of the given conditions is correct.
+Hầu hết trường hợp, OR `||` được sử dụng cùng câu lệnh `if` để kiểm tra có có giá trị nào là `true` hay không.
 
-For example:
+Ví dụ:
 
 ```js run
 let hour = 9;
@@ -55,7 +53,7 @@ if (hour < 10 || hour > 18) {
 }
 ```
 
-We can pass more conditions:
+Chúng ta có thể sử dụng nhiều btđk hơn:
 
 ```js run
 let hour = 12;
@@ -66,29 +64,28 @@ if (hour < 10 || hour > 18 || isWeekend) {
 }
 ```
 
-## OR seeks the first truthy value
+## OR tìm kiếm giá trị true đầu tiên
 
-The logic described above is somewhat classical. Now let's bring in the "extra" features of JavaScipt.
+Đây là điểm khác biệt giữa JavaScipt và lập trình cổ điển đã nói ở trên.
 
-The extended algorithm works as follows.
-
-Given multiple OR'ed values:
+Sự khác biệt như sau:
 
 ```js
 result = value1 || value2 || value3;
 ```
 
-The OR `"||"` operator does the following:
+Phép OR `"||"` sẽ được thực hiện như sau:
 
-- Evaluate operands from left to right.
-- For each operand, convert it to boolean. If the result is `true`, then stop and return the original value of that operand.
-- If all other operands have been assessed (i.e. all were `falsy`), return the last operand.
+- Đánh giá các toán hạng từ trái sang phải.
+- Chuyển đổi từng toán hạng sang kiểu Boolean. Nếu thấy có toán hạng là `true`, phép toán kết thúc, trả về giá trị nguyên bản khi chưa chuyển đổi (orginal value) của toán hạng đó.
+- Nếu tất cả toán hạng đều là `false` thì trả về toán hạng cuối cùng.
 
-A value is returned in its original form, without the conversion.
+Nói cách khác phép OR `"||"` trả về giá trị `truthy` đầu tiên. Hoặc trả về giá trị cuối cùng nếu tất cả toán hạng là `falsy`.
+Nhắc lại một chút:
+- `truthy` ám chỉ các giá trị mà khi convert sang Boolean thì sẽ được `true`. Ví dụ như 1, "fdsfsf", "0",...
+- `falsy` ám chỉ các giá trị mà khi convert sang Boolean thì sẽ được `fasle`. Ví dụ như null, 0, "", ....
 
-In other words, a chain of OR `"||"` returns the first truthy value or the last one if no such value is found.
-
-For instance:
+Ví dụ:
 
 ```js run
 alert( 1 || 0 ); // 1 (1 is truthy)
@@ -99,13 +96,11 @@ alert( null || 0 || 1 ); // 1 (the first truthy value)
 alert( undefined || null || 0 ); // 0 (all falsy, returns the last value)
 ```
 
-That leads to some interesting usages compared to a "pure, classical, boolean-only OR".
+1. **Lấy giá trị truthy từ các toán hạng hoặc biểu thức.**
 
-1. **Getting the first truthy value from the list of variables or expressions.**
+    Tưởng tượng bạn có nhiều biến, và các biến này có thể có giá trị là `null/undefined`. Và chúng ta cần chọn biến đầu tiên có giá trị mà ta cần.
 
-    Imagine we have several variables, which can either contain the data or be `null/undefined`. And we need to choose the first one with data.
-
-    We can use OR `||` for that:
+    Chúng ta sử dụng phép `||` :
 
     ```js run
     let currentUser = null;
@@ -118,14 +113,15 @@ That leads to some interesting usages compared to a "pure, classical, boolean-on
     alert( name ); // selects "John" – the first truthy value
     ```
 
-    If both `currentUser` and `defaultUser` were falsy then `"unnamed"` would be the result.
-2. **Short-circuit evaluation.**
+    Nếu cả `currentUser` và `defaultUser` là falsy thì giá trị `"unnamed"` sẽ là kết quả.
+2. **đánh giá ngắn mạch**
 
-    Operands can be not only values, but arbitrary expressions. OR evaluates and tests them from left to right. The evaluation stops when a truthy value is reached, and the value is returned. The process is called "a short-circuit evaluation", because it goes as short as possible from left to right.
+    Toán hạng có thể là các giá trị, cũng có thể là các biểu thức trừu tượng. OR sẽ đánh giá chúng từ trái sang phải. Sự đánh giá này sẽ dừng lại khi thấy giá trị truthy đầu tiên, và giá trị đó sẽ được trả về. Quá trình này gọi là đánh giá ngắn mạch "a short-circuit evaluation", bởi vì sự đánh giá này là ngắn nhất có thể từ trái sang phải.
+    "Ngắn mạch" từ này hay dùng trong ngành điện. Các bạn có thể google xem nhé.
 
-    This is clearly seen when the expression given as the second argument has a side effect. Like a variable assignment.
+    Điều này được thấy rõ khi biểu thức được đưa ra như là đối số thứ hai có tác dụng phụ. Giống như một phép gán biến.
 
-    If we run the example below, `x` would not get assigned:
+    Chạy đoạn code sau, ta sẽ thấy `x` không được gán giá trị:
 
     ```js run no-beautify
     let x;
@@ -135,7 +131,7 @@ That leads to some interesting usages compared to a "pure, classical, boolean-on
     alert(x); // undefined, because (x = 1) not evaluated
     ```
 
-    ...And if the first argument is `false`, then `OR` goes on and evaluates the second one thus running the assignment:
+    ...và nếu toán hạng đầu tiên là `false`, sau đó `OR` đánh giá toán hạng thứ hai, chính là biểu thức `(x = 1)`, và `x` sẽ được gán giá trị.:
 
     ```js run no-beautify
     let x;
@@ -145,21 +141,21 @@ That leads to some interesting usages compared to a "pure, classical, boolean-on
     alert(x); // 1
     ```
 
-    An assignment is a simple case, other side effects can be involved.
+    Phép gán ở trên chỉ là một ví dụ đơn giản, ta còn có thể dùng nhiều biểu thức phức tạp hơn.
 
-    As we can see, such a use case is a "shorter way to do `if`". The first operand is converted to boolean and if it's false then the second one is evaluated.
+    Như bạn thấy hầu hết các trường hợp đều "ngắn hơn là dùng `if`".
 
-    Most of time it's better to use a "regular" `if` to keep the code easy to understand, but sometimes that can be handy.
+    Nói chung là tùy trường hợp dùng OR cho ngắn hay dùng `if` để code dễ hiểu hơn là tùy ở bạn.
 
 ## && (AND)
 
-The AND operator is represented with two ampersands `&&`:
+Phép AND thể hiện bằng hai dấu và `&&`:
 
 ```js
 result = a && b;
 ```
 
-In classical programming AND returns `true` if both operands are truthy and `false` otherwise:
+Trong lập trình cổ điển phép AND trả về `true` nếu cả hai toán hạng là truthy và trả về `false` nếu ngược lại:
 
 ```js run
 alert( true && true );   // true
@@ -168,7 +164,7 @@ alert( true && false );  // false
 alert( false && false ); // false
 ```
 
-An example with `if`:
+Ví dụ với `if`:
 
 ```js run
 let hour = 12;
@@ -179,7 +175,7 @@ if (hour == 12 && minute == 30) {
 }
 ```
 
-Just as for OR, any value is allowed as an operand of AND:
+tương tự OR, AND có thể dùng trên bất kỳ kiểu dữ liệu nào:
 
 ```js run
 if (1 && 0) { // evaluated as true && false
@@ -188,25 +184,25 @@ if (1 && 0) { // evaluated as true && false
 ```
 
 
-## AND seeks the first falsy value
+## AND tìm giá trị falsy đầu tiên
 
-Given multiple AND'ed values:
+Xem ví dụ:
 
 ```js
 result = value1 && value2 && value3;
 ```
 
-The AND `"&&"` operator does the following:
+Phép AND `"&&"` sẽ thực hiện như sau:
 
-- Evaluate operands from left to right.
-- For each operand, convert it to a boolean. If the result is `false`, stop and return the original value of that operand.
-- If all other operands have been assessed (i.e. all were truthy), return the last operand.
+- Đánh giá các toán hạng từ trái sang phải.
+- Chuyển đổi từng toán hạng sang Boolean. Nếu gặp giá trị `false`, kết thúc phép toán và trả về orginal value của toán hạng đó.
+- Nếu tất cả toán hạng là truthy, trả về toán hạng cuối cùng.
 
-In other words, AND returns the first falsy value or the last value if none were found.
+Nói cách khác, AND trả về giá trị falsy đầu tiên. Hoặc trả về toán hạng cuối cùng nếu tất cả toán hạng đều là truthy
 
-The rules above are similar to OR. The difference is that AND returns the first *falsy* value while OR returns the first *truthy* one.
+Quy tắc này tương tự OR. Khác biệt là AND trả về giá trị *falsy* đầu tiên trong khi OR trả về giá trị *truthy* đầu tiên.
 
-Examples:
+Ví dụ:
 
 ```js run
 // if the first operand is truthy,
@@ -220,31 +216,31 @@ alert( null && 5 ); // null
 alert( 0 && "no matter what" ); // 0
 ```
 
-We can also pass several values in a row. See how the first falsy one is returned:
+Giá trị falsy đầu tiên được trả về:
 
 ```js run
 alert( 1 && 2 && null && 3 ); // null
 ```
 
-When all values are truthy, the last value is returned:
+Nếu tất cả là truthy, giá trị cuối cùng được trả về:
 
 ```js run
 alert( 1 && 2 && 3 ); // 3, the last one
 ```
 
-````smart header="AND `&&` executes before OR `||`"
-The precedence of the AND `&&` operator is higher than OR `||`, so it executes before OR.
+````smart header="AND `&&` được thực thi trước OR `||`"
+Phép AND `&&` có độ ưu tiên cao hơn phép OR `||`.
 
-In the code below `1 && 0` is calculated first:
+Xem vd bên dưới `1 && 0` sẽ được thực thi trước:
 
 ```js run
 alert( 5 || 1 && 0 ); // 5
 ```
 ````
 
-Just like OR, the AND `&&` operator can sometimes replace `if`.
+Tương tự OR, Phép AND `&&` thỉnh thoảng được dùng để thay thế `if`.
 
-For instance:
+Ví dụ:
 
 ```js run
 let x = 1;
@@ -252,9 +248,9 @@ let x = 1;
 (x > 0) && alert( 'Greater than zero!' );
 ```
 
-The action in the right part of `&&` would execute only if the evaluation reaches it. That is: only if `(x > 0)` is true.
+Hành động phía sau `&&` chỉ được thực thi nếu `(x > 0)` là đúng.
 
-So we basically have an analogue for:
+Nó tương đương với:
 
 ```js run
 let x = 1;
@@ -264,42 +260,42 @@ if (x > 0) {
 }
 ```
 
-The variant with `&&` appears to be shorter. But `if` is more obvious and tends to be a little bit more readable.
+Dùng `&&` thấy ngắn hơn dùng `if`. Nhưng dùng `if` rõ ràng và dễ đọc hơn.
 
-So it is recommended to use every construct for its purpose. Use `if` if we want if. And use `&&` if we want AND.
+Cho nên hãy sử dụng cho đúng mục đích.
 
 ## ! (NOT)
 
-The boolean NOT operator is represented with an exclamation sign `"!"`.
+Phép phủ định NOT được thể hiện bằn dấu chấm than `"!"`.
 
-The syntax is pretty simple:
+Cấu trúc ngữ pháp khá đơn giản:
 
 ```js
 result = !value;
 ```
 
-The operator accepts a single argument and does the following:
+Nó là phép toán một ngôi có nguyên tắc đơn giản như sau:
 
-1. Converts the operand to boolean type: `true/false`.
-2. Returns an inverse value.
+1. Chuyển đổi toán hạng thành Boolean: `true/false`.
+2. Trả về giá trị ngược lại.
 
-For instance:
+Ví dụ:
 
 ```js run
 alert( !true ); // false
 alert( !0 ); // true
 ```
 
-A double NOT `!!` is sometimes used for converting a value to boolean type:
+Sử dụng hai lần phép NOT `!!` thỉnh thoảng được sử dụng để convert giá trị thành Boolean:
 
 ```js run
 alert( !!"non-empty string" ); // true
 alert( !!null ); // false
 ```
 
-That is, the first NOT converts the value to boolean and returns the inverse, and the second NOT inverses it again. At the end we have a plain value-to-boolean conversion.
+Vì phủ định của phủ định là khẳng định mà.
 
-There's a little more verbose way to do the same thing -- a built-in `Boolean` function:
+Có cách đơn giản hơn là sử dụng hàm `Boolean` có sẵn trong JS:
 
 ```js run
 alert( Boolean("non-empty string") ); // true
