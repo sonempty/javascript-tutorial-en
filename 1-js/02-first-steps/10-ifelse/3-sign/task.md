@@ -4,12 +4,10 @@ importance: 2
 
 # Show the sign
 
-Using `if..else`, write the code which gets a number via `prompt` and then shows in `alert`:
+Sử dụng `if..else`, viết chương trình nhập vào một số từ `prompt` và `alert`:
 
-- `1`, if the value is greater than zero,
-- `-1`, if less than zero,
-- `0`, if equals zero.
-
-In this task we assume that the input is always a number.
+- `1`, nếu số lớn hơn 0,
+- `-1`, nếu số nhỏ hơn,
+- `0`, nếu bằng 0.
 
 [demo src="if_sign"]
