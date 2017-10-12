@@ -2,11 +2,11 @@ importance: 2
 
 ---
 
-# The name of JavaScript
+# Tên của JavaScript
 
-Using the `if..else` construct, write the code which asks: 'What is the "official" name of JavaScript?'
+Sử dụng `if..else` Viết chương trình hỏi người dùng: 'What is the "official" name of JavaScript?'
 
-If the visitor enters "ECMAScript", then output "Right!", otherwise -- output: "Didn't know? ECMAScript!"
+Nếu người dùng trả lời là "ECMAScript", show ra "Right!", ngược lại thì show ra: "Didn't know? ECMAScript!"
 
 ![](ifelse_task2.png)
 
