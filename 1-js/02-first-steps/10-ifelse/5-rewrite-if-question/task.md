@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Rewrite 'if' into '?'
+# Thay 'if' bằng '?'
 
-Rewrite this `if` using the ternary operator `'?'`:
+Viết lại chương trình dùng `if` bên dưới bằng cách sử dụng phép `'?'`:
 
 ```js
 if (a + b < 4) {
