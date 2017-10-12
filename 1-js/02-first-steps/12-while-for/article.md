@@ -1,16 +1,16 @@
-# Loops: while and for
+# Vòng lặp: while và for
 
-We often have a need to perform similar actions many times in a row.
+Thỉnh thoảng chúng ta cần lặp lại các hành động tương tự nhiều lần.
 
-For example, when we need to output goods from a list one after another. Or just run the same code for each number from 1 to 10.
+Ví dụ in ra tên hàng trong một list các mặt hàng, hay in ra các số từ 1 đên 100.
 
-*Loops* are a way to repeat the same part of code multiple times.
+*Loops* - Vòng lặp được sử dụng để thực hiện các công việc này.
 
 [cut]
 
-## The "while" loop
+## Vòng lặp "while"
 
-The `while` loop has the following syntax:
+Cú pháp:
 
 ```js
 while (condition) {
@@ -19,9 +19,9 @@ while (condition) {
 }
 ```
 
-While the `condition` is `true`, the `code` from the loop body is executed.
+Khi `condition` là `true`, thì `code` trong phần thân của vòng lặp sẽ được thực thi.
 
-For instance, the loop below outputs `i` while `i < 3`:
+Ví dụ, in ra `i` khi `i < 3`:
 
 ```js run
 let i = 0;
@@ -31,13 +31,13 @@ while (i < 3) { // shows 0, then 1, then 2
 }
 ```
 
-A single execution of the loop body is called *an iteration*. The loop in the example above makes three iterations.
+Một lần thực thi code trong phần thân vòng lặp được gọi là *an iteration*. Vòng lặp trong ví dụ trên có 3 iterations.
 
-If there were no `i++` in the example above, the loop would repeat (in theory) forever. In practice, the browser provides ways to stop such loops, and for server-side JavaScript we can kill the process.
+Nếu không có lệnh `i++` trong ví dụ trên, vòng lặp sẽ lặp (theo lý thuyết) mãi mãi. Trong thực tế trình duyệt sẽ có cách để stop những vòng lặp mãi mãi, và nếu code ở phần JavaScript-server-side chúng ta có thể chấm dứt tiến trình (kill the process).
 
-Any expression or a variable can be a loop condition, not just a comparison. They are evaluated and converted to boolean by `while`.
+Không chỉ riêng biểu thức so sánh, một biểu thức bất kỳ hay một giá trị có thể là btđk của vòng lặp. Chúng sẽ được đánh giá và convert sang boolean bởi `while`.
 
-For instance, the shorter way to write `while (i != 0)` could be `while (i)`:
+Ví dụ cách viết ngắn hơn cho `while (i != 0)` là `while (i)`:
 
 ```js run
 let i = 3;
@@ -49,8 +49,7 @@ while (i) { // when i becomes 0, the condition becomes falsy, and the loop stops
 }
 ```
 
-````smart header="Brackets are not required for a single-line body"
-If the loop body has a single statement, we can omit the brackets `{…}`:
+````smart header="Có thể bõ cặp `{…}` ngoặc nếu chỉ có một lệnh trong thân"
 
 ```js run
 let i = 3;
