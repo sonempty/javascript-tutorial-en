@@ -4,17 +4,17 @@ importance: 3
 
 # Check the login
 
-Write the code which asks for a login with `prompt`.
+Viết chương trình hỏi người dùng login từ `prompt`.
 
-If the visitor enters `"Admin"`, then `prompt` for a password, if the input is an empty line or `key:Esc` -- show "Canceled.", if it's another string -- then show "I don't know you".
+Nếu người dùng nhập vào `"Admin"`, thì `prompt` tiếp password, nếu nhập vào trống hoặc nhấn `key:Esc` -- thì show ra "Canceled.", nếu nhập vào sai pass thì show ra "I don't know you".
 
-The password is checked as follows:
+Kiểm tra password như sau:
 
-- If it equals "TheMaster", then show "Welcome!",
-- Another string -- show "Wrong password",
-- For an empty string or cancelled input, show "Canceled."
+- Nếu là "TheMaster", thì show ra "Welcome!",
+- Chuỗi khác thì show ra "Wrong password",
+- Không nhập vào hoặc nhấn phím `key:Esc` thì show ra "Canceled."
 
-The schema:
+Sơ đồ như sau:
 
 ![](ifelse_task.png)
 
