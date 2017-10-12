@@ -59,9 +59,9 @@ while (i) alert(i--);
 ```
 ````
 
-## The "do..while" loop
+## Vòng lặp "do..while"
 
-The condition check can be moved *below* the loop body using the `do..while` syntax:
+Btđk nằm phía *dưới* phần thân của vòng lặp `do..while`, cú pháp:
 
 ```js
 do {
@@ -69,7 +69,7 @@ do {
 } while (condition);
 ```
 
-The loop will first execute the body, then check the condition and, while it's truthy, execute it again and again.
+Vòng lặp thực thi code trong phần thân trước, sau đó kiểm tra btđk nếu là truthy, thực hiện code một lần nữa.
 
 For example:
 
