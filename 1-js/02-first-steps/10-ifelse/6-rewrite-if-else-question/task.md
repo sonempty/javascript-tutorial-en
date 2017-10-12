@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Rewrite 'if..else' into '?'
+# Thay 'if..else' bằng '?'
 
-Rewrite `if..else` using multiple ternary operators `'?'`.
+Viết lại `if..else` bằng cách sử dụng các phép `'?'`.
 
-For readability, it's recommended to split the code into multiple lines.
+Để cho dễ đọc, hãy viết trên nhiều dòng.
 
 ```js
 let message;
