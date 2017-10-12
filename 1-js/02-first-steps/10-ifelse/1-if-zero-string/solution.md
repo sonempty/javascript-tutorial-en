@@ -1,8 +1,8 @@
-**Yes, it will.**
+**Có. Lệnh `alert` sẽ được thực thi**
 
-Any string except an empty one (and `"0"` is not empty) becomes `true` in the logical context.
+Chỉ có chuỗi rỗng `""` mới trả về `false` còn lại chuỗi nào khác đều trả về `true` kể cả `"0"`.
 
-We can run and check:
+Bạn có thể chạy code để kiểm tra:
 
 ```js run
 if ("0") {
