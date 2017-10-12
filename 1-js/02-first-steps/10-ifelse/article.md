@@ -201,9 +201,9 @@ if (age < 3) {
 }
 ```
 
-## Non-traditional use of '?'
+## Một số cách ít khi dùng của '?'
 
-Sometimes the question mark `'?'` is used as a replacement for `if`:
+Thỉnh thoảng `'?'` được dùng thay vì `if`:
 
 ```js run no-beautify
 let company = prompt('Which company created JavaScript?', '');
@@ -214,15 +214,15 @@ let company = prompt('Which company created JavaScript?', '');
 */!*
 ```
 
-Depending on the condition `company == 'Netscape'`, either the first or the second part after `"?"` gets executed and shows the alert.
+Phụ thuộc vào giá trị của btđk `company == 'Netscape'`, mà câu lệnh nào phía sau `"?"` sẽ được thực thi.
 
-We don't assign a result to a variable here. The idea is to execute different code depending on the condition.
+Chúng ta không gán giá trị ở đây. Ý tưởng là sẽ thực hiện một hành động nào đó phụ thuộc vào btđk.
 
-**It is not recommended to use the question mark operator in this way.**
+**Không khuyến khích sử dụng `"?"` theo cách này nhé.**
 
-The notation seems to be shorter than `if`, which appeals to some programmers. But it is less readable.
+Cách sử dụng này ngắn hơn dùng `if`, nhưng khó đọc.
 
-Here is the same code with `if` for comparison:
+Chuyển đổi thành `if` cho ví dụ trên:
 
 ```js run no-beautify
 let company = prompt('Which company created JavaScript?', '');
@@ -236,6 +236,6 @@ if (company == 'Netscape') {
 */!*
 ```
 
-Our eyes scan the code vertically. The constructs which span several lines are easier to understand than a long horizontal instruction set.
+Mắt con người thường đọc code theo chiều dọc, vì thế code trên nhiều dòng sẽ dễ đọc hơn viết một dòng code dài.
 
-The idea of a question mark `'?'` is to return one or another value depending on the condition. Please use it for exactly that. There is `if` to execute different branches of the code.
+Ý tưởng khi dùng `'?'` là trả về một giá trị nào đó phụ thuộc vào btđk. Trong khi dùng `if` để thực thi các hành động nào đó phụ thuộc vào btđk. Các bạn chú ý sử dụng cho chính xác nhé.
