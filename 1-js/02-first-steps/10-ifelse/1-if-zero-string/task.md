@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# if (a string with zero)
+# if ("0")
 
-Will `alert` be shown?
+Lênh `alert` có được thực thi hay không?
 
 ```js
 if ("0") {
