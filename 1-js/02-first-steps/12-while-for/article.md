@@ -69,9 +69,9 @@ do {
 } while (condition);
 ```
 
-Vòng lặp thực thi code trong phần thân trước, sau đó kiểm tra btđk nếu là truthy, thực hiện code một lần nữa.
+Vòng lặp thực thi code trong phần thân trước, sau đó kiểm tra đk nếu là truthy, thực hiện code một lần nữa.
 
-For example:
+Ví dụ:
 
 ```js run
 let i = 0;
@@ -81,13 +81,13 @@ do {
 } while (i < 3);
 ```
 
-This form of syntax is rarely used except when you want the body of the loop to execute **at least once** regardless of the condition being truthy. Usually, the other form is preferred: `while(…) {…}`.
+Cú pháp này ít khi được sử dụng trừ khi bạn muốn phần body được thực thi **ít nhất 1 lần** bất kể btđk là truthy. Thông thường thì `while(…) {…}` hay được dùng hơn.
 
-## The "for" loop
+## Vòng lặp "for"
 
-The `for` loop is the most often used one.
+Vòng lặp `for` là vòng lặp hay được sử dụng nhất.
 
-It looks like this:
+Cú pháp:
 
 ```js
 for (begin; condition; step) {
@@ -95,7 +95,7 @@ for (begin; condition; step) {
 }
 ```
 
-Let's learn the meaning of these parts by example. The loop below runs `alert(i)` for `i` from `0` up to (but not including) `3`:
+Chúng ta sẽ học về 3 thành phần của `for` qua các ví dụ. Ví dụ bên dưới lệnh `alert(i)` được thực thi với `i` chạy từ `0` đến (nhưng ko bao gồm) `3`:
 
 ```js run
 for (let i = 0; i < 3; i++) { // shows 0, then 1, then 2
@@ -103,17 +103,17 @@ for (let i = 0; i < 3; i++) { // shows 0, then 1, then 2
 }
 ```
 
-Let's examine the `for` statement part by part:
+Chúng ta cùng xem xét `for` theo từng phần:
 
 | part  |          |                                                                            |
 |-------|----------|----------------------------------------------------------------------------|
-| begin | `i = 0`    | Executes once upon entering the loop.                                      |
-| condition | `i < 3`| Checked before every loop iteration, if fails the loop stops.              |
-| step| `i++`      | Executes after the body on each iteration, but before the condition check. |
-| body | `alert(i)`| Runs again and again while the condition is truthy                         |
+| begin | `i = 0`    | Thực hiện một lần khi bước vào vòng lặp.                                      |
+| condition | `i < 3`| Kiểm tra trước khi thực thi iteration, Nếu `false` thì dừng vòng lặp.              |
+| step| `i++`      | Thực thi sau mỗi iteration, nhưng trước khi kiểm tra đk. |
+| body | `alert(i)`| chạy lặp đi lặp lại nếu đk là truthy                         |
 
 
-The general loop algorithm works like this:
+Thuật toán của vòng lặp hoạt động như thế này:
 ```
 Run begin
 → (if condition → run body and run step)
@@ -122,9 +122,8 @@ Run begin
 → ...
 ```
 
-If you are new to loops, then maybe it would help if you go back to the example and reproduce how it runs step-by-step on a piece of paper.
 
-Here's what exactly happens in our case:
+Đối với ví dụ trên:
 
 ```js
 // for (let i = 0; i < 3; i++) alert(i)
@@ -140,8 +139,8 @@ if (i < 3) { alert(i); i++ }
 // ...finish, because now i == 3
 ```
 
-````smart header="Inline variable declaration"
-Here the "counter" variable `i` is declared right in the loop. That's called an "inline" variable declaration. Such variables are visible only inside the loop.
+````smart header="khai báo biến inline"
+Biến `i` được khai báo trong vòng loop. Đó được gọi là khai báo biến "inline". Những biến này chỉ sử dụng được trong vòng lặp.
 
 ```js run
 for (*!*let*/!* i = 0; i < 3; i++) {
@@ -150,7 +149,7 @@ for (*!*let*/!* i = 0; i < 3; i++) {
 alert(i); // error, no such variable
 ```
 
-Instead of defining a variable, we can use an existing one:
+Thay vì khai báo biến, cũng có thể sử dụng biến có sẵn:
 
 ```js run
 let i = 0;
@@ -165,11 +164,11 @@ alert(i); // 3, visible, because declared outside of the loop
 ````
 
 
-### Skipping parts
+### Lược bỏ thành phần
 
-Any part of `for` can be skipped.
+Có thể lược bỏ bất cứ thành phần nào của `for`.
 
-For example, we can omit `begin` if we don't need to do anything at the loop start.
+Ví dụ chúng ta lược bỏ `begin` nếu không cần giá trị khởi tạo.
 
 Like here:
 
@@ -181,7 +180,7 @@ for (; i < 3; i++) { // no need for "begin"
 }
 ```
 
-We can also remove the `step` part:
+Lược bõ `step`:
 
 ```js run
 let i = 0;
@@ -191,9 +190,9 @@ for (; i < 3;) {
 }
 ```
 
-The loop became identical to `while (i < 3)`.
+Vòng lặp trên giống như `while (i < 3)`.
 
-We can actually remove everything, thus creating an infinite loop:
+Có thể lược bỏ tất cả để tạo ra một vòng lặp vô hạn:
 
 ```js
 for (;;) {
@@ -201,15 +200,15 @@ for (;;) {
 }
 ```
 
-Please note that the two `for` semicolons `;` must be present, otherwise it would be a syntax error.
+Chú ý trong `for` dùng 2 dấu `;` nếu không sẽ báo lỗi cú pháp.
 
-## Breaking the loop
+## Thoát vòng lặp
 
-Normally the loop exits when the condition becomes falsy.
+Bình thường thì vòng lặp kết thúc khi đk là falsy.
 
-But we can force the exit at any moment. There's a special `break` directive for that.
+Nhưng chúng ta cũng có thể dừng vòng lặp bất cứ khi nào bằng một chỉ thị đặc biệt có tên là `break`.
 
-For example, the loop below asks the user for a series of numbers, but "breaks" when no number is entered:
+Ví dụ vòng lặp hỏi người dùng nhập vào một dãy số, và sẽ thoát nếu không có số nào được nhập vào:
 
 ```js
 let sum = 0;
@@ -228,17 +227,15 @@ while (true) {
 alert( 'Sum: ' + sum );
 ```
 
-The `break` directive is activated in the line `(*)` if the user enters an empty line or cancels the input. It stops the loop immediately, passing the control to the first line after the loop. Namely, `alert`.
+Chỉ thị `break` được chạy ở dòng `(*)` nếu user nhập vào dòng trống hoặc nhấn cancel. Nó dừng vòng lặp ngay lập tức, và đưa chương trình đến dòng code tiếp theo sau vòng lặp.  `alert`.
 
-The combination "infinite loop + `break` as needed" is great for situations when the condition must be checked not in the beginning/end of the loop, but in the middle, or even in several places of the body.
+Sự kết hợp của "infinite loop" và `break` hay dùng cho các trường hợp đk ko phải được kiểm tra ở đầu hay cuối vòng lặp, mà ở giữa vòng lặp hay bất cứ đâu trong body.
 
-## Continue to the next iteration [#continue]
+## Chỉ thị Continue [#continue]
 
-The `continue` directive is a "lighter version" of `break`. It doesn't stop the whole loop. Instead it stops the current iteration and forces the loop to start a new one (if the condition allows).
+Chỉ thị `continue` dừng lại iteration hiện thời và chuyển vòng lặp đến lần lặp mới .
 
-We can use it if we're done on the current iteration and would like to move on to the next.
-
-The loop above uses `continue` to output only odd values:
+Sử dụng `continue` để in ra các số lẽ:
 
 ```js run no-beautify
 for (let i = 0; i < 10; i++) {
@@ -250,10 +247,10 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-For even values of `i` the `continue` directive stops body execution, passing the control to the next iteration of `for` (with the next number). So the `alert` is only called for odd values.
+Với giá trị `i` chẵn, chỉ thị `continue` dừng sự thực thi trong body, chuyển vòng lặp qua iteration tiếp theo. Cho nên lệnh `alert` chỉ được gọi cho các giá trị lẽ.
 
-````smart header="The directive `continue` helps to decrease nesting level"
-A loop that shows odd values could look like this:
+````smart header="Chỉ thị `continue` giảm việc nesting trong code"
+Vòng lặp trên có thể viết:
 
 ```js
 for (let i = 0; i < 10; i++) {
@@ -265,15 +262,15 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-From a technical point of view it's identical to the example above. Surely, we can just wrap the code in the `if` block instead of `continue`.
+Hai cách dùng ở trên là tương đương nhau.
 
-But as a side-effect we got one more figure brackets nesting level. If the code inside `if` is longer than a few lines, that may decrease the overall readability.
+Nhưng nếu mã code trong `if` nhiều hơn thì code của ta sẽ khó đọc hơn vì nó thụt vào.
 ````
 
-````warn header="No `break/continue` to the right side of '?'"
-Please note that syntax constructs that are not expressions cannot be used in `'?'`. In particular, directives `break/continue` are disallowed there.
+````warn header="Không dùng `break/continue` bên phải '?'"
+Không được dùng trong biểu thức với `'?'`. Chỉ thị `break/continue` không được chấp nhận ở đây.
 
-For example, if we take this code:
+Ví dụ ta có code:
 
 ```js
 if (i > 5) {
@@ -283,24 +280,24 @@ if (i > 5) {
 }
 ```
 
-...And rewrite it using a question mark:
+...Và viết lại với `?`:
 
 
 ```js no-beautify
 (i > 5) ? alert(i) : *!*continue*/!*; // continue not allowed here
 ```
 
-...Then it stops working. The code like this will give a syntax error:
+...sẽ không chạy được. Code sẽ báo lỗi cú pháp:
 
 
-That's just another reason not to use a question mark operator `'?'` instead of `if`.
+Đây là lý do đừng sử dụng `'?'` thay cho `if`.
 ````
 
-## Labels for break/continue
+## Đánh nhãn cho break/continue
 
-Sometimes we need to break out from multiple nested loops at once.
+Thỉnh thoảng ta muốn break vòng lặp nào đó trong nhiều vòng lặp chồng nhau.
 
-For example, in the code below we loop over `i` and `j` prompting for coordinates `(i, j)` from `(0,0)` to `(3,3)`:
+Ví du hai vòng lặp chồng nhau `i` và `j`:
 
 ```js run no-beautify
 for (let i = 0; i < 3; i++) {
@@ -317,20 +314,20 @@ for (let i = 0; i < 3; i++) {
 alert('Done!');
 ```
 
-We need a way to stop the process if the user cancels the input.
+Chúng ta cần stop vòng lặp nếu user nhấn cancels hoặc không nhập vào gì cả.
 
-The ordinary `break` after `input` would only break the inner loop. That's not sufficient. Labels come to the rescue.
+Nếu dùng `break` sau `input` chỉ thoát được vòng lặp chứa nó. Chứ không thoát cả 2 vòng lặp. Sử dụng *label* để giải quyết vấn đề này.
 
-A *label* is an identifier with a colon before a loop:
+Một nhã *label* là một cái tên đặt cho vòng lặp, cú pháp:
 ```js
 labelName: for (...) {
   ...
 }
 ```
 
-The `break <labelName>` statement in the loop breaks out to the label.
+Chỉ thị `break <labelName>` thoát khỏi vòng lặp có tên là labelName.
 
-Like here:
+Như thế này:
 
 ```js run no-beautify
 *!*outer:*/!* for (let i = 0; i < 3; i++) {
@@ -348,42 +345,40 @@ Like here:
 alert('Done!');
 ```
 
-In the code above `break outer` looks upwards for the label named `outer` and breaks out of that loop.
+Ở ví dụ trên `break outer` tìm vòng lặp nào có tên là `outer` và thoát khỏi nó.
 
-So the control goes straight from `(*)` to `alert('Done!')`.
+và chương trình nhảy từ `(*)` sang `alert('Done!')`.
 
-We can also move the label onto a separate line:
+Có thể viết ra các dòng như này:
 
 ```js no-beautify
 outer:
 for (let i = 0; i < 3; i++) { ... }
 ```
 
-The `continue` directive can also be used with a label. In this case the execution jumps to the next iteration of the labeled loop.
+Chỉ thị `continue` cũng có thể dùng với label. 
 
-````warn header="Labels are not a \"goto\""
-Labels do not allow us to jump into an arbitrary place of code.
+Chỉ thị `break/continue` chỉ hoạt động được trong loops.
 
-For example, it is impossible to do this:
+Ví dụ như thế này sẽ báo lỗi:
 ```js
 break label;  // jumps to label? No.
 
 label: for (...)
 ```
 
-The call to a `break/continue` is only possible from inside the loop, and the label must be somewhere upwards from the directive.
 ````
 
-## Summary
+## Tóm tắt
 
-We covered 3 types of loops:
+Chúng ta đã học 3 loại vòng lặp:
 
-- `while` -- The condition is checked before each iteration.
-- `do..while` -- The condition is checked after each iteration.
-- `for (;;)` -- The condition is checked before each iteration, additional settings available.
+- `while` -- đk được kiểm tra trước mỗi iteration.
+- `do..while` -- đk được kiểm tra sau mỗi iteration.
+- `for (;;)` -- đk được kiểm tra trước mỗi iteration, có thêm phần step settings sau mỗi iteration.
 
-To make an "infinite" loop, usually the `while(true)` construct is used. Such a loop, just like any other, can be stopped with the `break` directive.
+Sử dụng vòng lặp vô hạn với `while(true)` , những vòng lặp như thế này có thể dùng chỉ thị `break` để dừng lại.
 
-If we don't want to do anything on the current iteration and would like to forward to the next one, the `continue` directive does it.
+Chỉ thị `continue` để bõ qua iteration hiện thời và tiếp tục lần lặp mới.
 
-`Break/continue` support labels before the loop. A label is the only way for `break/continue` to escape the nesting and go to the outer loop.
+`Break/continue` hỗ trợ label. Label là cách để `break/continue` thoát khỏi các vòng lặp chồng nhau.
