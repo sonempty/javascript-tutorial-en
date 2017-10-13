@@ -1,16 +1,14 @@
-# The "switch" statement
+# Câu lệnh "switch"
 
-A `switch` statement can replace multiple `if` checks.
-
-It gives a more descriptive way to compare a value with multiple variants.
+Lệnh `switch` thay thế cho việc sử dụng nhiều `else if`.
 
 [cut]
 
-## The syntax
+## Cú pháp
 
-The `switch` has one or more `case` blocks and an optional default.
+Lệnh `switch` có một hoặc nhiều khối lệnh `case` và một khối `default`.
 
-It looks like this:
+Như thế này:
 
 ```js no-beautify
 switch(x) {
@@ -28,13 +26,13 @@ switch(x) {
 }
 ```
 
-- The value of `x` is checked for a strict equality to the value from the first `case` (that is, `value1`) then to the second (`value2`) and so on.
-- If the equality is found, `switch` starts to execute the code starting from the corresponding `case`, until the nearest `break` (or until the end of `switch`).
-- If no case is matched then the `default` code is executed (if it exists).
+- Giá trị của `x` được kiểm tra có bằng (===) với giá trị trong `case` (ở đây là, `value1`) và tiếp theo (`value2`) cứ tiếp tục như thế.
+- Nếu bằng, `switch` thực thi khối lệnh trong `case` đó, cho đến khi lệnh `break` được gọi (hoặc kết thúc `switch`).
+- Nếu không có `case` nào thỏa mãn,  `default` được thực thi (nếu nó tồn tại).
 
-## An example
+## Ví dụ
 
-An example of `switch` (the executed code is highlighted):
+Một ví dụ với `switch` :
 
 ```js run
 let a = 2 + 2;
@@ -56,13 +54,13 @@ switch (a) {
 }
 ```
 
-Here the `switch` starts to compare `a` from the first `case` variant that is `3`. The match fails.
+Ở đây `switch` bắt đầu so sánh `a` từ `case` đầu tiên là `3`. phép so sánh này `false`.
 
-Then `4`. That's a match, so the execution starts from `case 4` until the nearest `break`.
+Tiếp theo là `4`. đúng, nên thực thi khối lệnh trong `case 4`.
 
-**If there is no `break` then the execution continues with the next `case` without any checks.**
+**Nếu không có `break` thì sẽ thực thi code trong các `case` tiếp theo mà không cần kiểm tra.**
 
-An example without `break`:
+Ví dụ: không có `break`:
 
 ```js run
 let a = 2 + 2;
@@ -81,7 +79,7 @@ switch (a) {
 }
 ```
 
-In the example above we'll see sequential execution of three `alert`s:
+Trong ví dụ trên ta thấy thực hiện 3 lần lệnh `alert`:
 
 ```js
 alert( 'Exactly!' );
@@ -89,10 +87,10 @@ alert( 'Too big' );
 alert( "I don't know such values" );
 ```
 
-````smart header="Any expression can be a `switch/case` argument"
-Both `switch` and `case` allow arbitrary expressions.
+````smart header="Biểu thức có thể là tham số của `switch/case`"
+Cả `switch` và `case` chấp nhận các biểu thức.
 
-For example:
+Ví dụ:
 
 ```js run
 let a = "1";
@@ -109,14 +107,14 @@ switch (+a) {
     alert("this doesn't run");
 }
 ```
-Here `+a` gives `1`, that's compared with `b + 1` in `case`, and the corresponding code is executed.
+Ở đây `+a` trả về `1`, so sánh với `b + 1` trong `case`, thấy bằng nhau nên code được thực thi.
 ````
 
-## Grouping of "case"
+## Nhóm các "case"
 
-Several variants of `case` which share the same code can be grouped.
+Nhiều giá trị `case` có cùng code thực thi có thể được nhóm lại.
 
-For example, if we want the same code to run for `case 3` and `case 5`:
+Ví dụ `case 3` và `case 5` cùng thực thi một hành động:
 
 ```js run no-beautify
 let a = 2 + 2;
@@ -139,15 +137,15 @@ switch (a) {
 }
 ```
 
-Now both `3` and `5` show the same message.
+Case `3` và `5` cùng hiển thị lệnh alert như nhau.
 
-The ability to "group" cases is a side-effect of how `switch/case` works without `break`. Here the execution of `case 3` starts from the line `(*)` and goes through `case 5`, because there's no `break`.
+Nhóm cases là một hiệu ứng phụ của việc làm cách nào `switch/case` hoạt động khi không có `break`. Ở đây `case 3` bắt đầu ở dòng `(*)` và chuyển qua `case 5`, bởi vì không có `break`.
 
-## Type matters
+## Vấn đề kiểu dữ liệu
 
-Let's emphasize that the equality check is always strict. The values must be of the same type to match.
+Phép so sánh là `===` (strict). Nên các giá trị phải có cùng kiểu dữ liệu.
 
-For example, let's consider the code:
+Xem xét code sau:
 
 ```js run
 let arg = prompt("Enter a value?")
@@ -169,6 +167,6 @@ switch (arg) {
 }
 ```
 
-1. For `0`, `1`, the first `alert` runs.
-2. For `2` the second `alert` runs.
-3. But for `3`, the result of the `prompt` is a string `"3"`, which is not strictly equal `===` to the number `3`. So we've got a dead code in `case 3`! The `default` variant will execute.
+1. Với `0`, `1`, lệnh `alert` đầu tiên sẽ chạy.
+2. Với `2` lệnh `alert` thứ hai sẽ chạy.
+3. Nhưng với `3`, kết quả trả về của `prompt` là chuỗi `"3"`, không `===` với số `3`. nên `case 3` sẽ không chạy! nên cuối cùng `default` sẽ chạy.
