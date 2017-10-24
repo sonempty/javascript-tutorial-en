@@ -21,3 +21,10 @@ if (n <= 1) {
 }
 ```
 
+Nếu Pro hơn thì hàm `pow(x, n)` được viết như sau:
+
+```js
+function pow(x, n) {
+  return (n == 0) ? 1 : x * pow(x, n - 1);
+}
+```
