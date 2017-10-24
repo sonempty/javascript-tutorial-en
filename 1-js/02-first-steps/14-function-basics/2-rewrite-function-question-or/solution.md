@@ -1,4 +1,4 @@
-Using a question mark operator `'?'`:
+Dùng `'?'`:
 
 ```js
 function checkAge(age) {
@@ -6,7 +6,7 @@ function checkAge(age) {
 }
 ```
 
-Using OR `||` (the shortest variant):
+Dùng OR `||` :
 
 ```js
 function checkAge(age) {
@@ -14,4 +14,4 @@ function checkAge(age) {
 }
 ```
 
-Note that the parentheses around `age > 18` are not required here. They exist for better readabilty.
+Cặp dấu ngoặc bao quanh `age > 18` có thể bõ, nhưng nên viết vào cho dễ đọc.
