@@ -2,11 +2,8 @@ importance: 4
 
 ---
 
-# Rewrite the function using '?' or '||'
+# Viết lại hàm dùng phép '?' hoặc phép '||'
 
-The following function returns `true` if the parameter `age` is greater than `18`.
-
-Otherwise it asks for a confirmation and returns its result.
 
 ```js
 function checkAge(age) {
@@ -18,9 +15,7 @@ function checkAge(age) {
 }
 ```
 
-Rewrite it, to perform the same, but without `if`, in a single line.
+Viết lại hàm `checkAge`, sử dụng:
 
-Make two variants of `checkAge`:
-
-1. Using a question mark operator `'?'`
-2. Using OR `||`
+1. Phép `'?'`
+2. Phép OR `||`
