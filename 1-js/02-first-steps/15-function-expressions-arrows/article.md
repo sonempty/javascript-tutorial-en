@@ -1,10 +1,8 @@
 # Function expressions và arrows function
 
-In JavaScript, a function is not a "magical language structure", but a special kind of value.
-
 [cut]
 
-The syntax that we used before is called a *Function Declaration*:
+Cú pháp khai báo hàm bài trước chúng ta học được gọi là *Function Declaration*:
 
 ```js
 function sayHi() {
@@ -12,9 +10,9 @@ function sayHi() {
 }
 ```
 
-There is another syntax for creating a function that is called a *Function Expression*.
+Có một cú pháp khác để tạo ra hàm, đó là *Function Expression* - biểu thức hàm.
 
-It looks like this:
+Như thế này:
 
 ```js
 let sayHi = function() {
@@ -22,12 +20,12 @@ let sayHi = function() {
 };
 ```
 
-Here, the function is created and assigned to the variable explicitly, like any other value. No matter how the function is defined, it's just a value stored in the variable `sayHi`.
+Ở trên, hàm được tạo ra và gán cho biến, giống như phép gán với các giá trị khác. Không có vấn đề gì với hàm được định nghĩa, nó là một giá trị được lưu trữ trong biến `sayHi`.
 
 
-The meaning of these code samples is the same: "create a function and put it into the variable `sayHi`".
+Nghĩa là: "Tạo ra một hàm và gán nó vào một biến có tên là `sayHi`".
 
-We can even print out that value using `alert`:
+Thậm chí có thể in ra code của hàm `alert`:
 
 ```js run
 function sayHi() {
@@ -39,15 +37,15 @@ alert( sayHi ); // shows the function code
 */!*
 ```
 
-Please note that the last line does not run the function, because there are no parentheses after `sayHi`. There are programming languages where any mention of a function name causes its execution, but JavaScript is not like that.
+Chú ý dòng cuối cùng không thực thi hàm, bởi vì không có cặp ngoặc sau `sayHi`. Có nhiều ngôn ngữ lập trình khi gọi tên hàm thì sẽ thực thi hàm luôn, nhưng JavaScript thì không như thế.
 
-In JavaScript, a function is a value, so we can deal with it as a value. The code above shows its string representation, which is the source code.
+Trong JavaScript, hàm là một giá trị, có thể sử dụng như các giá trị khác. Ví dụ bên trên show ra một chuỗi, cũng chính là code của hàm.
 
-It is a special value of course, in the sense that we can call it like `sayHi()`.
+Đó là một giá trị đặc biệt, về mặt ý nghĩa ta có thể gọi hàm `sayHi()`.
 
-But it's still a value. So we can work with it like with other kinds of values.
+Nhưng nó vẫn là một giá trị. Nên ta có thể dùng như kiểu các giá trị khác.
 
-We can copy a function to another variable:
+Ta có thể copy hàm cho biến khác:
 
 ```js run no-beautify
 function sayHi() {   // (1) create
@@ -62,11 +60,11 @@ sayHi(); // Hello    //     this still works too (why wouldn't it)
 
 Here's what happens above in detail:
 
-1. The Function Declaration `(1)` creates the function and puts it into the variable named `sayHi`.
-2. Line `(2)` copies it into the variable `func`.
+1. Function Declaration `(1)` tạo ra hàm và gán vào biến `sayHi`.
+2. Dòng `(2)` copy giá trị của `sayhi` vào biến `func`.
 
-    Please note again: there are no parentheses after `sayHi`. If there were, then `func = sayHi()` would write  *the result of the call* `sayHi()` into `func`, not *the function* `sayHi` itself.
-3. Now the function can be called as both `sayHi()` and `func()`.
+    Chú ý một lần nữa: Không có cặp dấu ngoặc tròn sau `sayHi`. Nếu có `func = sayHi()` sẽ thực hiện gán giá trị là  *kết quả của một lần gọi của hàm* `sayHi()` vào biến `func`.
+3. Giờ có thể gọi hàm bằng cả hai cách `sayHi()` và `func()`.
 
 Note that we could also have used a Function Expression to declare `sayHi`, in the first line:
 
@@ -80,8 +78,8 @@ let func = sayHi;
 Everything would work the same. Even more obvious what's going on, right?
 
 
-````smart header="Why there's a semicolon at the end?"
-There might be a question, why does Function Expression have a semicolon `;` at the end, and Function Declaration does not:
+````smart header="Tại sao có dấu chấm phẩy khi kết thúc Function Expression?"
+Tại sao có dấu chấm phẩy `;` khi kết thúc Function Expression? còn Function Declaration thì không:
 
 ```js
 function sayHi() {
@@ -93,27 +91,27 @@ let sayHi = function() {
 }*!*;*/!*
 ```
 
-The answer is simple:
-- There's no need for `;` at the end of code blocks and syntax structures that use them like `if { ... }`, `for {  }`, `function f { }` etc.
-- A Function Expression is used inside the statement: `let sayHi = ...;`, as a value. It's not a code block. The semicolon `;` is recommended at the end of statements, no matter what is the value. So the semicolon here is not related to the Function Expression itself in any way, it just terminates the statement.
+Câu trả lời đơn giản là:
+- Không cần thiết có dấu `;` ở cuối các khối code và các cấu trúc ngữ pháp như `if { ... }`, `for {  }`, `function f { }` ...
+- Một Function Expression được sử dụng trong câu lệnh: `let sayHi = ...;`, như một giá trị. Nó không phải là khối lệnh. Dấu chấm phẩy `;` được khuyên dùng khi kết thúc câu lệnh, không quan tâm nó là giá trị gì. Vì vậy, ở đây dấu chẩm phẩy không liên quan gì đến Function Expression, nó chỉ kết thúc cho một câu lệnh.
 ````
 
-## Callback functions
+## Hàm Callback
 
-Let's look at more examples of passing functions as values and using function expressions.
+Sử dụng hàm như một đối số để truyền vào trong hàm khác, sử dụng function expressions.
 
-We'll write a function `ask(question, yes, no)` with three parameters:
+Chúng ta viết hàm `ask(question, yes, no)` với ba tham số:
 
 `question`
-: Text of the question
+: câu hỏi
 
 `yes`
-: Function to run if the answer is "Yes"
+: hàm sẽ thực thi nếu câu trả lời là "Yes"
 
 `no`
-: Function to run if the answer is "No"
+: hàm sẽ thực thi nếu câu trả lời là "No"
 
-The function should ask the `question` and, depending on the user's answer, call `yes()` or `no()`:
+Hàm sẽ hỏi một `question` và, tùy thuộc câu trả lời mà ta sẽ gọi hàm `yes()` hay `no()`:
 
 ```js run
 *!*
@@ -135,13 +133,13 @@ function showCancel() {
 ask("Do you agree?", showOk, showCancel);
 ```
 
-Before we explore how we can write it in a much shorter way, let's note that in the browser (and on the server-side in some cases) such functions are quite popular. The major difference between a real-life implementation and the example above is that real-life functions use more complex ways to interact with the user than a simple `confirm`. In the browser, such a function usually draws a nice-looking question window. But that's another story.
+Ở ví dụ trên ta viết gọn hàm bằng cách sử dụng function-comment đã học ở bài trước. Cách viết như vậy là rất phổ biến hiện nay. Sự khác biệt duy nhất giữa ví dụ ở trên và code trong thực tế là trong thực tế các hàm sẽ phức tạp hơn chứ không đơn giản chỉ `confirm`, `alert`, câu hỏi cũng sẽ hiển thị một cách đẹp đẽ hơn. Nhưng đó là câu chuyện khác.
 
-**The arguments of `ask` are called *callback functions* or just *callbacks*.**
+**Các tham số của hàm `ask` được gọi là *callback functions* hay đơn giản là *callbacks*.**
 
-The idea is that we pass a function and expect it to be "called back" later if necessary. In our case, `showOk` becomes the callback for the "yes" answer, and `showCancel` for the "no" answer.
+Ý tưởng ở đây là các hàm đó sẽ được gọi sau nếu như cần thiết. Trong ví dụ trên, `showOk` là hàm callback cho câu trả lời "yes", và `showCancel` cho câu trả lời "no".
 
-We can use Function Expressions to write the same function much shorter:
+Chúng ta sử dụng Function Expressions để viết các hàm trên gọn hơn:
 
 ```js run no-beautify
 function ask(question, yes, no) {
@@ -159,27 +157,25 @@ ask(
 ```
 
 
-Here, functions are declared right inside the `ask(...)` call. They have no name, and so are called *anonymous*. Such functions are not accessible outside of `ask` (because they are not assigned to variables), but that's just what we want here.
+Ở trên, hàm được khai báo bên trong `ask(...)` call. Chúng nó không có tên, và được gọi là *vô danh - anonymous*. Những hàm như thế này không thể sử dụng bên ngoài `ask` (vì nó không được gán cho biến nào), nhưng đó là những gì bạn muốn.
 
-Such code appears in our scripts very naturally, it's in the spirit of JavaScript.
+Code như trên nhìn rất tự nhiên, đó là linh hồn của JavaScript.
 
 
-```smart header="A function is a value representing an \"action\""
-Regular values like strings or numbers represent the *data*.
+```smart header="Một hàm là một giá trị đại diện cho một hành động \"action\""
+Các giá trị thông thường như chuỗi hoặc số đại diện cho *dữ liệu*.
 
-A function can be perceived as an *action*.
-
-We can pass it between variables and run when we want.
+Một hàm có thể được coi là một *hành động*.
 ```
 
 
-## Function Expression vs Function Declaration
+## Function Expression và Function Declaration
 
-Let's formulate the key differences between Function Declarations and Expressions.
+Cùng so sánh Function Declarations và Expressions.
 
-First, the syntax: how to see what is what in the code.
+Đầu tiên là cú pháp: how to see what is what in the code.
 
-- *Function Declaration:* a function, declared as a separate statement, in the main code flow.
+- *Function Declaration:* một hàm, được khai báo trong một câu lệnh, trong main code.
 
     ```js
     // Function Declaration
@@ -187,9 +183,9 @@ First, the syntax: how to see what is what in the code.
       return a + b;
     }
     ```
-- *Function Expression:* a function, created inside an expression or inside another syntax construct.
+- *Function Expression:* một hàm, được tạo ra trong biểu thức hoặc trong cấu trúc cú pháp khác.
 
-    Here, the function is created at the right side of the "assignment expression =":
+    Ở đây, hàm được tạo ra trong về phải của biểu thức của một phép gán:
     ```js
     // Function Expression
     let sum = function(a, b) {
@@ -197,23 +193,23 @@ First, the syntax: how to see what is what in the code.
     };
     ```
 
-The more subtle difference is *when* a function is created by the JavaScript engine.
+Sự khác nhau tiếp theo là *khi nào* hàm sẽ được JavaScript engine tạo ra.
 
-**A Function Expression is created when the execution reaches it and is usable from then on.**
+**Một Function Expression được tạo ra khi chương trình chạy đến code này, và từ đó về sau ta có thể sử dụng được hàm.**
 
-Once the execution flow passes to the right side of the assignment `let sum = function…` -- here we go, the function is created and can be used (assigned, called etc) from now on.
+Khi chương trình chạy đến vế phải của biểu thức `let sum = function…` -- Đi thôi, hàm được tạo ra và có thể sử dụng rồi (gán, gọi ,...).
 
-Function Declarations are different.
+Function Declarations thì khác.
 
-**A Function Declaration is usable in the whole script/code block.**
+**Một Function Declaration có thể được sử dụng trong toàn bộ script/code block.**
 
-In other words, when JavaScript *prepares* to run the script or a code block, it first looks for Function Declarations in it and creates the functions. We can think of it as an "initialization stage".
+Nói cách khác, Khi JavaScript *chuẩn bị* chạy script hoặc một code block, đầu tiên nó sẽ tìm tất cả Function Declarations sau đó tạo ra các hàm này.
 
-And after all of the Function Declarations are processed, the execution goes on.
+Sau khi tất cả Function Declaration đã thực hiện xong, script/code block mới thực thi.
 
-As a result, a function declared as a Function Declaration can be called earlier than it is defined.
+Kết quả là hàm có thể gọi trước khi Function Declaration.
 
-For example, this works:
+Ví dụ:
 
 ```js run refresh untrusted
 *!*
@@ -225,9 +221,9 @@ function sayHi(name) {
 }
 ```
 
-The Function Declaration `sayHi` is created when JavaScript is preparing to start the script and is visible everywhere in it.
+Function Declaration `sayHi` được tạo ra khi JavaScript chuẩn bị chạy chương trình.
 
-...If it was a Function Expression, then it wouldn't work:
+...Nếu là một Function Expression, sẽ không chạy được:
 
 ```js run refresh untrusted
 *!*
@@ -239,9 +235,9 @@ let sayHi = function(name) {  // (*) no magic any more
 };
 ```
 
-Function Expressions are created when the execution reaches them. That would happen only in the line `(*)`. Too late.
+Function Expressions chỉ được tạo ra khi chương trình thực thi đến nó.
 
-**When a Function Declaration is made within a code block, it is visible everywhere inside that block. But not outside of it.**
+**Khi một Function Declaration nằm trong một code block, nó chỉ có thể được sử dụng bên trong block đó.**
 
 Sometimes that's handy to declare a local function only needed in that block alone. But that feature may also cause problems.
 
