@@ -66,7 +66,7 @@ Here's what happens above in detail:
     Chú ý một lần nữa: Không có cặp dấu ngoặc tròn sau `sayHi`. Nếu có `func = sayHi()` sẽ thực hiện gán giá trị là  *kết quả của một lần gọi của hàm* `sayHi()` vào biến `func`.
 3. Giờ có thể gọi hàm bằng cả hai cách `sayHi()` và `func()`.
 
-Note that we could also have used a Function Expression to declare `sayHi`, in the first line:
+Chú ý rằng chúng ta cũng đã sử dụng Function Expression để khai báo `sayHi`, ở dòng đầu tiên:
 
 ```js
 let sayHi = function() { ... };
@@ -75,7 +75,7 @@ let func = sayHi;
 // ...
 ```
 
-Everything would work the same. Even more obvious what's going on, right?
+Mọi thứ đều hoạt động bình thường, thậm chí rõ ràng hơn đúng không?
 
 
 ````smart header="Tại sao có dấu chấm phẩy khi kết thúc Function Expression?"
@@ -239,11 +239,9 @@ Function Expressions chỉ được tạo ra khi chương trình thực thi đ�
 
 **Khi một Function Declaration nằm trong một code block, nó chỉ có thể được sử dụng bên trong block đó.**
 
-Sometimes that's handy to declare a local function only needed in that block alone. But that feature may also cause problems.
+Đôi khi khai báo hàm trong một block code có vẽ tiện hơn. Nhưng có thể sẽ xảy ra lỗi.
 
-For instance, let's imagine that we need to declare a function `welcome()` depending on the `age` variable that we get in run time. And then we plan to use it some time later.
-
-The code below doesn't work:
+Ví dụ bên dưới với hàm `welcome()` code sau sẽ lỗi:
 
 ```js run
 let age = prompt("What is your age?", 18);
@@ -269,9 +267,9 @@ welcome(); // Error: welcome is not defined
 */!*
 ```
 
-That's because a Function Declaration is only visible inside the code block in which it resides.
+Bởi vì Function Declaration chỉ dùng được trong code block.
 
-Here's another example:
+Một ví dụ khác:
 
 ```js run
 let age = 16; // take 16 as an example
@@ -304,11 +302,11 @@ welcome(); // Error: welcome is not defined
 */!*
 ```
 
-What can we do to make `welcome` visible outside of `if`?
+Chúng ta sẽ làm gì để `welcome` có thể dùng được bên ngoài `if`?
 
-The correct approach would be to use a Function Expression and assign `welcome` to the variable that is declared outside of `if` and has the proper visibility.
+Sử dụng Function Expression và gán `welcome` vào một biến được khai báo bên ngoài `if`.
 
-Now it works as intended:
+Bây giờ nó hoạt động như dự định:
 
 ```js run
 let age = prompt("What is your age?", 18);
@@ -334,7 +332,7 @@ welcome(); // ok now
 */!*
 ```
 
-Or we could simplify it even further using a question mark operator `?`:
+Hoặc đơn giản hơn là sử dụng phép `?`:
 
 ```js run
 let age = prompt("What is your age?", 18);
@@ -349,27 +347,27 @@ welcome(); // ok now
 ```
 
 
-```smart header="When to choose Function Declaration versus Function Expression?"
-As a rule of thumb, when we need to declare a function, the first to consider is Function Declaration syntax, the one we used before. It gives more freedom in how to organize our code, because we can call such functions before they are declared.
+```smart header="Khi nào dùng Function Declaration và Function Expression?"
+Như một quy luật, khi cần khai báo hàm, đầu tiên ta xem xét cú pháp Function Declaration, liệu hàm có dùng trước khi khai báo hay không. Nó sẽ làm cho bạn code thoải mái hơn, không lo đến việc dùng hàm trước khi khai báo.
 
-It's also a little bit easier to look up `function f(…) {…}` in the code than `let f = function(…) {…}`. Function Declarations are more "eye-catching".
+Cũng dễ nhìn và dễ tìm hơn với `function f(…) {…}` so với `let f = function(…) {…}`.
 
-...But if a Function Declaration does not suit us for some reason (we've seen an example above), then Function Expression should be used.
+...Nhưng Function Declaration không thích hợp vì một số lý do (ta đã xem xét ở trên), Do đó nên dùng Function Expression.
 ```
 
 
 ## Arrow functions [#arrow-functions]
 
-There's one more very simple and concise syntax for creating functions, that's often better than Function Expressions. It's called "arrow functions", because it looks like this:
+Có một cú pháp ngắn gọn hơn và tốt hơn Function Expressions để khai báo hàm . Nó được gọi là "arrow functions", Vì có dấu mũi tên như này:
 
 
 ```js
 let func = (arg1, arg2, ...argN) => expression
 ```
 
-...This creates a function `func` that has arguments `arg1..argN`, evaluates the `expression` on the right side with their use and returns its result.
+...Cú pháp này tạo ra một hàm `func` với các tham số `arg1..argN`, phần `expression` bên phải chính là giá trị trả về của hàm, cũng là phần thân hàm.
 
-In other words, it's roughly the same as:
+Nói cách khác, cách khai báo ở trên tương đương với:
 
 ```js
 let func = function(arg1, arg2, ...argN) {
@@ -377,9 +375,9 @@ let func = function(arg1, arg2, ...argN) {
 }
 ```
 
-...But much more concise.
+...nhưng ngắn gọn hơn.
 
-Let's see an example:
+Ví dụ:
 
 ```js run
 let sum = (a, b) => a + b;
@@ -395,7 +393,7 @@ alert( sum(1, 2) ); // 3
 
 ```
 
-If we have only one argument, then parentheses can be omitted, making that even shorter:
+Nếu chỉ có một tham số, thì có thể bõ luôn cặp dấu ngoặc như bên dưới cho ngắn gọn hơn:
 
 ```js run
 // same as
