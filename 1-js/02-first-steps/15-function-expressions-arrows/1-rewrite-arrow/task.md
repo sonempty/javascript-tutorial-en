@@ -1,7 +1,5 @@
 
-# Rewrite with arrow functions
-
-Replace Function Expressions with arrow functions in the code:
+# Viết lại hàm sử dụng arrow functions
 
 ```js run
 function ask(question, yes, no) {
