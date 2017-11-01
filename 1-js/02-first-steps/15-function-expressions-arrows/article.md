@@ -405,7 +405,7 @@ let double = n => n * 2;
 alert( double(3) ); // 6
 ```
 
-If there are no arguments, parentheses should be empty (but they should be present):
+Nếu không có tham số nào, vẫn phải có cặp dấu ngoặc:
 
 ```js run
 let sayHi = () => alert("Hello!");
@@ -413,9 +413,9 @@ let sayHi = () => alert("Hello!");
 sayHi();
 ```
 
-Arrow functions can be used in the same way as Function Expressions.
+Arrow functions được dùng giống như cách dùng Function Expressions.
 
-For instance, here's the rewritten example with `welcome()`:
+Ví dụ với hàm `welcome()` ở các ví dụ trước có thể viết lại như sau:
 
 ```js run
 let age = prompt("What is your age?", 18);
@@ -427,17 +427,15 @@ let welcome = (age < 18) ?
 welcome(); // ok now
 ```
 
-Arrow functions may appear unfamiliar and not very readable at first, but that quickly changes as the eyes get used to the structure.
+Arrow functions có thể không thân thiện lắm khi bạn mới tiếp xúc, nhưng từ từ sẽ quen.
 
-They are very convenient for simple one-line actions, when we're just too lazy to write many words.
+Chúng rất tiện lợi với các hàm đơn giản, khi bạn lười code.
 
 ```smart header="Multiline arrow functions"
 
-The examples above took arguments from the left of `=>` and evaluated the right-side expression with them.
+Đôi khi hàm phức tạp hơn với nhiều biểu thức và câu lệnh. Nếu dùng arrow function thì cần dùng cặp ngoặc nhọn, và sử dụng `return` bên trong.
 
-Sometimes we need something a little bit more complex, like multiple expressions or statements. It is also possible, but we should enclose them in figure brackets. Then use a normal `return` within them.
-
-Like this:
+ví dụ:
 
 ```js run
 let sum = (a, b) => {  // the figure bracket opens a multiline function
@@ -450,26 +448,26 @@ let sum = (a, b) => {  // the figure bracket opens a multiline function
 alert( sum(1, 2) ); // 3
 ```
 
-```smart header="More to come"
-Here we praised arrow functions for brevity. But that's not all! Arrow functions have other interesting features. We'll return to them later in the chapter <info:arrow-functions>.
+```smart header="Nhiều hơn nữa"
+Bài này chỉ giới thiệu ngắn gọn về Arrow function, thực ra còn nhiều cách thức và ý nghĩa khi sử dụng nữa. Chúng ta sẽ tìm hiểu kỹ hơn ở bài <info:arrow-functions>.
 
-For now, we can already use them for one-line actions and callbacks.
+Bây giờ chúng ta sử dụng nó cho one-line actions và callbacks.
 ```
 
-## Summary
+## Tóm tắt
 
-- Functions are values. They can be assigned, copied or declared in any place of the code.
-- If the function is declared as a separate statement in the main code flow, that's called a "Function Declaration".
-- If the function is created as a part of an expression, it's called a "Function Expression".
-- Function Declarations are processed before the code block is executed. They are visible everywhere in the block.
-- Function Expressions are created when the execution flow reaches them.
+- Hàm cũng là giá trị. Có thể được gán, copy và khai báo ở bất kỳ đâu.
+- Nếu hàm được khai báo trong câu lệnh phân biệt ở main code, thì gọi là "Function Declaration".
+- Nếu hàm được tạo ra như là một phần của biểu thức  thì gọi là "Function Expression".
+- Function Declarations được xử lý trước khi code đươc thực thi. Cho nên có thể dùng hàm trước hoặc sau code khai báo hàm.
+- Function Expressions được tạo ra khi thực thi đến đoạn code chứa nó.
 
 
-In most cases when we need to declare a function, a Function Declaration is preferable, because it is visible prior to the declaration itself. That gives us more flexibility in code organization, and is usually more readable.
+Function Declaration thì dễ dùng, dễ đọc hơn, không phải lo đến chuyện trước sau.
 
-So we should use a Function Expression only when a Function Declaration is not fit for the task. We've seen a couple of examples of that in this chapter, and will see more in the future.
+Nhưng nên sử dụng Function Expression vì nó thích hợp hơn cho các nhiệm vụ cần được thực thi.
 
-Arrow functions are handy for one-liners. They come in two flavors:
+Arrow functions cho các one-line-action. Nó đơn giản, và có hai dạng như bên dưới:
 
-1. Without figure brackets: `(...args) => expression` -- the right side is an expression: the function evaluates it and returns the result.
-2. With figure brackets: `(...args) => { body }` -- brackets allow us to write multiple statements inside the function, but we need an explicit `return` to return something.
+1. Không có cặp ngoặc nhọn: `(...args) => expression` -- bên phải là một biểu thức: hàm sẽ đánh giá và trả về giá trị của biểu thức này.
+2. Có cặp ngoặc nhọn: `(...args) => { body }` -- để dùng nhiều biểu thức, câu lệnh hơn trong thân hàm, cần khai báo rõ ràng `return`.
