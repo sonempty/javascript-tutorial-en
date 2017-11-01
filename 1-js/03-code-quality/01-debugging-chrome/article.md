@@ -1,22 +1,22 @@
-# Debugging in Chrome
+# Debug trên trình duyệt Chrome
 
-Before writing more complex code, let's talk about debugging.
+Trước khi viết các code phức tạp. Ta tìm hiểu về việc debug lỗi.
 
-All modern browsers and most other environments support "debugging" -- a special UI in developer tools that makes finding and fixing errors much easier.
+Các trình duyệt hiện nay đa số sẽ hỗ trợ "debugging" -- một giao diện để LTV tìm lỗi dễ dàng hơn.
 
-We'll be using Chrome here, because it's probably the most feature-rich in this aspect.
+Chúng ta sẽ sử dụng Chrome, vì hiện nay thấy nó Pro và đầy đủ nhất.
 
 [cut]
 
-## The "sources" pane
+## "sources" pane
 
-Your Chrome version may look a little bit different, but it still should be obvious what's there.
+Tùy thuộc phiên bản Chrome bạn đang dùng, có thể nhìn hơi khác tí, nhưng cơ bản thì nó cũng thế.
 
-- Open the [example page](debugging/index.html) in Chrome.
-- Turn on developer tools with `key:F12` (Mac: `key:Cmd+Opt+I`).
-- Select the `sources` pane.
+- Mở trang này [example page](debugging/index.html) bằng Chrome.
+- Mở Developer Tool bằng phím `key:F12` (Mac: `key:Cmd+Opt+I`).
+- Chọn tab `sources`.
 
-Here's what you should see if you are doing it for the first time:
+Nếu làm đúng thì bạn sẽ thấy như sau:
 
 ![](chrome-open-sources.png)
 
@@ -28,19 +28,19 @@ Let's click it and select `index.html` and then `hello.js` in the tree view. Her
 
 Here we can see three zones:
 
-1. **Resources zone** lists html, javascript, css and other files including images that are attached to the page. Chrome extensions may appear here too.
-2. **Source zone** shows the source code.
-3. **Information and control zone** is for debugging, we'll explore it soon.
+1. **Resources zone** danh sách các file html, javascript, css, images liên quan đến trang đang mở. Chrome extensions có thể sẽ xuất hiện ở đây luôn.
+2. **Source zone** để xem source code.
+3. **Information and control zone** để debugging, tìm hiểu nó sau.
 
-Now you could click the same toggler <span class="devtools" style="background-position:-200px -76px"></span> again to hide the resources list and give the code some space.
+Click vào <span class="devtools" style="background-position:-200px -76px"></span> để ẩn/hiện các cửa sổ
 
 ## Console
 
-If we press `Esc`, then a console opens below. We can type commands there and press `key:Enter` to execute.
+Nhấn `Esc`, cửa sổ console sẽ xuất hiện, viết một câu lệnh nào đó và nhấn `key:Enter` để thực thi.
 
-After a statement is executed, its result is shown below.
+Kết quả sẽ dược in ra luôn.
 
-For example, here `1+2` results in `3`, and `hello("debugger")` returns nothing, so the result is `undefined`:
+Ví dụ `1+2` cho kết quả là `3`, và `hello("debugger")` không có return, nên kết quả là `undefined`:
 
 ![](chrome-sources-console.png)
 
