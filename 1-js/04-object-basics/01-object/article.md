@@ -214,7 +214,7 @@ let obj = {
 alert( obj.for + obj.let + obj.return );  // 6
 ```
 
-Cơ bản thì key có thể đặt tên gì cũng được ngoại trừ: `"__proto__"` that gets special treatment for historical reasons. For instance, we can't set it to a non-object value:
+Cơ bản thì key có thể đặt tên gì cũng được ngoại trừ: `"__proto__"` Nó là tổ tiên của các Object, và không thể gán một giá trị non-object được:
 
 ```js run
 let obj = {};
@@ -222,22 +222,23 @@ obj.__proto__ = 5;
 alert(obj.__proto__); // [object Object], didn't work as intended
 ```
 
-As we see from the code, the assignment to a primitive `5` is ignored.
+Bạn thấy gán `5` cho `__proto_` sẽ bị bõ qua.
 
-That can become a source of bugs and even vulnerabilies if we intent to store arbitrary key-value pairs in an object, and allow a visitor to specify the keys.
+Đó có thể sẽ là một bug trong code. Cho nên bạn cần chú ý.
 
-In that case the visitor may choose "__proto__" as the key, and the assignment logic will be ruined (as shown above).
+Trường hợp user nhập vào "__proto__" làm key chẳng hạn, và phép gán sẽ không có tác dụng.
 
-There exist a way to make objects treat `__proto__` as a regular property, we'll cover it later, but first we need to know more about objects to understand it. 
-There's another data structure [Map](info:map-set-weakmap-weakset), that we'll learn in the chapter <info:map-set-weakmap-weakset>, which supports arbitrary keys. Also
+Có cách để sử dụng `__proto__` như một property bình thường, chúng ta sẽ học sau, trước mắt cứ biết vậy đã.
+
+Có một cấu trúc dữ liệu khác [Map](info:map-set-weakmap-weakset), sẽ được học trong bài <info:map-set-weakmap-weakset>, nó hỗ trợ các key tùy ý.
 ````
 
 
-## Property value shorthand
+## Property viết tắt
 
-In real code we often use existing variables as values for property names.
+Trong code thực tế, ta hay sử dụng các biến có sẵn làm value, và key có cùng tên với biến luôn.
 
-For instance:
+Ví dụ:
 
 ```js run
 function makeUser(name, age) {
@@ -252,9 +253,9 @@ let user = makeUser("John", 30);
 alert(user.name); // John
 ```
 
-In the example above, properties have the same names as variables. The use-case of making a property from a variable is so common, that there's a special *property value shorthand* to make it shorter.
+Ở ví dụ trên, properties có tên giống với tham số. Kiểu dùng này là rất phổ biến, và ta có một cách để viết ngắn gọn hơn *property viết tắt*.
 
-Instead of `name:name` we can just write `name`, like this:
+Thay vì `name:name` ta viết `name`, như này:
 
 ```js
 function makeUser(name, age) {
@@ -268,7 +269,7 @@ function makeUser(name, age) {
 }
 ```
 
-We can use both normal properties and shorthands in the same object:
+Có thể dùng property viết tắt trong Object (các biến này đã tồn tại trước):
 
 ```js
 let user = {
@@ -277,9 +278,9 @@ let user = {
 };
 ```
 
-## Existence check
+## Kiểm tra sự tồn tại
 
-A notable objects feature is that it's possible to access any property. There will be no error if the property doesn't exist! Accessing a non-existing property just returns `undefined`. It provides a very common way to test whether the property exists -- to get it and compare vs undefined:
+Có thể truy cập trên bất kỳ property nào, nết property không tồn tại thì sẽ trả về `undefined` chứ không bị lỗi. Vậy làm sao để kiểm tra Object có một property nào đó hay không ?
 
 ```js run
 let user = {};
@@ -287,14 +288,14 @@ let user = {};
 alert( user.noSuchProperty === undefined ); // true means "no such property"
 ```
 
-There also exists a special operator `"in"` to check for the existence of a property.
+Phép toán `"in"` dùng để kiểm tra một property có tồn tại hay không.
 
-The syntax is:
+Cú pháp:
 ```js
 "key" in object
 ```
 
-For instance:
+Ví dụ:
 
 ```js run
 let user = { name: "John", age: 30 };
@@ -303,9 +304,9 @@ alert( "age" in user ); // true, user.age exists
 alert( "blabla" in user ); // false, user.blabla doesn't exist
 ```
 
-Please note that on the left side of `in` there must be a *property name*. That's usually a quoted string.
+Chú ý, bên trái `in` phải là *property name*. Thường là string trong dấu nháy.
 
-If we omit quotes, that would mean a variable containing the actual name to be tested. For instance:
+Không có dấu nháy để thể hiện đó là string thì có nghĩa đó là biến, ví dụ:
 
 ```js run
 let user = { age: 30 };
@@ -314,10 +315,10 @@ let key = "age";
 alert( *!*key*/!* in user ); // true, takes the name from key and checks for such property
 ```
 
-````smart header="Using \"in\" for properties that store `undefined`"
-Usually, the strict comparison `"=== undefined"` check works fine. But there's a special case when it fails, but `"in"` works correctly.
+````smart header="Sử dụng \"in\" để kiểm tra các property có giá trị `undefined`"
+Thông thường, phép so sánh bằng nghiêm ngặt `"=== undefined"` sẽ ok. Nhưng có nhiều trường hợp sẽ sai, dùng `"in"` sẽ luôn ok.
 
-It's when an object property exists, but stores `undefined`:
+Đó là trường hợp property tồn tại, nhưng giá trị của nó là `undefined`:
 
 ```js run
 let obj = {
@@ -330,17 +331,17 @@ alert( "test" in obj ); // true, the property does exist!
 ```
 
 
-In the code above, the property `obj.test` technically exists. So the `in` operator works right.
+Trong ví dụ trên `obj.test` tồn tại. Nên `in` hoạt động đúng.
 
-Situations like this happen very rarely, because `undefined` is usually not assigned. We mostly use `null` for "unknown" or "empty" values. So the `in` operator is an exotic guest in the code.
+Tình huống trên hiếm khi xảy ra vì `undefined` thường hiếm khi được dùng để gán giá trị cho biến. Người ta thường sử dụng `null` cho cho các giá trị "chưa biết" hoặc "rỗng". Vì thế `in` cũng thường ít khi được dùng.
 ````
 
 
-## The "for..in" loop
+## Vòng lặp "for..in"
 
-To walk over all keys of an object, there exists a special form of the loop: `for..in`. This is a completely different thing from the `for(;;)` construct that we studied before.
+Lặp qua các keys của Object thì ta dùng: `for..in`. Nó khác với `for(;;)` đã học trước đó nhé.
 
-The syntax:
+Cú pháp:
 
 ```js
 for(key in object) {
@@ -348,7 +349,7 @@ for(key in object) {
 }
 ```
 
-For instance, let's output all properties of `user`:
+Ví dụ, in ra các keys, values của `user`:
 
 ```js run
 let user = {
@@ -365,18 +366,18 @@ for(let key in user) {
 }
 ```
 
-Note that all "for" constructs allow us to declare the looping variable inside the loop, like `let key` here.
+Chú ý, tất cả các cấu trúc "for" cho phép khai bái biến ở trong vòng lặp, ví dụ trên là `let key`.
 
-Also, we could use another variable name here instead of `key`. For instance, `"for(let prop in obj)"` is also widely used.
+Cũng có thể dùng một biến có tên bất kỳ thay vì `key`. Ví dụ, `"for(let prop in obj)"` cũng được sử dụng rộng rãi.
 
 
-### Ordered like an object
+### Sắp xếp Object
 
-Are objects ordered? In other words, if we loop over an object, do we get all properties in the same order that they are added in it? Can we rely on it?
+Các đối tượng có được sắp xếp hay không? Nói cách khác, khi ta loop qua một Object, thì sẽ theo thứ tự từ trên xuống dưới hay như nào ?
 
-The short answer is: "ordered in a special fashion": integer properties are sorted, others appear in creation order. The details follow.
+Câu trả lời là: "Được sắp xếp theo cách đặc biệt": property có key là số nguyên sẽ được sắp xếp và cũng nhảy lên trước. Còn lại thì theo thứ tự từ trên xuống.
 
-As an example, let's consider an object with the phone codes:
+Ví dụ Object với mã vùng điện thoại các quốc gia:
 
 ```js run
 let codes = {
@@ -394,19 +395,17 @@ for(let code in codes) {
 */!*
 ```
 
-The object may be used to suggest a list of options to the user. If we're making a site mainly for German audience then we probably want `49` to be the first.
+Khi chạy code ta sẽ thấy:
 
-But if we run the code, we see a totally different picture:
+- USA (1) in ra trước.
+- Tiếp theo là Switzerland (41) và tiếp đến các mã vùng khác.
 
-- USA (1) goes first
-- then Switzerland (41) and so on.
+Như vậy các property đã được sắp xếp, bởi vì chúng là số nguyên `1, 41, 44, 49`.
 
-The phone codes go in the ascending sorted order, because they are integers. So we see `1, 41, 44, 49`.
+````smart header="Integer properties? nó là cái gì?"
+"integer property" là cái key dạng "interger" như ví dụ trên. Có thể convert sang number mà không thay đổi gì.
 
-````smart header="Integer properties? What's that?"
-The "integer property" term here means a string that can be converted to-and-from an integer without a change.
-
-So, "49" is an integer property name, because when it's transformed to an integer number and back, it's still the same. But "+49" and "1.2" are not:
+vậy, "49" là một integer property, bởi vì nó có thể convert sang number và ngược lại. Nhưng "+49" và "1.2" thì không:
 
 ```js run
 // Math.trunc is a built-in function that removes the decimal part
@@ -416,7 +415,7 @@ alert( String(Math.trunc(Number("1.2"))) ); // "1", not same ⇒ not integer pro
 ```
 ````
 
-...On the other hand, if the keys are non-integer, then they are listed in the creation order, for instance:
+...Nếu key là non-integer thì nó sẽ theo thứ tự từ trên xuống:
 
 ```js run
 let user = {
@@ -433,9 +432,9 @@ for (let prop in user) {
 }
 ```
 
-So, to fix the issue with the phone codes, we can "cheat" by making the codes non-integer. Adding a plus `"+"` sign before each code is enough.
+Vì vậy với ví dụ về phone codes ở trên, ta có thể "cheat" bằng cách đưa key về dạng non-integer. Thêm dấu `"+"` đằng trước là ok.
 
-Like this:
+Như này:
 
 ```js run
 let codes = {
@@ -451,30 +450,30 @@ for(let code in codes) {
 }
 ```
 
-Now it works as intended.
+Nó sẽ in ra theo thứ tự như mong muốn.
 
-## Copying by reference
+## Copying bằng tham chiếu (reference)
 
-One of the fundamental differences of objects vs primitives is that they are stored and copied "by reference".
+Sự khác nhau cơ bản giữa objects và primitives là nó lưu trữ và copy giá trị bằng tham chiếu (by reference).
 
-Primitive values: strings, numbers, booleans -- are assigned/copied "as a whole value".
+Kiểu dữ liệu primitive: strings, numbers, booleans -- được gán/copy "bởi giá trị của nó".
 
-For instance:
+Ví dụ:
 
 ```js
 let message = "Hello!";
 let phrase = message;
 ```
 
-As a result we have two independent variables, each one is storing the string `"Hello!"`.
+Kết quả là hai biến sẽ cùng lưu trữ giá trị `"Hello!"`.
 
 ![](variable-copy-value.png)
 
-Objects are not like that.
+Objects không giống như thế.
 
-**A variable stores not the object itself, but it's "address in memory", in other words "a reference" to it.**
+**Một biến không lưu trữ giá trị của Object, Nó là "địa chỉ trong bộ nhớ", hay nói cách khác là "một tham chiếu".**
 
-Here's the picture for the object:
+Hơi khó hiểu đúng không, xem ví dụ sẽ rõ:
 
 ```js
 let user = {
@@ -484,13 +483,11 @@ let user = {
 
 ![](variable-contains-reference.png)
 
-Here, the object is stored somewhere in memory. And the variable `user` has a "reference" to it.
+Ở đây, Object được lưu ở địa chỉ nào đó trong bộ nhớ. Và biến `user` sẽ tham chiếu "reference" đến đó.
 
-**When an object variable is copied -- the reference is copied, the object is not duplicated.**
+**Khi copy một Object là copy sự tham chiếu đến giá trị được lưu.**
 
-If we imagine an object as a cabinet, then a variable is a key to it. Copying a variable duplicates the key, but not the cabinet itself.
-
-For instance:
+Ví dụ:
 
 ```js no-beautify
 let user = { name: "John" };
@@ -498,11 +495,11 @@ let user = { name: "John" };
 let admin = user; // copy the reference
 ```
 
-Now we have two variables, each one with the reference to the same object:
+Chúng ta có hai biến, và hai biến này cùng tham chiếu đến một object:
 
 ![](variable-copy-reference.png)
 
-We can use any variable to access the cabinet and modify its contents:
+Chúng ta có thể truy xuất, chỉnh sửa giá trị bởi bất cứ biến nào:
 
 ```js run
 let user = { name: 'John' };
@@ -516,15 +513,15 @@ admin.name = 'Pete'; // changed by the "admin" reference
 alert(*!*user.name*/!*); // 'Pete', changes are seen from the "user" reference
 ```
 
-The example above demonstrates that there is only one object. Like if we had a cabinet with two keys and used one of them (`admin`) to get into it. Then, if we later use the other key (`user`) we would see changes.
+Ví dụ trên cho ta thấy rằng chỉ có một object duy nhất.
 
-### Comparison by reference
+### So sánh bởi tham chiếu
 
-The equality `==` and strict equality `===` operators for objects work exactly the same.
+Phép `==` và `===` đối với Object hoạt động tương tự.
 
-**Two objects are equal only if they are the same object.**
+**Hai object là bằng nhau nếu chúng là một.**
 
-For instance, two variables reference the same object, they are equal:
+Ví dụ hai biến cùng tham chiếu đến một object thì bằng nhau:
 
 ```js run
 let a = {};
@@ -534,7 +531,7 @@ alert( a == b ); // true, both variables reference the same object
 alert( a === b ); // true
 ```
 
-And here two independent objects are not equal, even though both are empty:
+Hai Object độc lập thì không bằng nhau, cho dù chúng nhìn thì như nhau:
 
 ```js run
 let a = {};
@@ -543,13 +540,13 @@ let b = {}; // two independent objects
 alert( a == b ); // false
 ```
 
-For comparisons like `obj1 > obj2` or for a comparison against a primitive `obj == 5`, objects are converted to primitives. We'll study how object conversions work very soon, but to say the truth, such comparisons are necessary very rarely and usually are a result of a coding mistake.
+Vì vậy so sánh hai object `obj1 > obj2` hoặc object với primitive `obj == 5`, objects sẽ được convert sang primitives. Chúng ta sẽ học về việc so sánh object ngay bây giờ, nhưng lưu ý là việc so sánh object hiếm khi dùng đến và thường sẽ dễ tạo lỗi cho code nếu không hiểu rõ.
 
 ### Const object
 
-An object declared as `const` *can* be changed.
+Một object được khai báo bởi từ khóa `const` *vẫn có thể thay đổi*.
 
-For instance:
+Ví dụ:
 
 ```js run
 const user = {
@@ -563,9 +560,9 @@ user.age = 25; // (*)
 alert(user.age); // 25
 ```
 
-It might seem that the line `(*)` would cause an error, but no, there's totally no problem. That's because `const` fixes the value of `user` itself. And here `user` stores the reference to the same object all the time. The line `(*)` goes *inside* the object, it doesn't reassign `user`.
+Bạn nghĩ rằng dòng `(*)` sẽ báo lỗi? không lỗi nhé, chẳng có vấn đề gì. Bởi vì `const` set giá trị cho `user`. Và ở đây `user` lưu trữ tham chiếu đến một object. Dòng `(*)` thay đổi object, chứ không phải `user`.
 
-The `const` would give an error if we try to set `user` to something else, for instance:
+Chỉ có lỗi nếu bạn gán `user` cho một thứ khác, ví dụ:
 
 ```js run
 const user = {
@@ -580,19 +577,19 @@ user = {
 };
 ```
 
-...But what if we want to make constant object properties? So that `user.age = 25` would give an error. That's possible too. We'll cover it in the chapter <info:property-descriptors>.
+...Nhưng sẽ ra sao nếu dùng `const` cho object properties? và `user.age = 25` sẽ báo lỗi. Có thể được nhé, chúng ta sẽ học ở chương <info:property-descriptors>.
 
-## Cloning and merging, Object.assign
+## Cloning và merging, Object.assign
 
-So, copying an object variable creates one more reference to the same object.
+Copy một object chỉ là tạo ra một reference đến cùng một object.
 
-But what if we need to duplicate an object? Create an independent copy, a clone?
+Nhưng muốn copy một object ra thành một object riêng biệt thì làm sao?
 
-That's also doable, but a little bit more difficult, because there's no built-in method for that in JavaScript. Actually, that's rarely needed. Copying by reference is good most of the time.
+Có thể làm được nhé, nhưng hơi khó khăn, trong Javascript không có sẵn các phương thức để làm việc đó. Mà thật sự thì cũng ít khi có nhu cầu. Copy bởi reference thường dùng nhiều hơn trong đa số trường hợp.
 
-But if we really want that, then we need to create a new object and replicate the structure of the existing one by iterating over its properties and copying them on the primitive level.
+Nhưng nếu thật sự cần làm, thì ta loop qua object và copy từng key, value là được.
 
-Like this:
+Ví dụ:
 
 ```js run
 let user = {
@@ -615,18 +612,18 @@ clone.name = "Pete"; // changed the data in it
 alert( user.name ); // still John in the original object
 ```
 
-Also we can use the method [Object.assign](mdn:js/Object/assign) for that.
+Cũng có thể dùng [Object.assign](mdn:js/Object/assign) copy cho lẹ.
 
-The syntax is:
+Cú pháp:
 
 ```js
 Object.assign(dest[, src1, src2, src3...])
 ```
 
-- Arguments `dest`, and `src1, ..., srcN` (can be as many as needed) are objects.
-- It copies the properties of all objects `src1, ..., srcN` into `dest`. In other words, properties of all arguments starting from the 2nd are copied into the 1st. Then it returns `dest`.
+- Tham số `dest`, và `src1, ..., srcN` là các objects.
+- Nó copy tất cả property của `src1, ..., srcN` vào `dest`. và cuối cùng trả về `dest` (sau khi đã thay đổi).
 
-For instance, we can use it to merge several objects into one:
+Ví dụ merge nhiều objects vào một object:
 ```js
 let user = { name: "John" };
 
@@ -641,7 +638,7 @@ Object.assign(user, permissions1, permissions2);
 // now user = { name: "John", canView: true, canEdit: true }
 ```
 
-If the receiving object (`user`) already has the same named property, it will be overwritten:
+Nếu object (`user`) có sẵn property cùng tên, nó sẽ bị ghi đè:
 
 ```js
 let user = { name: "John" };
@@ -652,7 +649,7 @@ Object.assign(user, { name: "Pete", isAdmin: true });
 // now user = { name: "Pete", isAdmin: true }
 ```
 
-We also can use `Object.assign` to replace the loop for simple cloning:
+Ta sử dụng `Object.assign` thay thế cho loop để copy một cách ngắn gọn:
 
 ```js
 let user = {
@@ -665,11 +662,9 @@ let clone = Object.assign({}, user);
 */!*
 ```
 
-It copies all properties of `user` into the empty object and returns it. Actually, the same as the loop, but shorter.
+Đến nay ta chỉ dùng kiểu primitive cho properties của `user` . Nếu muốn gán object cho property ta phải làm sao?
 
-Until now we assumed that all properties of `user` are primitive. But properties can be references to other objects. What to do with them?
-
-Like this:
+Như này:
 ```js run
 let user = {
   name: "John",
@@ -682,9 +677,9 @@ let user = {
 alert( user.sizes.height ); // 182
 ```
 
-Now it's not enough to copy `clone.sizes = user.sizes`, because the `user.sizes` is an object, it will be copied by reference. So `clone` and `user` will share the same sizes:
+Bây giờ copy `clone.sizes = user.sizes` lại không đủ rồi, vì `user.sizes` là một object và nó sẽ copy kiểu reference. Vì vậy `clone` và `user` đều có chung sizes mà không phải là 2 sizes độc lập:
 
-Like this:
+Ví dụ:
 ```js run
 let user = {
   name: "John",
@@ -703,42 +698,42 @@ user.sizes.width++;       // change a property from one place
 alert(clone.sizes.width); // 51, see the result from the other one
 ```
 
-To fix that, we should use the cloning loop that examines each value of `user[key]` and, if it's an object, then replicate it's structure as well. That is called a "deep cloning".
+Để fix, thì ta loop qua key của user và `user[key]` và nếu là object thì loop tiếp. Việc này được gọi là "deep cloning".
 
-There's a standard algorithm for deep cloning that handles the case above and more complex cases, called the [Structured cloning algorithm](https://w3c.github.io/html/infrastructure.html#internal-structured-cloning-algorithm). In order not to reinvent the wheel, we can use a working implementation of it from the JavaScript library [lodash](https://lodash.com), the method is called [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
+Có một thuật toán để deep cloning cho nhiều trường hợp phức tạp hơn, được gọi là [Structured cloning algorithm](https://w3c.github.io/html/infrastructure.html#internal-structured-cloning-algorithm). Và để cho dễ dàng tiện lợi hơn, ta có thể dùng thư viện [lodash](https://lodash.com), với phương thức deep cloning có sẵn [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
 
 
 
-## Summary
+## Tổng kết
 
-Objects are associative arrays with several special features.
+Objects là mảng kết hợp với nhiều tính năng riêng.
 
-They store properties (key-value pairs), where:
-- Property keys must be strings or symbols (usually strings).
-- Values can be of any type.
+Chúng gồm các properties (cặp key-value), mà:
+- Property keys phải là strings hoặc symbols (thường là strings).
+- Values là bất cứ giá trị nào.
 
-To access a property, we can use:
-- The dot notation: `obj.property`.
-- Square brackets notation `obj["property"]`. Square brackets allow to take the key from a variable, like `obj[varWithKey]`.
+Truy xuất property ta dùng:
+- Dấu chấm: `obj.property`.
+- Cặp ngoặc vuông `obj["property"]`. Nó cho phép lấy key từ một biến có sẵn `obj[varWithKey]`.
 
-Additional operators:
-- To delete a property: `delete obj.prop`.
-- To check if a property with the given key exists: `"key" in obj`.
-- To iterate over an object: `for(let key in obj)` loop.
+Các phép toán:
+- Xóa property: `delete obj.prop`.
+- Kiểm tra tồn tại: `"key" in obj`.
+- Lặp qua Object: `for(let key in obj)`.
 
-Objects are assigned and copied by reference. In other words, a variable stores not the "object value", but a "reference" (address in memory) for the value. So copying such a variable or passing it as a function argument copies that reference, not the object. All operations via copied references (like adding/removing properties) are performed on the same single object.
+Objects được gán hay copy bởi tham chiếu. Nói cách khác một biến lưu trữ object là tham chiếu đến địa chỉ của object đó trên bộ nhớ. 
 
-To make a "real copy" (a clone) we can use `Object.assign` or  [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
+Để thực sự copy (clone) một object, ta dùng `Object.assign` hoặc  [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
 
-What we've studied in this chapter is called a "plain object", or just `Object`.
+Những gì chúng ta học trong bài này là  "plain object" hay nói gọi là `Object`.
 
-There are many other kinds of objects in JavaScript:
+Có nhiều loại objects khác trong JavaScript:
 
-- `Array` to store ordered data collections,
-- `Date` to store the information about the date and time,
-- `Error` to store the information about an error.
-- ...And so on.
+- `Array` : mãng,
+- `Date` để lưu trữ dữ liệu thời gian,
+- `Error` lưu trữ lỗi.
+- ...và nhiều nữa.
 
-They have their special features that we'll study later. Sometimes people say something like "Array type" or "Date type", but formally they are not types of their own, but belong to a single "object" data type. And they extend it in various ways.
+Chúng ta sẽ học thêm nhiều về Object. Thỉnh thoảng người ta nói "kiểu Array" hay "Kiểu Date", Nhưng chính thức thì chúng đều là Object, chẳng qua là một sự mở rộng nào đó mà thôi.
 
-Objects in JavaScript are very powerful. Here we've just scratched the surface of the topic that is really huge. We'll be closely working with objects and learning more about them in further parts of the tutorial.
+Objects trong JavaScript là rất mạnh mẽ. Bài này khá dài nhưng thật ra chỉ là chút da lông ngoài bề mặt mà thôi. Tính năng của Object còn khổng lồ lắm. Ta sẽ học từng phần, từ từ thôi, ko cần xoắn :D
