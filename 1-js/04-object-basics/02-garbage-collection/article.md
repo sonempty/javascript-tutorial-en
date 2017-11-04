@@ -1,37 +1,37 @@
 # Garbage collection
 
-Memory management in JavaScript is performed automatically and invisibly to us. We create primitives, objects, functions... All that takes memory.
+Quản lý bộ nhớ trong JavaScript được thực hiện tự động và chúng ta sẽ không nhìn thấy. Chúng ta tạo ra primitives, objects, functions... và tất cả chúng đều sẽ chiếm giữ tài nguyên bộ nhớ.
 
-What happens when something is not needed any more? How does the JavaScript engine discover it and clean it up?
+JavaScript engine sẽ phát hiện và xóa đi những thứ không còn hữu dụng để giải phóng bộ nhớ như thế nào?
 
 [cut]
 
-## Reachability
+## Khả năng tiếp cận - reachability
 
-The main concept of memory management in JavaScript is *reachability*.
+Khái niệm chính trong JavaScript để quản lý bộ nhớ là *reachability*.
 
-Simply put, "reachable" values are those that are accessible or usable somehow. They are guaranteed to be stored in memory.
+Các giá trị có thể truy cập được là các giá trị có lưu trong bộ nhớ. Chúng được gọi là *reachable*
 
-1. There's a base set of inherently reachable values, that cannot be deleted for obvious reasons.
+1. Có một tập hợp các giá trị reachable, và không thể xóa được.
 
-    For instance:
+    Ví dụ:
 
-    - Local variables and parameters of the current function.
-    - Variables and parameters for other functions on the current chain of nested calls.
-    - Global variables.
-    - (there are some other, internal ones as well)
+    - Local variables và parameters của hàm đang thực thi.
+    - Variables và parameters của hàm khác trong nested calls.
+    - Biến Global.
+    - (Và một số thứ khác nữa)
 
-    These values are called *roots*.
+    Những giá trị này được gọi là giá trị gốc - *roots*.
 
-2. Any other value is considered reachable if it's reachable from a root by a reference or by a chain of references.
+2. Những thứ khác được xem là reachable nếu nó có thể truy cập được từ một hoặc một chuỗi sự tham chiếu vào roots.
 
-    For instance, if there's an object in a local variable, and that object has a property referencing another object, that object is considered reachable. And those that it references are also reachable. Detailed examples to follow.
+    Ví dụ, Có một object trong local variable, và object này có các property tham chiếu đến object khác, Vậy object này là reachable. Và những objects mà nó tham chiếu đến cũng là reachable.
 
-There's a background process in the JavaScript engine that is called [garbage collector](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). It monitors all objects and removes those that have become unreachable.
+Đây là một background process (chạy trong background) trong JavaScript engine, nó được gọi là [garbage collector](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). Nó theo dõi các đối tượng và xóa đi nếu chúng unreachable
 
-## A simple example
+## Một ví dụ đơn giản
 
-Here's the simplest example:
+Đây là một ví dụ đơn giản:
 
 ```js
 // user has a reference to the object
@@ -42,9 +42,9 @@ let user = {
 
 ![](memory-user-john.png)
 
-Here the arrow depicts an object reference. The global variable `"user"` references the object `{name: "John"}` (we'll call it John for brevity). The `"name"` property of John stores a primitive, so it's painted inside the object.
+Ở đây mũi tên mô tả một tham chiếu đối tượng. Biến global `"user"` tham chiếu đến đổi tượng `{name: "John"}` (ta gọi đối tượng này là John cho ngắn gọn). Key `"name"` của property của John lưu trữ một giá trị primitive, vậy nó nằm trong object.
 
-If the value of `user` is overwritten, the reference is lost:
+Nếu giá trị của `user` bị ghi đè, sự tham chiếu sẽ mất đi:
 
 ```js
 user = null;
@@ -52,11 +52,11 @@ user = null;
 
 ![](memory-user-john-lost.png)
 
-Now John becomes unreachable. There's no way to access it, no references to it. Garbage collector will junk the data and free the memory.
+Bây giờ John đã trở thành unreachable. Không có cách nào để sử dụng (gọi) nó, không có tham chiếu đến nó. Garbage collector sẽ xóa nó để giải phóng tài nguyên bộ nhớ.
 
-## Two references
+## Hai sự tham chiếu
 
-Now let's imagine we copied the reference from `user` to `admin`:
+Giờ ta copy ( bằng tham chiếu) `user` cho `admin`:
 
 ```js
 // user has a reference to the object
@@ -71,16 +71,16 @@ let admin = user;
 
 ![](memory-user-john-admin.png)
 
-Now if we do the same:
+Nếu ta làm tương tự:
 ```js
 user = null;
 ```
 
-...Then the object is still reachable via `admin` global variable, so it's in memory. If we overwrite `admin` too, then it can be removed.
+...Thì John vẫn reachable thông qua biến global `admin`, cho nên nó vẫn tồn tại trong bộ nhớ mà không bị xóa đi. Nếu ghi đè `admin`, thì John sẽ bị xóa đi.
 
-## Interlinked objects
+## Liên kết objects
 
-Now a more complex example. The family:
+Một ví dụ phức tạp hơn:
 
 ```js
 function marry(man, woman) {
@@ -100,15 +100,15 @@ let family = marry({
 });
 ```
 
-Function `marry` "marries" two objects by giving them references to each other and returns a new object that contains them both.
+Hàm `marry` có hai đối tượng tham chiếu lẫn nhau, và return một đối tượng khác chứa giá trị nằm trong hai đối tượng đó.
 
-The resulting memory structure:
+Kết quả lưu trong bộ nhớ sẽ như thế này:
 
 ![](family.png)
 
-As of now, all objects are reachable.
+Vậy, tất cả đối tượng là reachable.
 
-Now let's remove two references:
+Ta xóa đi hai tham chiếu:
 
 ```js
 delete family.father;
@@ -117,79 +117,78 @@ delete family.mother.husband;
 
 ![](family-delete-refs.png)
 
-It's not enough to delete only one of these two references, because all objects would still be reachable.
+Nếu chỉ delete một tham chiếu, thì tất cả object vẫn reachable.
 
-But if we delete both, then we can see that John has no incoming reference any more:
+Nếu delete cả hai thì ta thấy John sẽ unreachable:
 
 ![](family-no-father.png)
 
-Outgoing references do not matter. Only incoming ones can make an object reachable. So, John is now unreachable and will be removed from the memory with all its data that also became unaccessible.
+Tham chiếu từ John ra (outgoing reference) không có ý nghĩa. Chỉ có tham chiếu vào (incoming) mới làm đối tượng reachable. Vì vậy John hiện tại sẽ unreachable và sẽ bị xóa đi.
 
-After garbage collection:
+Sau khi garbage collection:
 
 ![](family-no-father-2.png)
 
 ## Unreachable island
 
-It is possible that the whole island of interlinked objects becomes unreachable and is removed from the memory.
-
-The source object is the same as above. Then:
+Island dịch ra là đảo, ốc đảo. Ở đây ám chỉ một khu vực chứa các object liên kết.
+Ta có thể khiến một island trở thành unreachable:
 
 ```js
 family = null;
 ```
 
-The in-memory picture becomes:
+Trong bộ nhớ sẽ như thế này:
 
 ![](family-no-family.png)
 
-This example demonstrates how important the concept of reachability is.
+Ví dụ này chứng minh tầm quan trọng của khả năng tiếp cận như thế nào.
 
-It's obvious that John and Ann are still linked, both have incoming references. But that's not enough.
+Hiển nhiên rằng John và Ann liên kết với nhau, cả hai đều có tham chiếu incoming. Nhưng chưa đủ.
 
-The former `"family"` object has been unlinked from the root, there's no reference to it any more, so the whole island becomes unreachable and will be removed.
+Object `"family"` chứa cả Ann và john không liên kết đến root, không có tham chiếu incoming nào đến nó, cho nên nó unreachable và sẽ bị xóa.
 
-## Internal algorithms
+## Thuật toán trong garbage collection
 
-The basic garbage collection algorithm is called "mark-and-sweep".
+Thuật toán cơ bản trong garbage collection là  đánh dấu và quét - "mark-and-sweep".
 
-The following "garbage collection" steps are regularly performed:
+"garbage collection" hoạt động theo các bước:
 
-- The garbage collector takes roots and "marks" (remembers) them.
-- Then it visits and "marks" all references from them.
-- Then it visits marked objects and marks *their* references. All visited objects are remembered, so as not to visit the same object twice in the future.
-- ...And so on until there are unvisited references (reachable from the roots).
-- All objects except marked ones are removed.
+- Đánh dấu (mark) và ghi nhớ các roots.
+- Đánh dấu tất cả các references của roots
+- Xem xét và đánh dấu tất cả các tham chiếu đến các objects đã được đánh dấu ở bước 2. Tất cả các object đã được đánh dấu sẽ được ghi nhớ và không xem xét lại trong tương lai.
+- ...cứ tiếp tục như thế cho đến khi đánh giá tất cả object (reachable từ roots).
+- Tất cả object không được đánh dấu sẽ bị xóa đi.
 
-For instance, let our object structure look like this:
+Minh họa các bước như dưới đây:
 
 ![](garbage-collection-1.png)
 
-We can clearly see an "unreachable island" to the right side. Now let's see how "mark-and-sweep" garbage collector deals with it.
+Ta thấy "unreachable island" nằm bên phải. Giờ xem "mark-and-sweep" của garbage collector xác định nó như thế nào.
 
-The first step marks the roots:
+Bước một là đánh dấu roots:
 
 ![](garbage-collection-2.png)
 
-Then their references are marked:
+Tiếp là tham chiếu của root:
 
 ![](garbage-collection-3.png)
 
-...And their references, while possible:
+...Và tham chiếu của các object vừa rồi:
 
 ![](garbage-collection-4.png)
 
-Now the objects that could not be visited in the process are considered unreachable and will be removed:
+Giờ các object không được xem xét (không được đánh dấu) là unreachable và bị xóa:
 
 ![](garbage-collection-5.png)
 
-That's the concept of how garbage collection works.
+Đó là cách garbage collection hoạt động.
 
-JavaScript engines apply many optimizations to make it run faster and not affect the execution.
+JavaScript engines có nhiều cải tiến để garbage collection hoạt động nhanh, hiệu quả mà không ảnh hưởng đến việc thực thi chương trình của bạn.
 
-Some of the optimizations:
+Những cải tiến đó là:
 
-- **Generational collection** -- objects are split into two sets: "new ones" and "old ones". Many  objects appear, do their job and die fast, they can be cleaned up aggressively. Those that survive for long enough, become "old" and are examined less often.
+- **Generational collection** -- objects được chia làm hai loại: "mới" và "cũ". Many  objects appear, do their job and die fast, they can be cleaned up aggressively. Those that survive for long enough, become "old" and are examined less often.
 - **Incremental collection** -- if there are many objects, and we try to walk and mark the whole object set at once, it may take some time and introduce visible delays in the execution. So the engine tries to split the garbage collection into pieces. Then the pieces are executed one by one, separately. That requires some extra bookkeeping between them to track changes, but we have many tiny delays instead of a big one.
 - **Idle-time collection** -- the garbage collector tries to run only while the CPU is idle, to reduce the possible effect on the execution.
 
