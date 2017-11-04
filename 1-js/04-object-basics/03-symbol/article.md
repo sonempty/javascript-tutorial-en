@@ -1,33 +1,33 @@
 
-# Symbol type
+# Kiểu Symbol
 
-By specification, object property keys may be either of string type, or of symbol type. Not numbers, not booleans, only strings or symbols, these two types.
+Object property Keys chỉ có thể là String hoặc Sybol. Không thể là numbers, booleans...
 
-Till now we've only seen strings. Now let's see the advantages that symbols can give us.
+Trước giờ chúng ta chỉ sử dụng String để làm key, giờ ta sử dụng Sybol xem như thế nào nhé.
 
 [cut]
 
 ## Symbols
 
-"Symbol" value represents a unique identifier.
+Một giá trị "Symbol" đại diện cho định danh **duy nhất**.
 
-A value of this type can be created using `Symbol()`:
+Giá trị đó được tạo ra bởi `Symbol()`:
 
 ```js
 // id is a new symbol
 let id = Symbol();
 ```
 
-We can also give symbol a description (also called a symbol name), mostly useful for debugging purposes:
+Có thể thêm description cho Sybol (được gọi là symbol name), sẽ dễ dàng cho debug code:
 
 ```js
 // id is a symbol with the description "id"
 let id = Symbol("id");
 ```
 
-Symbols are guaranteed to be unique. Even if we create many symbols with the same description, they are different values. The description is just a label that doesn't affect anything.
+Symbols được đảm bảo là duy nhất. cho dù có cùng description, chúng vẫn khác nhau. Description chỉ là cái label thôi, không có ảnh hưởng gì.
 
-For instance, here are two symbols with the same description -- they are not equal:
+Ví dụ hai Sybols có cùng description -- Chúng không bằng nhau:
 
 ```js run
 let id1 = Symbol("id");
@@ -38,12 +38,12 @@ alert(id1 == id2); // false
 */!*
 ```
 
-If you are familiar with Ruby or another language that also has some sort of "symbols" -- please don't be misguided. JavaScript symbols are different.
+Nếu bạn có được học về "symbols" ở các NNLT khác rồi -- đừng nhầm lẫn. Symbol trong JavaScript là khác biệt với các NNLT khác.
 
-````warn header="Symbols don't auto-convert to a string"
-Most values in JavaScript support implicit conversion to a string. For instance, we can `alert` almost any value, and it will work. Symbols are special. They don't auto-convert.
+````warn header="Symbols không bị convert sang string"
+Nhiều giá trị trong JavaScript hỗ trợ việc convert qua string. Ví dụ `alert` sẽ convert giá trị truyền vào sang String. Symbols là đặc biệt, nó sẽ không bị tự động convert.
 
-For instance, this `alert` will show an error:
+ví dụ:
 
 ```js run
 let id = Symbol("id");
@@ -52,7 +52,7 @@ alert(id); // TypeError: Cannot convert a Symbol value to a string
 */!*
 ```
 
-If we really want to show a symbol, we need to call `.toString()` on it, like here:
+Nếu thực sự muốn in ra một Sysbol thì dùng `.toString()` :
 ```js run
 let id = Symbol("id");
 *!*
@@ -60,12 +60,13 @@ alert(id.toString()); // Symbol(id), now it works
 */!*
 ```
 
-That's a "language guard" against messing up, because strings and symbols are fundamentally different and should not occasionally convert one into another.
+Đó là sự bảo bộ từ JS để tránh sự rối rắm. Và thực tế thì cũng chẳng ai đi convert Symbol sang String làm gì.
+
 ````
 
-## "Hidden" properties
+## Property ẩn
 
-Symbols allow us to create "hidden" properties of an object, that no other part of code can occasionally access or overwrite.
+Symbols giúp tạo ra các property ẩn trong object, that no other part of code can occasionally access or overwrite.
 
 For instance, if we want to store an "identifier" for the object `user`, we can use a symbol as a key for it:
 
