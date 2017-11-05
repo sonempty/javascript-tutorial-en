@@ -1,6 +1,6 @@
 # Object methods, "this"
 
-Objects are usually created to represent entities of the real world, like users, orders and so on:
+Objects thường được tạo ra và đại diện cho một thực thể nào đó trong thế giới thực, như users, orders và vv...:
 
 ```js
 let user = {
@@ -9,15 +9,15 @@ let user = {
 };
 ```
 
-And, in the real world, a user can *act*: select something from the shopping cart, login, logout etc.
+Trong thế giới thực, một user có thể có các hành động: chọn mặt hàng nào đó trong shopping cart, login, logout ...
 
-Actions are represented in JavaScript by functions in properties.
+Các hành động đó được đại diện bởi  một hàm trong properties. Và hàm đó ta gọi là **Method**
 
 [cut]
 
-## Method examples
+## Ví dụ về methods
 
-For the start, let's teach the `user` to say hello:
+Ta tạo một hành động nói xin chào cho `user`:
 
 ```js run
 let user = {
@@ -34,15 +34,13 @@ user.sayHi = function() {
 user.sayHi(); // Hello!
 ```
 
-Here we've just used a Function Expression to create the function and assign it to the property `user.sayHi` of the object.
+Sử dụng Function Expression và gán cho property `user.sayHi` của user.
 
-Then we can call it. The user can now speak!
+Hàm mà là một property của object thi được gọi là *method*.
 
-A function that is the property of an object is called its *method*.
+Vậy ở đây ta có method `sayHi` của object `user`.
 
-So, here we've got a method `sayHi` of the object `user`.
-
-Of course, we could use a pre-declared function as a method, like this:
+Tất nhiên ta cũng có thể khai báo hàm trước rồi gán vào property sau:
 
 ```js run
 let user = {
@@ -62,14 +60,14 @@ user.sayHi = sayHi;
 user.sayHi(); // Hello!
 ```
 
-```smart header="Object-oriented programming"
-When we write our code using objects to represent entities, that's called an [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), in short: "OOP".
+```smart header="Lập trình hướng đối tượng"
+Khi ta dùng một đối tượng để đại diện cho một thực thể thật, đó gọi là lập trình hướng đối tượng [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), viết tắt là "OOP".
 
-OOP is a big thing, an interesting science of its own. How to choose the right entities? How to organize the interaction between them? That's architecture, and there are great books on that topic, like "Design Patterns: Elements of Reusable Object-Oriented Software" by E.Gamma, R.Helm, R.Johnson, J.Vissides or "Object-Oriented Analysis and Design with Applications" by G.Booch, and more. We'll scratch the surface of that topic later in the chapter <info:object-oriented-programming>.
+OOP là một khái niệm lớn, nó là một môn học căn bản cho các lập trình viên. Thường thi nếu học lập trình bài bản , bạn nên học qua về OOP. Nó dạy cho bạn cách đặt tên, thuộc tính, cấu trúc ....một thực thể như thế nào khi đưa vào lập trình.
 ```
 ### Method shorthand
 
-There exists a shorter syntax for methods in an object literal:
+Tương tự như Property shorthand như đã học, có thể khai báo một method ngắn gọn như bên dưới:
 
 ```js
 // these objects do the same
@@ -90,21 +88,21 @@ let user = {
 };
 ```
 
-As demonstrated, we can omit `"function"` and just write `sayHi()`.
+Ta có thể bõ qua từ khóa `"function"` chỉ viết `sayHi()`.
 
-To tell the truth, the notations are not fully identical. There are subtle differences related to object inheritance (to be covered later), but for now they do not matter. In almost all cases the shorter syntax is preferred.
+Thực ra thì hai cách trên không hoàn toàn tương tự. Có một sự khác nhau tinh tế liên quan đến tính kế thừa của object (sẽ học sau), Nhưng hiện tại ta chưa cần quan tâm. Viết kiểu shorthand được khuyến khích sử dụng hơn nhé.
 
-## "this" in methods
+## "this" trong methods
 
-It's common that an object method needs to access the information stored in the object to do its job.
+Khi tạo ra một method, điều hay xảy ra là ta cần lấy thông tin từ một property khác trong cùng object.
 
-For instance, the code inside `user.sayHi()` may need the name of the `user`.
+Ví dụ `user.sayHi()` cần lấy tên của `user` để in ra câu chào.
 
-**To access the object, a method can use the `this` keyword.**
+**Để truy cập object, method sử dụng từ khóa `this`.**
 
-The value of `this` is the object "before dot", the one used to call the method.
+Giá trị của `this` là object "trước dấu chấm", được sử dụng để gọi method.
 
-For instance:
+Ví dụ:
 
 ```js run
 let user = {
@@ -122,9 +120,9 @@ let user = {
 user.sayHi(); // John
 ```
 
-Here during the execution of `user.sayHi()`, the value of `this` will be `user`.
+Khi thực thi `user.sayHi()`, Giá trị của `this` chính là `user`.
 
-Technically, it's also possible to access the object without `this`, by referencing it via the outer variable:
+Về mặt kỹ thuật ta có thể dùng chính object đó thay cho `this`:
 
 ```js
 let user = {
@@ -140,9 +138,9 @@ let user = {
 };
 ```
 
-...But such code is unreliable. If we decide to copy `user` to another variable, e.g. `admin = user` and overwrite `user` with something else, then it will access the wrong object.
+...Nhưng như thế sẽ không đáng tin cậy, khi ta copy `user` cho một biến khác `admin = user` và ghi đè `user`, khi đó sẽ truy cập sai object.
 
-That's demonstrated below:
+Ví dụ:
 
 ```js run
 let user = {
@@ -164,13 +162,13 @@ user = null; // overwrite to make things obvious
 admin.sayHi(); // Whoops! inside sayHi(), the old name is used! error!
 ```
 
-If we used `this.name` instead of `user.name` inside the `alert`, then the code would work.
+Nếu sử dụng `this.name` thay vì `user.name` thì `alert` sẽ chạy ok.
 
-## "this" is not bound
+## "this" không bị ràng buộc
 
-In JavaScript, "this" keyword behaves unlike most other programming languages. First, it can be used in any function.
+Trong JavaScript, "this" không giống các NNLT khác. Nó có thể dùng trong bất cứ hàm nào.
 
-There's no syntax error in the code like that:
+Không có lỗi cú pháp trong code bên dưới:
 
 ```js
 function sayHi() {
@@ -178,9 +176,9 @@ function sayHi() {
 }
 ```
 
-The value of `this` is evaluated during the run-time. And it can be anything.
+Giá trị của `this` được đánh giá khi chạy chương trình, nó có thể là bất cứ cái gì.
 
-For instance, the same function may have different "this" when called from different objects:
+Ví dụ, cùng một hàm nhưng có thể có "this" khác nhau khi gọi hàm ở các object khác nhau:
 
 ```js run
 let user = { name: "John" };
@@ -204,7 +202,7 @@ admin.f(); // Admin  (this == admin)
 admin['f'](); // Admin (dot or square brackets access the method – doesn't matter)
 ```
 
-Actually, we can call the function without an object at all:
+Thực tế ta có thể gọi this mà không cần chứa trong object nào:
 
 ```js run
 function sayHi() {
@@ -214,28 +212,26 @@ function sayHi() {
 sayHi(); // undefined
 ```
 
-In this case `this` is `undefined` in strict mode. If we try to access `this.name`, there will be an error.
+Trường hợp trên `this` là `undefined` trong "strict mode". Nếu truy cập `this.name`, sẽ báo lỗi.
 
-In non-strict mode (if one forgets `use strict`) the value of `this` in such case will be the *global object* (`window` in a browser, we'll get to it later). This is a historical behavior that `"use strict"` fixes.
+Trong non-strict mode (Không có `use strict`) giá trị của `this` sẽ là *global object* (`window` nếu dùng trình duyệt chạy code). Đây là một hành vi mang tính lịch sử mà `"use strict"` sử dụng.
 
-Please note that usually a call of a function that uses `this` without an object is not normal, but rather a programming mistake. If a function has `this`, then it is usually meant to be called in the context of an object.
+Chú ý là dùng `this` mà không phải trong một object là không nên, đó là một sai lầm trong code. Nếu một hàm có `this`, thì nó nên được gọi trong một ngữ cảnh object.
 
-```smart header="The consequences of unbound `this`"
-If you come from another programming language, then you are probably used to the idea of a "bound `this`", where methods defined in an object always have `this` referencing that object.
+```smart header="Hậu quả của việc không ràng buộc `this`"
+Các NNLT khác thường sẽ ràng buộc `this`, chúng thường định nghĩa method trong object với `this`.
 
-In JavaScript `this` is "free", its value is evaluated at call-time and does not depend on where the method was declared, but rather on what's the object "before the dot".
+Trong JavaScript `this` là "free", Giá trị của `this` sẽ được đánh giá khi chạy code, nhưng việc đó sẽ đưa đến câu hỏi là giá trị đó là object nào ??
 
-The concept of run-time evaluated `this` has both pluses and minuses. On the one hand, a function can be reused for different objects. On the other hand, greater flexibility opens a place for mistakes.
+Nó rất linh hoạt vì `this` dùng cho object nào cũng được, nhưng cũng đồng nghĩa với việc sẽ dễ xảy ra lỗi hơn.
 
-Here our position is not to judge whether this language design decision is good or bad. We'll understand how to work with it, how to get benefits and evade problems.
+Ở đây không so sánh JavaScript sử dụng `this` so với các NNLT khác là tốt hay xấu. Mà ta cần hiểu nó hoạt động như thế nào để sử dụng một cách hiệu quả
 ```
 
 ## Internals: Reference Type
 
 ```warn header="In-depth language feature"
-This section covers an advanced topic, to understand certain edge-cases better.
-
-If you want to go on faster, it can be skipped or postponed.
+Phần này là phần nâng cao. Nếu bạn muốn có thể bõ qua. Vâng, tác giả bõ qua luôn, bạn nào muốn thì đọc tiếng anh nhé. Hê hê
 ```
 
 An intricate method call can lose `this`, for instance:
@@ -343,13 +339,13 @@ That's a special feature of arrow functions, it's useful when we actually do not
 
 ## Summary
 
-- Functions that are stored in object properties are called "methods".
-- Methods allow objects to "act" like `object.doSomething()`.
-- Methods can reference the object as `this`.
+- Functions được khai báo trong một property được gọi là "methods".
+- Methods cho phép object có các "hành động" như `object.doSomething()`.
+- Methods có thể tham chiếu đến object bằng `this`.
 
-The value of `this` is defined at run-time.
-- When a function is declared, it may use `this`, but that `this` has no value until the function is called.
-- That function can be copied between objects.
-- When a function is called in the "method" syntax: `object.method()`, the value of `this` during the call is `object`.
+Giá trị của `this` được định nghĩa ở run-time.
+- Khi khai báo một hàm có thể dùng `this`, Nhưng `this` sẽ không có giá trị cho đến khi gọi hàm.
+- Hàm đó có thể được copy bởi nhiều object.
+- Khi hàm được gọi trong cú pháp của "method": `object.method()`, giá trị của `this` chính là `object`.
 
-Please note that arrow functions are special: they have no `this`. When `this` is accessed inside an arrow function, it is taken from outside.
+Chú ý Arrow-function không có `this`. Khi `this` được gọi trong Arrow-function, nó sẽ là `this` của hàm chứa arrow-function đó.
