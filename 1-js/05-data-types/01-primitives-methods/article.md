@@ -1,20 +1,18 @@
-# Methods of primitives
+# Methods của primitives
 
-JavaScript allows us to work with primitives (strings, numbers etc) as if they were objects.
+JavaScript cho phép làm việc với primitives (strings, numbers ..) như kiểu chúng là objects.
 
-They also provide methods to call and such. We will study those soon, but first we'll see how it works, because, of course, primitives are not objects (and here we will make it even more clear).
+Nó cung cấp các method có thể gọi được trên primitives, chúng ta sẽ học ngay bây giờ, nhưng chúng ta sẽ xem xét tại sao lại như thế. Bởi dù sao primitive không phải là objects.
 
 [cut]
 
-Let's look at the key distinction between primitives and objects.
+Chúng ta cùng phân biệt những điểm chính giữa primitives và objects.
 
-A primitive
+Một object
+: có khả năng lưu trữ nhiều giá trị trong các properties.
+Có thể được tạo ra bằng cách `{}`, Ví dụ: `{name: "John", age: 30}`. Có nhiều kiểu Object khác trong JavaScript, Ví dụ. functions là objects.
 
-An object
-: Is capable of storing multiple values as properties.
-Can be created with `{}`, for instance: `{name: "John", age: 30}`. There are other kinds of objects in JavaScript, e.g. functions are objects.
-
-One of the best things about objects is that we can store a function as one of its properties:
+Một trong những điều hay nhất về objects là ta có thể lưu một hàm vào properties:
 
 ```js run
 let john = {
@@ -27,32 +25,32 @@ let john = {
 john.sayHi(); // Hi buddy!
 ```
 
-So here we've made an object `john` with the method `sayHi`.
+Ở đây ta tạo ra object `john` với method `sayHi`.
 
-Many built-in objects already exist, such as those that work with dates, errors, HTML elements etc. They have different properties and methods.
+Một vài Object built-in có sẵn trong JS, ví dụ dates, errors, HTML elements ... Nó có các properties và methods khác nhau.
 
-But, these features come with a cost!
+Nhưng, các tính năng đó đều phải trả giá!
 
-Objects are "heavier" than primitives. They require additional resources to support the internal machinery. But as properties and methods are very useful in programming, JavaScript engines try to optimize them to reduce the additional burden.
+Objects nặng hơn primitives, chúng chiếm nhiều tài nguyên hệ thống hơn. Nhưng chúng lại rất hữu ích trong lập trình, JavaScript engines đang cố gắng cải thiện chúng, để giảm sự tiêu tốn về tài nguyên hệ thống.
 
-## A primitive as an object
+## Một primitive là một object
 
-Here's the paradox faced by the creator of JavaScript:
+Đây là nghịch lý trong JavaScript:
 
-- There are many things one would want to do with a primitive like a string or a number. It would be great to access them as methods.
-- Primitives must be as fast and lightweight as possible.
+- Có vài thứ ta muốn làm với primitive, và những việc đó sẽ dễ dàng hơn nếu có sẵn các method.
+- Primitives phải nhanh và nhẹ như chúng vốn có.
 
-The solution looks a little bit awkward, but here it is:
+Và giải pháp là:
 
-1. Primitives are still primitive. A single value, as desired.
-2. The language allows access to methods and properties of strings, numbers, booleans and symbols.
-3. When this happens, a special "object wrapper" is created that provides the extra functionality, and then is destroyed.
+1. Primitives vẫn là primitive. Một giá trị đơn như mong muốn.
+2. JS cho phép truy cập các methods và properties của strings, numbers, booleans và symbols.
+3. Khi điều này xảy ra một "object tạm thời - object wrapper" được tạo ra cung cấp chức năng này, sau đó nó được xóa đi.
 
-The "object wrappers" are different for each primitive type and are called: `String`, `Number`, `Boolean` and `Symbol`. Thus, they provide different sets of methods.
+"Object wrappers" khác nhau cho mỗi loại primitive, gồm: `String`, `Number`, `Boolean` và `Symbol`. Như vậy chúng cũng cung cấp các methods khác nhau.
 
-For instance, there exists a method [str.toUpperCase()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) that returns a capitalized string.
+Ví dụ, có method [str.toUpperCase()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) trả về một string được viết hoa.
 
-Here's how it works:
+Như này:
 
 ```js run
 let str = "Hello";
@@ -60,17 +58,17 @@ let str = "Hello";
 alert( str.toUpperCase() ); // HELLO
 ```
 
-Simple, right? Here's what actually happens in `str.toUpperCase()`:
+Đây là những gì xảy ra khi ta gọi `str.toUpperCase()`:
 
-1. The string `str` is a primitive. So in the moment of accessing its property, a special object is created that knows the value of the string, and has useful methods, like `toUpperCase()`.
-2. That method runs and returns a new string (shown by `alert`).
-3. The special object is destroyed, leaving the primitive `str` alone.
+1. Chuỗi `str` là một primitive. Vì vậy khi ta truy cập property của nó, một object tạm thời được tạo ra, với những method hữu ích như `toUpperCase()`.
+2. Gọi method này, nó chạy và trả về chuỗi `str` được viết hoa.
+3. Object tạm bị xóa, để lại primitive `str` như ban đầu.
 
-So primitives can provide methods, but they still remain lightweight.
+Vì vậy primitives có thể cung cấp các methods, nhưng chúng nhẹ hơn.
 
-The JavaScript engine highly optimizes this process. It may even skip the creation of the extra object at all. But it must still adhere to the specification and behave as if it creates one.
+JavaScript engine đã và đang cải thiện rất nhiều quá trình này. Nó thậm chí không tạo ra Object tạm như đã nói, tuy nhiên ở đây ta vẫn đề cập đến cho dễ hiểu.
 
-A number has methods of its own, for instance, [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) rounds the number to the given precision:
+Number có các method của nó, ví dụ, [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) để làm tròn số:
 
 ```js run
 let n = 1.23456;
@@ -78,15 +76,15 @@ let n = 1.23456;
 alert( n.toFixed(2) ); // 1.23
 ```
 
-We'll see more specific methods in chapters <info:number> and <info:string>.
+Ta sẽ học nhiều về các method của string, number ở bài <info:number> và <info:string>.
 
 
-````warn header="Constructors `String/Number/Boolean` are for internal use only"
-Some languages like Java allow us to create "wrapper objects" for primitives explicitly using a syntax like `new Number(1)` or `new Boolean(false)`.
+````warn header="Constructors `String/Number/Boolean` chỉ được dùng nội bộ"
+các NNLT khác như Java tạo ra "wrapper objects" cho primitives một cách rõ ràng bởi cú pháp `new Number(1)` hoặc `new Boolean(false)`.
 
-In JavaScript, that's also possible for historical reasons, but highly **unrecommended**. Things will go crazy in several places.
+Trong JavaScript, cũng có thể, Nhưng **không được khuyến khích**. Chúng dành cho một số thứ quái đản khác.
 
-For instance:
+Ví dụ:
 
 ```js run
 alert( typeof 1 ); // "number"
@@ -94,7 +92,7 @@ alert( typeof 1 ); // "number"
 alert( typeof new Number(1) ); // "object"!
 ```
 
-And because what follows, `zero`, is an object, the alert will show up:
+Và, `zero`, là một object, nên:
 
 ```js run
 let zero = new Number(0);
@@ -104,25 +102,25 @@ if (zero) { // zero is true, because it's an object
 }
 ```
 
-On the other hand, using the same functions `String/Number/Boolean` without `new` is a totally sane and useful thing. They convert a value to the corresponding type: to a string, a number, or a boolean (primitive).
+Sử dụng hàm `String/Number/Boolean` không có `new` cho một số thứ hữu dụng. chúng convert giá trị sang kiểu: string, number, hoặc boolean (primitive).
 
-For example, this is entirely valid:
+Ví dụ:
 ```js
 let num = Number("123"); // convert a string to number
 ```
 ````
 
 
-````warn header="null/undefined have no methods"
-The special primitives `null` and `undefined` are exceptions. They have no corresponding "wrapper objects" and provide no methods. In a sense, they are "the most primitive".
+````warn header="null/undefined không có methods"
+Kiểu primitives đặc biệt `null` và `undefined` là ngoại lệ. Chúng không có "wrapper objects" tương ứng và không cung cấp các methods. Trong một ngữ nghĩa nào đó chúng là "the most primitive - nguyên thủy nhất".
 
-An attempt to access a property of such value would give the error:
+VD:
 
 ```js run
 alert(null.test); // error
 ````
 
-## Summary
+## Tổng kết
 
-- Primitives except `null` and `undefined` provide many helpful methods. We will study those in the upcoming chapters.
-- Formally, these methods work via temporary objects, but JavaScript engines are well tuned to optimize that internally, so they are not expensive to call.
+- Primitives ngoại trừ `null` và `undefined` cung cấp một số methods hữu ích. Ta sẽ học sau.
+- Chính thức, các method này hoạt động thông qua các object tạm thời, Nhưng JavaScript engines đang tối ưu hết sức, nên sẽ không tiêu tốn tài nguyên cho lắm khi sử dụng chúng.
