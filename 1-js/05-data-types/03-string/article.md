@@ -1,16 +1,14 @@
 # Strings
 
-In JavaScript, the textual data is stored as strings. There is no separate type for a single character.
+Trong JavaScript, dữ liệu văn bản được lưu trữ dưới dạng strings. Kể cả các chữ cái đơn.
 
-The internal format for strings is always [UTF-16](https://en.wikipedia.org/wiki/UTF-16), it is not tied to the page encoding.
+Định dạng string luôn là kiểu [UTF-16](https://en.wikipedia.org/wiki/UTF-16), Nó không gắn liền với mã hóa trang web.
 
 [cut]
 
 ## Quotes
 
-Let's recall the kinds of quotes.
-
-Strings can be enclosed within either single quotes, double quotes or backticks:
+String được bao quanh bởi cặp dấu nháy đơn - single quotes hoặc nháy kép - double quotes hoặc backticks:
 
 ```js
 let single = 'single-quoted';
@@ -19,7 +17,7 @@ let double = "double-quoted";
 let backticks = `backticks`;
 ```
 
-Single and double quotes are essentially the same. Backticks however allow us to embed any expression into the string, including function calls:
+Single và double quotes là như nhau. Backticks là một template cho phép ta nhúng biến, biểu thức vào, bao gồm cả gọi hàm:
 
 ```js run
 function sum(a, b) {
@@ -29,7 +27,7 @@ function sum(a, b) {
 alert(`1 + 2 = ${sum(1, 2)}.`); // 1 + 2 = 3.
 ```
 
-Another advantage of using backticks is that they allow a string to span multiple lines:
+Sử dụng backticks cũng cho phép viết String trên nhiều dòng:
 
 ```js run
 let guestList = `Guests:
@@ -41,20 +39,19 @@ let guestList = `Guests:
 alert(guestList); // a list of guests, multiple lines
 ```
 
-If we try to use single or double quotes in the same way, there will be an error:
+Nếu dùng single hoặc double quotes như ví dụ bên trên sẽ báo lỗi:
 ```js run
 let guestList = "Guests:  // Error: Unexpected token ILLEGAL
   * John";
 ```
 
-Single and double quotes come from ancient times of language creation when the need for multiline strings was not taken into account. Backticks appeared much later and thus are more versatile.
 
-Backticks also allow us to specify a "template function" before the first backtick. The syntax is: <code>func&#96;string&#96;</code>. The function `func` is called automatically, receives the string and embedded expressions and can process them. You can read more about it in the [docs](mdn:JavaScript/Reference/Template_literals#Tagged_template_literals). This is called "tagged templates". This feature makes it easier to wrap strings into custom templating or other functionality, but it is rarely used.
+Backticks cũng cho phép ta sử dụng "template function" . Cú pháp: <code>func&#96;string&#96;</code>. Hàm `func` được gọi, nhận string và biểu thức được nhúng vào, sau đó xử lý chúng. Có thể tìm hiểu thêm tại [docs](mdn:JavaScript/Reference/Template_literals#Tagged_template_literals). Cái này được gọi là "tagged templates". Tính năng này cũng hiếm khi được sử dụng.
 
 
-## Special characters
+## Các ký tự đặc biệt
 
-It is still possible to create multiline strings with single quotes by using a so-called "newline character", written as `\n`, which denotes a line break:
+Ký tự `\n` đại diện cho xuống hàng:
 
 ```js run
 let guestList = "Guests:\n * John\n * Pete\n * Mary";
@@ -62,7 +59,7 @@ let guestList = "Guests:\n * John\n * Pete\n * Mary";
 alert(guestList); // a multiline list of guests
 ```
 
-For example, these two lines describe the same:
+Ví dụ viết String trên 2 hàng bằng hai cách:
 
 ```js run
 alert( "Hello\nWorld" ); // two lines using a "newline symbol"
@@ -72,7 +69,7 @@ alert( `Hello
 World` );
 ```
 
-There are other, less common "special" characters as well. Here's the list:
+Một vài ký tự đặc biệt khác:
 
 | Character | Description |
 |-----------|-------------|
@@ -81,10 +78,10 @@ There are other, less common "special" characters as well. Here's the list:
 |`\n`|New line|
 |`\r`|Carriage return|
 |`\t`|Tab|
-|`\uNNNN`|A unicode symbol with the hex code `NNNN`, for instance `\u00A9` -- is a unicode for the copyright symbol `©`. It must be exactly 4 hex digits. |
-|`\u{NNNNNNNN}`|Some rare characters are encoded with two unicode symbols, taking up to 4 bytes. This long unicode requires braces around it.|
+|`\uNNNN`|Một ký tự Unicode hex code `NNNN`, Ví dụ `\u00A9` -- là dấu bản quyền `©`.|
+|`\u{NNNNNNNN}`|Một vài ký tự Unicode đặc biệt, chiếm 4 bytes. Nó cần được nằm trong cặp ngoặc nhọn.|
 
-Examples with unicode:
+Vài ví dụ với unicode:
 
 ```js run
 alert( "\u00A9" ); // ©
@@ -92,9 +89,9 @@ alert( "\u{20331}" ); // 佫, a rare chinese hieroglyph (long unicode)
 alert( "\u{1F60D}"); // 😍, a smiling face symbol (another long unicode)
 ```
 
-All special characters start with a backslash character `\`. It is also called an "escape character".
+Một ký tự đặc biệt được bắt đầu bởi dấu `\`. Nó được gọi là ký tự thoát "escape character".
 
-We would also use it if we want to insert a quote into the string.
+Cũng sử dụng khi string có dấu nháy.
 
 For instance:
 
@@ -102,19 +99,19 @@ For instance:
 alert( 'I*!*\'*/!*m the Walrus!' ); // *!*I'm*/!* the Walrus!
 ```
 
-As you can see, we have to prepend the inner quote by the backslash `\'`, because otherwise it would indicate the string end.
+Ta phải sử dụng `\'`, vì nó cũng đại diện cho bắt đầu và kết thúc string.
 
-Of course, that refers only to the quotes that are same as the enclosing ones. So, as a more elegant solution, we could switch to double quotes or backticks instead:
+Tất nhiên nếu khác thì không cần sử dụng:
 
 ```js run
 alert( `I'm the Walrus!` ); // I'm the Walrus!
 ```
 
-Note that the backslash `\` serves for the correct reading of the string by JavaScript, then disappears. The in-memory string has no `\`. You can clearly see that in `alert` from the examples above.
+Dấu `\` sẽ không hiển thị, nó chỉ dùng để thể hiện cho JS là biết là bắt đầu một ký tự đặc biệt. Trong bộ nhớ sẽ không có `\`.
 
-But what if we need to show an actual backslash `\` within the string?
+Khi cần in ra dấu `\`trong string?
 
-That's possible, but we need to double it like `\\`:
+Ta dùng 2 dấu `\\`:
 
 ```js run
 alert( `The backslash: \\` ); // The backslash: \
@@ -123,23 +120,23 @@ alert( `The backslash: \\` ); // The backslash: \
 ## String length
 
 
-The `length` property has the string length:
+`length` property thể hiện độ dài của string:
 
 ```js run
 alert( `My\n`.length ); // 3
 ```
 
-Note that `\n` is a single "special" character, so the length is indeed `3`.
+Chú ý `\n` chỉ tính là một ký tự, nên ví dụ trên có độ dài là `3`.
 
-```warn header="`length` is a property"
-People with a background in some other languages sometimes mistype by calling `str.length()` instead of just `str.length`. That doesn't work.
+```warn header="`length` là một property"
+Đừng sử dụng nhầm `str.length()` thay vì `str.length`, như những ngôn ngữ khác.
 
-Please note that `str.length` is a numeric property, not a function. There is no need to add brackets after it.
+Chú ý `str.length` là một property, không phải là một hàm. Nên khi gọi không có cặp dấu ngoặc tròn.
 ```
 
-## Accessing characters
+## Truy cập các phần tử của string
 
-To get a character at position `pos`, use square brackets `[pos]` or call the method [str.charAt(pos)](mdn:js/String/charAt). The first character starts from the zero position:
+Lấy ký tự ở vị trí `pos`, sử dụng ngoặc vuông `[pos]` hoặc dùng method [str.charAt(pos)](mdn:js/String/charAt). Ký tự đầu tiên có vị trí bằng `0`:
 
 ```js run
 let str = `Hello`;
@@ -151,10 +148,8 @@ alert( str.charAt(0) ); // H
 // the last character
 alert( str[str.length - 1] ); // o
 ```
-
-The square brackets are a modern way of getting a character, while `charAt` exists mostly for historical reasons.
-
-The only difference between them is that if no character is found, `[]` returns `undefined`, and `charAt` returns an empty string:
+Dùng charAt là theo các bản JS cũ. bản ES6 nên dùng []
+Sự khác nhau giữa chúng là, `[pos]` trả về `undefined`, và `charAt(pos)` trả về `''` khi không có vị trí `pos`.
 
 ```js run
 let str = `Hello`;
@@ -163,7 +158,7 @@ alert( str[1000] ); // undefined
 alert( str.charAt(1000) ); // '' (an empty string)
 ```
 
-We can also iterate over characters using `for..of`:
+Duyệt qua string bằng `for..of`:
 
 ```js run
 for(let char of "Hello") {
@@ -171,11 +166,11 @@ for(let char of "Hello") {
 }
 ```
 
-## Strings are immutable
+## Strings là immutable
 
-Strings can't be changed in JavaScript. It is impossible to change a character.
+Strings là không thể thay đổi trong JavaScript.
 
-Let's try it to show that it doesn't work:
+Ví dụ:
 
 ```js run
 let str = 'Hi';
@@ -184,9 +179,7 @@ str[0] = 'h'; // error
 alert( str[0] ); // doesn't work
 ```
 
-The usual workaround is to create a whole new string and assign it to `str` instead of the old one.
-
-For instance:
+Cho nên chỉ có thể gán lại, chứ không thể thay đổi:
 
 ```js run
 let str = 'Hi';
@@ -196,34 +189,33 @@ str = 'h' + str[1];  // replace the string
 alert( str ); // hi
 ```
 
-In the following sections we'll see more examples of this.
 
-## Changing the case
+## Viết hoa, thường
 
-Methods [toLowerCase()](mdn:js/String/toLowerCase) and [toUpperCase()](mdn:js/String/toUpperCase) change the case:
+Methods [toLowerCase()](mdn:js/String/toLowerCase) và [toUpperCase()](mdn:js/String/toUpperCase) thay đổi kiểu hoa, thường của string:
 
 ```js run
 alert( 'Interface'.toUpperCase() ); // INTERFACE
 alert( 'Interface'.toLowerCase() ); // interface
 ```
 
-Or, if we want a single character lowercased:
+hoặc, chỉ thay đổi một ký tự:
 
 ```js
 alert( 'Interface'[0].toLowerCase() ); // 'i'
 ```
 
-## Searching for a substring
+## tìm substring
 
-There are multiple ways to look for a substring within a string.
+Có nhiều cách để tìm một chuỗi con - substring trong một string cho trước.
 
 ### str.indexOf
 
-The first method is [str.indexOf(substr, pos)](mdn:js/String/indexOf).
+Đầu tiên là method [str.indexOf(substr, pos)](mdn:js/String/indexOf).
 
-It looks for the `substr` in `str`, starting from the given position `pos`, and returns the position where the match was found or `-1` if nothing can be found.
+Tìm `substr` trong `str`, bắt đầu từ vị trí `pos`, trả về vị trí chứa subtring hoặc `-1` nếu không tìm thấy.
 
-For instance:
+Ví dụ:
 
 ```js run
 let str = 'Widget with id';
@@ -234,9 +226,9 @@ alert( str.indexOf('widget') ); // -1, not found, the search is case-sensitive
 alert( str.indexOf("id") ); // 1, "id" is found at the position 1 (..idget with id)
 ```
 
-The optional second parameter allows us to search starting from the given position.
+Tham số `pos` là optional, mặc định bằng `0`.
 
-For instance, the first occurrence of `"id"` is at position `1`. To look for the next occurrence, let's start the search from position `2`:
+Ví dụ, vị trí của `"id"` đầu tiên là `1`. tìm tiếp thì ta sử dụng với `pos` là `2`:
 
 ```js run
 let str = 'Widget with id';
@@ -245,8 +237,7 @@ alert( str.indexOf('id', 2) ) // 12
 ```
 
 
-If we're interested in all occurrences, we can run `indexOf` in a loop. Every new call is made with the position after the previous match:
-
+Nếu muốn tìm hết, ta dùng `indexOf` trong vòng lặp.
 
 ```js run
 let str = 'As sly as a fox, as strong as an ox';
@@ -263,7 +254,7 @@ while (true) {
 }
 ```
 
-The same algorithm can be layed out shorter:
+Cách ngắn hơn:
 
 ```js run
 let str = "As sly as a fox, as strong as an ox";
@@ -278,12 +269,12 @@ while ((pos = str.indexOf(target, pos + 1)) != -1) {
 ```
 
 ```smart header="`str.lastIndexOf(pos)`"
-There is also a similar method [str.lastIndexOf(pos)](mdn:js/String/lastIndexOf) that searches from the end of a string to its beginning.
+Có một method tương tự [str.lastIndexOf(pos)](mdn:js/String/lastIndexOf), nó tìm từ cuối đến đầu string.
 
-It would list the occurrences in the reverse order.
+kết quả sẽ đảo ngược.
 ```
 
-There is a slight inconvenience with `indexOf` in the `if` test. We can't put it in the `if` like this:
+Có một sự bất tiện nhỏ với `indexOf` trong `if`. Như thế này:
 
 ```js run
 let str = "Widget with id";
@@ -293,9 +284,9 @@ if (str.indexOf("Widget")) {
 }
 ```
 
-The `alert` in the example above doesn't show because `str.indexOf("Widget")` returns `0` (meaning that it found the match at the starting position). Right, but `if` considers `0` to be `false`.
+Lệnh `alert` sẽ không được chạy vì `str.indexOf("Widget")` trả về `0`. Vì trong `if`, `0` là `false`.
 
-So, we should actually check for `-1`, like this:
+Nên ta kiểm tra với `-1`, như này:
 
 ```js run
 let str = "Widget with id";
@@ -307,12 +298,12 @@ if (str.indexOf("Widget") != -1) {
 }
 ```
 
-````smart header="The bitwise NOT trick"
-One of the old tricks used here is the [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_NOT) `~` operator. It converts the number to a 32-bit integer (removes the decimal part if exists) and then reverses all bits in its binary representation.
+````smart header="Phép nhị phân NOT"
+Sử dụng toán tử [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_NOT) `~`. Nó convert sang số nguyên dạng 32 bit (removes the decimal part if exists) và đảo ngược giá trị các bit.
 
-For 32-bit integers the call `~n` means exactly the same as `-(n+1)` (due to IEEE-754 format).
+Với số nguyên 32-bit, gọi `~n` tương đương `-(n+1)` (do định dạng IEEE-754).
 
-For instance:
+Ví dụ:
 
 ```js run
 alert( ~2 ); // -3, the same as -(2+1)
@@ -323,11 +314,9 @@ alert( ~-1 ); // 0, the same as -(-1+1)
 */!*
 ```
 
-As we can see, `~n` is zero only if `n == -1`.
+Ta thấy, `~n` là bằng `0` khi và chỉ khi `n == -1`.
 
-So, the test `if ( ~str.indexOf("...") )` is truthy that the result of `indexOf` is not `-1`. In other words, when there is a match.
-
-People use it to shorten `indexOf` checks:
+Nên `if ( ~str.indexOf("...") )` là thứ ta cần cho ví dụ trên:
 
 ```js run
 let str = "Widget";
@@ -337,16 +326,16 @@ if (~str.indexOf("Widget")) {
 }
 ```
 
-It is usually not recommended to use language features in a non-obvious way, but this particular trick is widely used in old code, so we should understand it.
+Tuy nhiên, việc viết như thế không được khuyến khích vì nó không rõ ràng
 
 Just remember: `if (~str.indexOf(...))` reads as "if found".
 ````
 
 ### includes, startsWith, endsWith
 
-The more modern method [str.includes(substr, pos)](mdn:js/String/includes) returns `true/false` depending on whether `str` contains `substr` within.
+Những methods này là có trong bản JS mới. Method [str.includes(substr, pos)](mdn:js/String/includes) trả về `true/false` phụ thuộc vào ciệc liệu `str` có bao gồm `substr` hay không.
 
-It's the right choice if we need to test for the match, but don't need its position:
+Nếu không quan tâm đến `pos`:
 
 ```js run
 alert( "Widget with id".includes("Widget") ); // true
@@ -354,28 +343,28 @@ alert( "Widget with id".includes("Widget") ); // true
 alert( "Hello".includes("Bye") ); // false
 ```
 
-The optional second argument of `str.includes` is the position to start searching from:
+`pos` trong `str.includes` thể hiện vị trị bắt đầu tìm kiếm:
 
 ```js run
 alert( "Midget".includes("id") ); // true
 alert( "Midget".includes("id", 3) ); // false, from position 3 there is no "id"
 ```
 
-The methods [str.startsWith](mdn:js/String/startsWith) and [str.endsWith](mdn:js/String/endsWith) do exactly what they say:
+Methods [str.startsWith](mdn:js/String/startsWith) và [str.endsWith](mdn:js/String/endsWith):
 
 ```js run
 alert( "Widget".startsWith("Wid") ); // true, "Widget" starts with "Wid"
 alert( "Widget".endsWith("get") );   // true, "Widget" ends with "get"
 ```
 
-## Getting a substring
+## Lấy một substring
 
-There are 3 methods in JavaScript to get a substring: `substring`, `substr` and `slice`.
+Có 3 methods trong JavaScript để lấy substring: `substring`, `substr` và `slice`.
 
 `str.slice(start [, end])`
-: Returns the part of the string from `start` to (but not including) `end`.
+: Trả về một phần của str từ vị trí `start` đến (không bao gồm) `end`.
 
-    For instance:
+    Ví dụ:
 
     ```js run
     let str = "stringify";
@@ -383,14 +372,14 @@ There are 3 methods in JavaScript to get a substring: `substring`, `substr` and 
     alert( str.slice(0,1) ); // 's', from 0 to 1, but not including 1, so only character at 0
     ```
 
-    If there is no second argument, then `slice` goes till the end of the string:
+    Nếu không có tham số `end` thì `slice` chạy đến cuối string:
 
     ```js run
     let str = "st*!*ringify*/!*";
     alert( str.slice(2) ); // ringify, from the 2nd position till the end
     ```
 
-    Negative values for `start/end` are also possible. They mean the position is counted from the string end:
+    Giá trị ấm cho `start/end` được sử dụng, nó có ý nghĩa sẽ bắt đầu từ cuối tring:
 
     ```js run
     let str = "strin*!*gif*/!*y";
@@ -401,11 +390,11 @@ There are 3 methods in JavaScript to get a substring: `substring`, `substr` and 
 
 
 `str.substring(start [, end])`
-: Returns the part of the string *between* `start` and `end`.
+: trả về một phần của string *giữa* `start` và `end`.
 
-    This is almost the same as `slice`, but it allows `start` to be greater than `end`.
+    Tương tự `slice`, nhưng chấp nhận `start` lớn hơn `end`.
 
-    For instance:
+    Ví dụ:
 
 
     ```js run
@@ -421,20 +410,20 @@ There are 3 methods in JavaScript to get a substring: `substring`, `substr` and 
 
     ```
 
-    Negative arguments are (unlike slice) not supported, they are treated as `0`.
+    Số âm không được chấp nhận (không giống slice) nó sẽ xem như là `0`.
 
 
 `str.substr(start [, length])`
-: Returns the part of the string from `start`, with the given `length`.
+: Trả về một phần của string, bắt đầu từ `start`, với  `length` ký tự.
 
-    In contrast with the previous methods, this one allows us to specify the `length` instead of the ending position:
+    Ngược lại với các method trước, nó dùng `length` thay vì vị trí:
 
     ```js run
     let str = "st*!*ring*/!*ify";
     alert( str.substr(2, 4) ); // ring, from the 2nd position get 4 characters
     ```
 
-    The first argument may be negative, to count from the end:
+    `start` có thể là số âm, nghĩa là đếm từ cuối string:
 
     ```js run
     let str = "strin*!*gi*/!*fy";
@@ -450,38 +439,36 @@ Let's recap these methods to avoid any confusion:
 | `substr(start, length)` | from `start` get `length` characters | allows negative `start` |
 
 
-```smart header="Which one to choose?"
-All of them can do the job. Formally, `substr` has a minor drawback: it is described not in the core JavaScript specification, but in Annex B, which covers browser-only features that exist mainly for historical reasons. So, non-browser environments may fail to support it. But in practice it works everywhere.
-
-The author finds himself using `slice` almost all the time.
+```smart header="Nên dùng thằng nào?"
+Dùng tất, nhưng thường thì sử dụng `slice` cho hầu hết các trường hợp.
 ```
 
-## Comparing strings
+## So sánh strings
 
-As we know from the chapter <info:comparison>, strings are compared character-by-character in alphabetical order.
+Đã học trong chương <info:comparison>, strings được so sánh từng ký tự theo thứ tự trong bãng chữ cái.
 
-Although, there are some oddities.
+Mặc dù, có một số sự kỳ quặc.
 
-1. A lowercase letter is always greater than the uppercase:
+1. Chữ viết thường luôn lớn hơn chữ viết hoa:
 
     ```js run
     alert( 'a' > 'Z' ); // true
     ```
 
-2. Letters with diacritical marks are "out of order":
+2. Chữ cái với dấu âm không sử dụng được:
 
     ```js run
     alert( 'Österreich' > 'Zealand' ); // true
     ```
 
-    This may lead to strange results if we sort these country names. Usually people would expect `Zealand` to come after `Österreich` in the list.
+    Đây là một kết quả kỳ lạ khi sắp xếp tên các quốc gia. Thường thì người ta mong muốn `Zealand` nằm ở sau `Österreich` trong danh sách.
 
-To understand what happens, let's review the internal representation of strings in JavaScript.
+Để hiểu những gì xảy ra ta xem lại các biểu diễn string trong JavaScript.
 
-All strings are encoded using [UTF-16](https://en.wikipedia.org/wiki/UTF-16). That is: each character has a corresponding numeric code. There are special methods that allow to get the character for the code and back.
+String được mã hóa theo định dạng [UTF-16](https://en.wikipedia.org/wiki/UTF-16). Đó là: Mỗi ký tự sẽ có một mã số. Có một method đặc biệt để lấy được mã số này.
 
 `str.codePointAt(pos)`
-: Returns the code for the character at position `pos`:
+: Trả về mã ký tự ở vị trí `pos`:
 
     ```js run
     // different case letters have different codes
@@ -490,20 +477,20 @@ All strings are encoded using [UTF-16](https://en.wikipedia.org/wiki/UTF-16). Th
     ```
 
 `String.fromCodePoint(code)`
-: Creates a character by its numeric `code`
+: Tạo ra một ký tự với mã số là `code`
 
     ```js run
     alert( String.fromCodePoint(90) ); // Z
     ```
 
-    We can also add unicode characters by their codes using `\u` followed by the hex code:
+    Ta cũng có thể sử dụng mã Unicode với `\u` và hex code:
 
     ```js run
     // 90 is 5a in hexadecimal system
     alert( '\u005a' ); // Z
     ```
 
-Now let's see the characters with codes `65..220` (the latin alphabet and a little bit extra) by making a string of them:
+Giờ ta xem các ký tự với mã từ `65..220` :
 
 ```js run
 let str = '';
@@ -516,46 +503,46 @@ alert( str );
 // ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜ
 ```
 
-See? Capital characters go first, then a few special ones, then lowercase characters.
+Thấy không, chữ hoa trước, rồi đến một vài ký tự đặc biệt, rồi đến chữ thường.
 
-Now it becomes obvious why `a > Z`.
+Giờ ta rõ ràng tại sao `a > Z`.
 
-The characters are compared by their numeric code. The greater code means that the character is greater. The code for `a` (97) is greater than the code for `Z` (90).
+Ký tự được so sánh bởi mã của nó. Mã lớn hơn thì lớn hơn,  `a` (97) lớn hơn `Z` (90).
 
-- All lowercase letters go after uppercase letters because their codes are greater.
-- Some letters like `Ö` stand apart from the main alphabet. Here, it's code is greater than anything from `a` to `z`.
+- Chữ thường lớn hơn chữ hoa.
+- Các chữ cái `Ö` là một phần của bãng chữ cái, và nó có mã lớn hơn cả `a` đến `z`.
 
 
-### Correct comparisons
+### Sự so sánh đúng
 
-The "right" algorithm to do string comparisons is more complex than it may seem, because alphabets are different for different languages. The same-looking letter may be located differently in different alphabets.
+Thuật toán đúng để so sánh String là phức tạp hơn rất nhiều so với những gì chúng ta thấy. Vì bãng chữ cái sẽ khác nhau với các ngôn ngữ khác nhau. Một chữ cái có thể có mã code khác nhau tùy thuộc ngôn ngữ.
 
-So, the browser needs to know the language to compare.
+Nên, trình duyệt cần biết là ngôn ngữ nào được sử dụng để so sánh.
 
-Luckily, all modern browsers (IE10- requires the additional library [Intl.JS](https://github.com/andyearnshaw/Intl.js/)) support the internationalization standard [ECMA 402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf).
+May mắn thay, các trình duyệt ngày nay (IE10- cần [Intl.JS](https://github.com/andyearnshaw/Intl.js/)) hỗ trợ chuẩn quốc tế [ECMA 402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf).
 
-It provides a special method to compare strings in different languages, following their rules.
+Nó cung cấp một method đặc biệt để so sánh trong tất cả các ngôn ngữ.
 
-The call [str.localeCompare(str2)](mdn:js/String/localeCompare):
+Gọi là [str.localeCompare(str2)](mdn:js/String/localeCompare):
 
-- Returns `1` if `str` is greater than `str2` according to the language rules.
-- Returns `-1` if `str` is less than `str2`.
-- Returns `0` if they are equal.
+- Trả về `1` nếu `str` lớn hơn `str2` theo quy tắc ngôn ngữ đó.
+- Trả về  `-1` nếu `str` nhở hơn `str2`.
+- Trả về  `0` nếu bằng.
 
-For instance:
+Ví dụ:
 
 ```js run
 alert( 'Österreich'.localeCompare('Zealand') ); // -1
 ```
 
-This method actually has two additional arguments specified in [the documentation](mdn:js/String/localeCompare), which allow it to specify the language (by default taken from the environment) and setup additional rules like case sensivity or should `"a"` and `"á"` be treated as the same etc.
+Method này có hai tham số được định nghĩa trong [the documentation](mdn:js/String/localeCompare), cho phép đặc tả ngôn ngữ (mặc định được lấy từ môi trường) và tạo ra các quy tắc, ví dụ `"a"` và `"á"` là như nhau...
 
 ## Internals, Unicode
 
-```warn header="Advanced knowledge"
-The section goes deeper into string internals. This knowledge will be useful for you if you plan to deal with emoji, rare mathematical of hieroglyphs characters or other rare symbols.
+```warn header="Kiến thức nâng cao"
+Phần này sẽ hữu ích nếu bạn sử dụng emoji, ký hiệu toán học, chữ tượng hình hoặc các ký tự đặc biệt.
 
-You can skip the section if you don't plan to support them.
+Có thể bõ qua nếu bạn không cần chúng.
 ```
 
 ### Surrogate pairs
@@ -656,21 +643,21 @@ In reality, this is not always the case. The reason being that the symbol `Ṩ
 If you want to learn more about normalization rules and variants -- they are described in the appendix of the Unicode standard: [Unicode Normalization Forms](http://www.unicode.org/reports/tr15/), but for most practical purposes the information from this section is enough.
 
 
-## Summary
+## Tổng kết
 
-- There are 3 types of quotes. Backticks allow a string to span multiple lines and embed expressions.
-- Strings in JavaScript are encoded using UTF-16.
-- We can use special characters like `\n` and insert letters by their unicode using `\u...`.
-- To get a character, use: `[]`.
-- To get a substring, use: `slice` or `substring`.
-- To lowercase/uppercase a string, use: `toLowerCase/toUpperCase`.
-- To look for a substring, use: `indexOf`, or `includes/startsWith/endsWith` for simple checks.
-- To compare strings according to the language, use: `localeCompare`, otherwise they are compared by character codes.
+- Có 3 kiểu quotes. Backticks chấp nhận viết string nhiều hàng và nhúng biến, biểu thức.
+- Strings trong JavaScript được mã hóa theo bãng mã UTF-16.
+- Sử dụng các ký tự đặc biệt như `\n` và chèn chữ bởi mã Univode với `\u...`.
+- Lấy ký tự sử dụng: `[]`.
+- Lấy substring dùng: `slice` hoặc `substring`.
+- Viết hoa/thường dùng: `toLowerCase/toUpperCase`.
+- Tìm substring dùng: `indexOf`, or `includes/startsWith/endsWith` for simple checks.
+- So sánh string dùng: `localeCompare`.
 
-There are several other helpful methods in strings:
+Một số methods hữu ích với strings:
 
-- `str.trim()` -- removes ("trims") spaces from the beginning and end of the string.
-- `str.repeat(n)` -- repeats the string `n` times.
-- ...and more. See the [manual](mdn:js/String) for details.
+- `str.trim()` -- bõ ("trims") các dấu space ở đầu và cuối string.
+- `str.repeat(n)` -- repeats string `n` lần.
+- ...Và nhiều hơn, xem tại [manual](mdn:js/String).
 
-Strings also have methods for doing search/replace with regular expressions. But that topic deserves a separate chapter, so we'll return to that later.
+Strings cũng có methods để search/replace với biểu thức chính quy - regular expressions. Nhưng ta sẽ học trong chương khác.
