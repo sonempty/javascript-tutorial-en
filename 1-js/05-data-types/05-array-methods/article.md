@@ -380,9 +380,9 @@ Bây giờ nó hoạt động như mong muốn.
 
 Let's step aside and think what's happening. The `arr` can be array of anything, right? It may contain numbers or strings or html elements or whatever. We have a set of *something*. To sort it, we need an *ordering function* that knows how to compare its elements. The default is a string order.
 
-The `arr.sort(fn)` method has a built-in implementation of sorting algorithm. We don't need to care how it exactly works (an optimized [quicksort](https://en.wikipedia.org/wiki/Quicksort) most of the time). It will walk the array, compare its elements using the provided function and reorder them, all we need is to provide the `fn` which does the comparison.
+Method `arr.sort(fn)` tự thực hiện các thuật toán phân loại. Ta không cần quan tâm nó hoạt động bằng cách nào (Một cách sắp xếp tối ưu [quicksort](https://en.wikipedia.org/wiki/Quicksort) hầu hết thời gian). Nó sẽ lướt qua array, thực hiện các phép so sánh theo hàm `fn` mà ta cung cấp để thực hiện các phép so sánh.
 
-By the way, if we ever want to know which elements are compared -- nothing prevents from alerting them:
+Nhân tiện, nếu chúng ta muốn biết những element nào được so sánh -- không có gì xuất hiện khi alert chúng:
 
 ```js run
 [1, -2, 15, 2, 0, 8].sort(function(a, b) {
@@ -390,13 +390,13 @@ By the way, if we ever want to know which elements are compared -- nothing preve
 });
 ```
 
-The algorithm may compare an element multiple times in the process, but it tries to make as few comparisons as possible.
+Thuật toán có thể so sánh một phần tử nhiều lần trong tiến trình (process), nhưng nó sẽ cố gắng thực hiện càng ít phép so sánh nhất có thể.
 
 
-````smart header="A comparison function may return any number"
-Actually, a comparison function is only required to return a positive number to say "greater" and a negative number to say "less".
+````smart header="Hàm so sánh có thể trả về bất cứ số nào"
+Thật sự, hàm so sánh chỉ cần trả về số dương để ngụ rằng "lớn hơn" số âm "nhỏ hơn".
 
-That allows to write shorter functions:
+Có thể viết ngắn hơn như sau:
 
 ```js run
 let arr = [ 1, 2, 15 ];
@@ -407,21 +407,21 @@ alert(arr);  // *!*1, 2, 15*/!*
 ```
 ````
 
-````smart header="Arrow functions for the best"
-Remember [arrow functions](info:function-expression#arrow-functions)? We can use them here for neater sorting:
+````smart header="Arrow functions là tốt nhất"
+Có nhớ [arrow functions](info:function-expression#arrow-functions)? Ta có thể sử dụng để làm hàm so sánh:
 
 ```js
 arr.sort( (a, b) => a - b );
 ```
 
-This works exactly the same as the other, longer, version above.
+Nó hoạt động như các cách khác.
 ````
 
-### reverse
+### Đảo ngược - reverse
 
-The method [arr.reverse](mdn:js/Array/reverse) reverses the order of elements in `arr`.
+Method [arr.reverse](mdn:js/Array/reverse) đảo ngược thứ tự trong mảng `arr`.
 
-For instance:
+Ví dụ:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -430,15 +430,13 @@ arr.reverse();
 alert( arr ); // 5,4,3,2,1
 ```
 
-It also returns the array `arr` after the reversal.
+Nó trả về `arr` sau khi đã đảo thứ tự.
 
-### split and join
+### split và join
 
-Here's the situation from the real life. We are writing a messaging app, and the person enters the comma-delimited list of receivers: `John, Pete, Mary`. But for us an array of names would be much more comfortable than a single string. How to get it?
+method [str.split(delim)](mdn:js/String/split) phân tách các string vào một array bởi sự phân cách `delim`.
 
-The [str.split(delim)](mdn:js/String/split) method does exactly that. It splits the string into an array by the given delimiter `delim`.
-
-In the example below, we split by a comma followed by space:
+Trong ví dụ dưới ta tách string bởi 1 dấu phẩy và 1 dấu space:
 
 ```js run
 let names = 'Bilbo, Gandalf, Nazgul';
@@ -450,7 +448,7 @@ for (let name of arr) {
 }
 ```
 
-The `split` method has an optional second numeric argument -- a limit on the array length. If it is provided, then the extra elements are ignored. In practice it is rarely used though:
+`split` method có một tham số tùy chọn là một number -- giới hạn của array length. Nếu được truyền vào, sẽ bõ qua các element khi array đã đủ số element:
 
 ```js run
 let arr = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2);
@@ -458,8 +456,8 @@ let arr = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2);
 alert(arr); // Bilbo, Gandalf
 ```
 
-````smart header="Split into letters"
-The call to `split(s)` with an empty `s` would split the string into an array of letters:
+````smart header="Split thành các chữ cái"
+Gọi `split('')` sẽ tách từng chữ vào trong array:
 
 ```js run
 let str = "test";
@@ -468,9 +466,9 @@ alert( str.split('') ); // t,e,s,t
 ```
 ````
 
-The call [arr.join(str)](mdn:js/Array/join) does the reverse to `split`. It creates a string of `arr` items glued by `str` between them.
+Method [arr.join(str)](mdn:js/Array/join) ngược lại với `split`. Nó tạo ra string từ các `arr` items với dấu phân cách là `str`.
 
-For instance:
+Ví dụ:
 
 ```js run
 let arr = ['Bilbo', 'Gandalf', 'Nazgul'];
@@ -482,13 +480,13 @@ alert( str ); // Bilbo;Gandalf;Nazgul
 
 ### reduce/reduceRight
 
-When we need to iterate over an array -- we can use `forEach`.
+Khi ta lặp (iterate) qua một array -- ta có thể dùng `forEach`.
 
-When we need to iterate and return the data for each element -- we can use `map`.
+Khi ta muốn lặp và trả về data theo mỗi element -- ta dùng `map`.
 
-The methods [arr.reduce](mdn:js/Array/reduce) and [arr.reduceRight](mdn:js/Array/reduceRight) also belong to that breed, but are a little bit more intricate. They are used to calculate a single value based on the array.
+Methods [arr.reduce](mdn:js/Array/reduce) và [arr.reduceRight](mdn:js/Array/reduceRight) cũng tương tự như thế, nhưng là một chút phức tạp hơn. Chúng được sử dụng để tính toán một giá trị đơn dựa trên mảng.
 
-The syntax is:
+Cú pháp:
 
 ```js
 let value = arr.reduce(function(previousValue, item, index, arr) {
@@ -496,19 +494,19 @@ let value = arr.reduce(function(previousValue, item, index, arr) {
 }, initial);
 ```
 
-The function is applied to the elements. You may notice the familiar arguments, starting from the 2nd:
+Hàm được áp dụng cho các elements. Bạn nên chú ý, tham số hay dùng bắt đầu từ vị trí thứ 2:
 
-- `item` -- is the current array item.
-- `index` -- is its position.
-- `arr` -- is the array.
+- `item` -- array item.
+- `index` -- index của item.
+- `arr` -- chính là array.
 
-So far, like `forEach/map`. But there's one more argument:
+Vẫn tương tự `forEach/map`. nhưng có thêm tham số:
 
-- `previousValue` -- is the result of the previous function call, `initial` for the first call.
+- `previousValue` -- là kết quả của function call trước đó, `initial` khởi tạo cho lần function call đầu tiên.
 
-The easiest way to grasp that is by example.
+Cách dễ nhất để nắm bắt đó là bằng ví dụ.
 
-Here we get a sum of array in one line:
+Ở đây ta tính tổng của một mảng:
 
 ```js run
 let arr = [1, 2, 3, 4, 5]
@@ -518,19 +516,19 @@ let result = arr.reduce((sum, current) => sum + current, 0);
 alert(result); // 15
 ```
 
-Here we used the most common variant of `reduce` which uses only 2 arguments.
+Ở đây chúng tôi đã sử dụng biến thể phổ biến nhất của `reduce` với chỉ hai tham số.
 
-Let's see the details of what's going on.
+Chúng ta xem chuyện gì xảy ra.
 
-1. On the first run, `sum` is the initial value (the last argument of `reduce`), equals `0`, and `current` is the first array element, equals `1`. So the result is `1`.
-2. On the second run, `sum = 1`, we add the second array element (`2`) to it and return.
-3. On the 3rd run, `sum = 3` and we add one more element ot it, and so on...
+1. Lần đầu chạy, `sum` là có giá trị khởi tạo - initial (tham số cuối cùng trong `reduce`), bằng `0`, và `current` là element đầu tiên của arr, bằng `1`. Nên kết quả là `1`, gán cho `sum`
+2. Lần thứ hai chạy, `sum = 1`, Ta cộng với element thứ hai là `2` , kết quả là `3`, gán cho `sum`
+3. Lần thứ ba chạy, `sum = 3` ...
 
-The calculation flow:
+Sơ đồ:
 
 ![](reduce.png)
 
-Or in the form of a table, where each row represents is a function call on the next array element:
+Hoặc xem bảng:
 
 |   |`sum`|`current`|`result`|
 |---|-----|---------|---------|
@@ -541,9 +539,9 @@ Or in the form of a table, where each row represents is a function call on the n
 |the fifth call|`10`|`5`|`15`|
 
 
-As we can see, the result of the previous call becomes the first argument of the next one.
+Ta có thể thấy kết quả của lần gọi trước là tham số của lần gọi tiếp theo.
 
-We also can omit the initial value:
+Ta có thể bõ qua giá trị khởi tạo:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -554,7 +552,7 @@ let result = arr.reduce((sum, current) => sum + current);
 alert( result ); // 15
 ```
 
-The result is the same. That's because if there's no initial, then `reduce` takes the first element of the array as the initial value and starts the iteration from the 2nd element.
+Kết quả vẫn thế. Bởi vì nếu không có giá trị khởi tạo, thì `reduce` lấy giá trị element đầu tiên làm giá trị khởi tạo, và lặp tiếp từ element thứ hai.
 
 The calculation table is the same as above, minus the first row.
 
