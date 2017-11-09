@@ -1,25 +1,25 @@
 # Array methods
 
-Arrays provide a lot of methods. To make things easier, in this chapter they are split into groups.
+Arrays cung cấp nhiều methods giúp ta làm việc dễ hơn, trong chương này ta sẽ phân nhóm chúng.
 
 [cut]
 
 ## Add/remove items
 
-We already know methods that add and remove items from the beginning or the end:
+Ta đã biết các methods làm việc với đầu và cuối Array:
 
 - `arr.push(...items)` -- adds items to the end,
 - `arr.pop()` -- extracts an item from the end,
 - `arr.shift()` -- extracts an item from the beginning,
 - `arr.unshift(...items)` -- adds items to the beginning.
 
-Here are few others.
+Đây là một số methods khác.
 
 ### splice
 
-How to delete an element from the array?
+Làm sao để xóa một element từ array?
 
-The arrays are objects, so we can try to use `delete`:
+Array là một objects, nên ta có thể dùng `delete`:
 
 ```js run
 let arr = ["I", "go", "home"];
@@ -32,25 +32,21 @@ alert( arr[1] ); // undefined
 alert( arr.length ); // 3
 ```
 
-The element was removed, but the array still has 3 elements, we can see that `arr.length == 3`.
+Element bị xóa nhưng array vẫn có 3 elements, ta có thể thấy `arr.length == 3`.
 
-That's natural, because `delete obj.key` removes a value by the `key`. It's all it does. Fine for objects. But for arrays we usually want the rest of elements to shift and occupy the freed place. We expect to have a shorter array now.
+Đó là tự nhiên, bởi vì `delete obj.key` xóa value theo `key`. Nhưng với array ta muốn xóa element một cách thực sự.
 
-So, special methods should be used.
+Method [arr.splice(str)](mdn:js/Array/splice) cho phép ta add/remove/insert các element vào array.
 
-The [arr.splice(str)](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: add, remove and insert elements.
-
-The syntax is:
+Cú pháp:
 
 ```js
 arr.splice(index[, deleteCount, elem1, ..., elemN])
 ```
 
-It starts from the position `index`: removes `deleteCount` elements and then inserts `elem1, ..., elemN` at their place. Returns the array of removed elements.
+Bắt đầu tự vị trí `index`: removes `deleteCount` elements và sau đó inserts `elem1, ..., elemN` vào đó. Trả về một array bị remove.
 
-This method is easy to grasp by examples.
-
-Let's start with the deletion:
+Xem các ví dụ:
 
 ```js run
 let arr = ["I", "study", "JavaScript"];
@@ -62,9 +58,9 @@ arr.splice(1, 1); // from index 1 remove 1 element
 alert( arr ); // ["I", "JavaScript"]
 ```
 
-Easy, right? Starting from the index `1` it removed `1` element.
+Dễ phải ko, bắt đầu từ vị trí index `1` xóa đi `1` element.
 
-In the next example we remove 3 elements and replace them by the other two:
+Ví dụ tiếp:
 
 ```js run
 let arr = [*!*"I", "study", "JavaScript",*/!* "right", "now"];
@@ -75,7 +71,7 @@ arr.splice(0, 3, "Let's", "dance")
 alert( arr ) // now [*!*"Let's", "dance"*/!*, "right", "now"]
 ```
 
-Here we can see that `splice` returns the array of removed elements:
+Ở đây ta thấy `splice` trả về một array gồm các element bị xóa:
 
 ```js run
 let arr = [*!*"I", "study",*/!* "JavaScript", "right", "now"];
@@ -86,7 +82,7 @@ let removed = arr.splice(0, 2);
 alert( removed ); // "I", "study" <-- array of removed elements
 ```
 
-The `splice` method is also able to insert the elements without any removals. For that we need to set `deleteCount` to `0`:
+`splice` method có thể dùng để insert element. Ta set `deleteCount` bằng `0`:
 
 ```js run
 let arr = ["I", "study", "JavaScript"];
@@ -99,8 +95,8 @@ arr.splice(2, 0, "complex", "language");
 alert( arr ); // "I", "study", "complex", "language", "JavaScript"
 ```
 
-````smart header="Negative indexes allowed"
-Here and in other array methods, negative indexes are allowed. They specify the position from the end of the array, like here:
+````smart header="Index âm được chấp nhận"
+Đây là một array methods khác, index âm được chấp nhận. Chúng xác định vị trí bắt đầu từ cuối array:
 
 ```js run
 let arr = [1, 2, 5]
@@ -116,19 +112,19 @@ alert( arr ); // 1,2,3,4,5
 
 ### slice
 
-The method [arr.slice](mdn:js/Array/slice) is much simpler than similar-looking `arr.splice`.
+Method [arr.slice](mdn:js/Array/slice) đơn giản hơn `arr.splice`.
 
-The syntax is:
+Cú pháp:
 
 ```js
 arr.slice(start, end)
 ```
 
-It returns a new array where it copies all items start index `"start"` to `"end"` (not including `"end"`). Both `start` and `end` can be negative, in that case position from array end is assumed.
+Trả về một array chứa các element từ index `"start"` đến `"end"` (không bao gồm `"end"`). Cả `start` và `end` có thể âm, trường hợp này sẽ tính từ cuối array.
 
-It works like `str.slice`, but makes subarrays instead of substrings.
+Nó giống `str.slice`, nhưng trả về subarrays thay vì substrings.
 
-For instance:
+Ví dụ:
 
 ```js run
 let str = "test";
@@ -143,21 +139,21 @@ alert( arr.slice(-2) ); // s,t
 
 ### concat
 
-The method [arr.concat](mdn:js/Array/concat) joins the array with other arrays and/or items.
+Method [arr.concat](mdn:js/Array/concat) kết hợp các array với nhau thành một.
 
-The syntax is:
+Cú pháp:
 
 ```js
 arr.concat(arg1, arg2...)
 ```
 
-It accepts any number of arguments -- either arrays or values.
+Có thể chứa nhiều tham số arg - với bất kỳ giá trị nào.
 
-The result is a new array containing items from `arr`, then `arg1`, `arg2` etc.
+Kết quả là một array mới bao gồm `arr`, tiếp theo là `arg1`, `arg2` ...
 
-If an argument is an array or has `Symbol.isConcatSpreadable` property, then all its elements are copied. Otherwise the argument itself is copied.
+Nếu `arg` là một array hoặc có `Symbol.isConcatSpreadable` property, thì tất cả element của nó sẽ được copy. Ngược lại sẽ copy chính `arg` đó.
 
-For instance:
+Ví dụ:
 
 ```js run
 let arr = [1, 2];
@@ -172,7 +168,7 @@ alert( arr.concat([3, 4], [5, 6])); // 1,2,3,4,5,6
 alert( arr.concat([3, 4], 5, 6)); // 1,2,3,4,5,6
 ```
 
-Normally, it only copies elements from arrays ("spreads" them), other objects even if they look like arrays and added as a whole:
+Thông thường chỉ copy array, các object khác cho dù giống aray cũng được copy nguyên object thành một element:
 
 ```js run
 let arr = [1, 2];
@@ -186,7 +182,7 @@ alert( arr.concat(arrayLike) ); // 1,2,[object Object]
 //[1, 2, arrayLike]
 ```
 
-...But if an array-like object has `Symbol.isConcatSpreadable` property, then its elements are added instead:
+...nhưng nếu array-like object có `Symbol.isConcatSpreadable` property, thì các element của nó sẽ được copy:
 
 ```js run
 let arr = [1, 2];
@@ -203,19 +199,19 @@ let arrayLike = {
 alert( arr.concat(arrayLike) ); // 1,2,something,else
 ```
 
-## Searching in array
+## Tìm kiếm trong array
 
-These are methods to search for something in an array.
+Dưới là các method tìm kiếm trong array.
 
-### indexOf/lastIndexOf and includes
+### indexOf/lastIndexOf và includes
 
-The methods [arr.indexOf](mdn:js/Array/indexOf), [arr.lastIndexOf](mdn:js/Array/lastIndexOf) and [arr.includes](mdn:js/Array/includes) have the same syntax and do essentially the same as their string counterparts, but operate on items instead of characters:
+Methods [arr.indexOf](mdn:js/Array/indexOf), [arr.lastIndexOf](mdn:js/Array/lastIndexOf) và [arr.includes](mdn:js/Array/includes) có cú pháp và bản chất và cách hoạt động tương tự nhau:
 
-- `arr.indexOf(item, from)` looks for `item` starting from index `from`, and returns the index where it was found, otheriwse `-1`.
-- `arr.lastIndexOf(item, from)` -- same, but looks from right to left.
-- `arr.includes(item, from)` -- looks for `item` starting from index `from`, returns `true` if found.
+- `arr.indexOf(item, from)` tìm `item` từ vị trí index `from`, trả về vị trí được tìm thấy, ngược lại trả về `-1`.
+- `arr.lastIndexOf(item, from)` -- tương tự, nhưng tìm từ phải qua trái.
+- `arr.includes(item, from)` -- tìm `item` từ vị trí `from`, trả về `true` nếu tìm thấy.
 
-For instance:
+Ví dụ:
 
 ```js run
 let arr = [1, 0, false];
@@ -227,33 +223,33 @@ alert( arr.indexOf(null) ); // -1
 alert( arr.includes(1) ); // true
 ```
 
-Note that the methods use `===` comparison. So, if we look for `false`, it finds exactly `false` and not the zero.
+Những methods này sử dụng phép so sánh `===`. Cho nên nếu ta tìm kiếm `false`, nó sẽ tìm chính xác `false` chứ không phải zero.
 
-If we want to check for inclusion, and don't want to know the exact index, then `arr.includes` is preferred.
+Nếu chỉ muốn tìm có hay không, và không cần biết index, nên dùng `arr.includes(item)`
 
 
-### find and findIndex
+### find và findIndex
 
-Imagine we have an array of objects. How do we find an object with the specific condition?
+Tưởng tượng ta có một array chứa các objects. Làm sao tìm được object thỏa mãn một điều kiện nào đó?
 
-Here the [arr.find](mdn:js/Array/find) method comes in handy.
+Ta sử dụng method [arr.find](mdn:js/Array/find).
 
-The syntax is:
+Cú pháp:
 ```js
 let result = arr.find(function(item, index, array) {
   // should return true if the item is what we are looking for
 });
 ```
 
-The function is called repetitively for each element of the array:
+function sẽ được gọi lặp đi lặp lại cho mỗi element của array:
 
-- `item` is the element.
-- `index` is its index.
-- `array` is the array itself.
+- `item` là element.
+- `index` là index của element trên.
+- `array` là chính array đó.
 
-If it returns `true`, the search is stopped, the `item` is returned. If nothing found, `undefined` is returned.
+Nếu nó trả về `true`, việc tìm kiếm kết thúc, `item` tìm thấy được trả về. Nếu không tìm thấy thì trả về `undefined`.
 
-For example, we have an array of users, each with the fields `id` and `name`. Let's find the one with `id == 1`:
+Ví dụ, tìm object trong array có `id == 1`:
 
 ```js run
 let users = [
@@ -267,19 +263,19 @@ let user = users.find(item => item.id == 1);
 alert(user.name); // John
 ```
 
-In real life arrays of objects is a common thing, so the `find` method is very useful.
+Trong thực tế, một array chứa các object rất hay được sử dụng, vì lẽ đó method `find` là rất hữu ích.
 
-Note that in the example we provide to `find` a single-argument function `item => item.id == 1`. Other parameters of `find` are rarely used.
+Chú ý rằng với ví dụ trên, `find` chỉ có một tham số `item => item.id == 1`. Các tham số khác của hàm `find` hiếm khi được sử dụng.
 
-The [arr.findIndex](mdn:js/Array/findIndex) method is essentially the same, but it returns the index where the element was found instead of the element itself.
+Method [arr.findIndex](mdn:js/Array/findIndex) là tương tự nhưng nó trả về vị trí index thay vì trả về element.
 
 ### filter
 
-The `find` method looks for a single (first) element that makes the function return `true`.
+`find` method tìm một item đơn (đầu tiên) làm cho function trả về `true`.
 
-If there may be many, we can use [arr.filter(fn)](mdn:js/Array/filter).
+Nếu như tìm nhiều element thỏa mãn điều kiện, ta dùng [arr.filter(fn)](mdn:js/Array/filter).
 
-The syntax is roughly the same as `find`, but it returns an array of matching elements:
+Cú pháp tương tự `find`, nhưng nó trả về một array chứa các item thỏa mãn điều điệu:
 
 ```js
 let results = arr.filter(function(item, index, array) {
@@ -302,16 +298,16 @@ let someUsers = users.filter(item => item.id < 3);
 alert(someUsers.length); // 2
 ```
 
-## Transform an array
+## Biến đổi một array
 
-This section is about the methods transforming or reordering the array.
+Phần này ta tìm hiểu các methods biến đổi hoặc sắp xếp lại một array.
 
 
 ### map
 
-The [arr.map](mdn:js/Array/map) method is one of the most useful and often used.
+[arr.map](mdn:js/Array/map) method thường rất hay được sử dụng.
 
-The syntax is:
+Cú pháp:
 
 ```js
 let result = arr.map(function(item, index, array) {
@@ -319,9 +315,9 @@ let result = arr.map(function(item, index, array) {
 })
 ```
 
-It calls the function for each element of the array and returns the array of results.
+Gọi hàm với mỗi element của array, trả về một array chứa kết quả.
 
-For instance, here we transform each element into its length:
+Ví dụ:
 
 ```js run
 let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length)
@@ -330,9 +326,9 @@ alert(lengths); // 5,7,6
 
 ### sort(fn)
 
-The method [arr.sort](mdn:js/Array/sort) sorts the array *in place*.
+Method [arr.sort](mdn:js/Array/sort) sắp xếp lại array *trong vị trí*.
 
-For instance:
+Ví dụ:
 
 ```js run
 let arr = [ 1, 2, 15 ];
@@ -343,17 +339,17 @@ arr.sort();
 alert( arr );  // *!*1, 15, 2*/!*
 ```
 
-Did you notice anything strange in the outcome?
+Có thấy kỳ lạ không?
 
-The order became `1, 15, 2`. Incorrect. But why?
+Sắp xếp thành `1, 15, 2`. Sai, nhưng tại sao?
 
-**The items are sorted as strings by default.**
+**Item được sắp xếp theo String ở mặc định.**
 
-Literally, all elements are converted to strings and then compared. So, the lexicographic ordering is applied and indeed `"2" > "15"`.
+Theo nghĩa đen, tất cả item sẽ được convert sang string, sau đó so sánh. Vì vậy `"2" > "15"`.
 
-To use our own sorting order, we need to supply a function of two arguments as the argument of `arr.sort()`.
+Để sắp xếp như mong muốn, ta cần tạo ra một hàm với hai tham số, và truyền hàm đó cho `arr.sort()`.
 
-The function should work like this:
+Như thế này:
 ```js
 function compare(a, b) {
   if (a > b) return 1;
@@ -362,7 +358,7 @@ function compare(a, b) {
 }
 ```
 
-For instance:
+Ví dụ:
 
 ```js run
 function compareNumeric(a, b) {
@@ -380,7 +376,7 @@ arr.sort(compareNumeric);
 alert(arr);  // *!*1, 2, 15*/!*
 ```
 
-Now it works as intended.
+Bây giờ nó hoạt động như mong muốn.
 
 Let's step aside and think what's happening. The `arr` can be array of anything, right? It may contain numbers or strings or html elements or whatever. We have a set of *something*. To sort it, we need an *ordering function* that knows how to compare its elements. The default is a string order.
 
