@@ -1,33 +1,33 @@
 # Arrays 
 
-Objects allow to store keyed collections of values. That's fine.
+Objects cho phép lưu trữ các bộ key-value.
 
-But quite often we find that we need an *ordered collection*, where we have a 1st, a 2nd, a 3rd element and so on. For example, we need that to store a list of something: users, goods, HTML elements etc. 
+Nhưng ta cần một * bộ có thứ tự - ordered collection*, với giá trị 1st, 2nd, 3rd ... Ví dụ ta cần lưu một bộ giá trị: users, goods, HTML elements ... 
 
-It is not convenient to use an object here, because it provides no methods to manage the order of elements. We can’t insert a new property “between” the existing ones. Objects are just not meant for such use.
+Sẽ không thích hợp khi sử dụng object ở đây, Bởi vì nó không sắp xếp được các giá trị của nó. Ta không thể chèn vào một property mới “ở giữa” các property đã có.
 
-There exists a special data structure named `Array`, to store ordered collections. 
+Có một cấu trúc dữ liệu được gọi là mãng `Array`, để lưu trữ các bộ có thứ tự. 
 
 [cut]
 
-## Declaration
+## Khai báo
 
-There are two syntaxes for creating an empty array:
+Có hai cách tạo ra một Array rỗng:
 
 ```js
 let arr = new Array();
 let arr = [];
 ```
 
-Almost all the time, the second syntax is used. We can supply initial elements in the brackets:
+Cách thứ hai hay được sử dụng, ta có thể khởi tạo luôn các Array element:
 
 ```js
 let fruits = ["Apple", "Orange", "Plum"];
 ```
 
-Array elements are numbered, starting with zero.
+Array elements được đánh số thứ tự, bắt đầu từ 0.
 
-We can get an element by its number in square brackets:
+Ta truy xuất các element thông qua số thứ tự của nó trong dấu ngoặc vuông:
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -37,19 +37,19 @@ alert( fruits[1] ); // Orange
 alert( fruits[2] ); // Plum
 ```
 
-We can replace an element:
+Gán lại giá trị cho element:
 
 ```js
 fruits[2] = 'Pear'; // now ["Apple", "Orange", "Pear"]
 ```
 
-...Or add a new one to the array:
+...hoặc add thêm element cho array:
 
 ```js
 fruits[3] = 'Lemon'; // now ["Apple", "Orange", "Pear", "Lemon"]
 ```
 
-The total count of the elements in the array is its `length`:
+Tổng số element trong array là độ dài `length` của array:
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -57,7 +57,7 @@ let fruits = ["Apple", "Orange", "Plum"];
 alert( fruits.length ); // 3
 ```
 
-We can also use `alert` to show the whole array.
+Ta có thể `alert` toàn bộ array.
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -65,9 +65,9 @@ let fruits = ["Apple", "Orange", "Plum"];
 alert( fruits ); // Apple,Orange,Plum
 ```
 
-An array can store elements of any type.
+element có thể là bất cứ loại dữ liệu nào.
 
-For instance:
+Ví dụ:
 
 ```js run no-beautify
 // mix of values
@@ -82,7 +82,7 @@ arr[3](); // hello
 
 
 ````smart header="Trailing comma"
-An array, just like an object, may end with a comma:
+Một array, cũng như object, nên kết thúc bởi dấu phẩy:
 ```js 
 let fruits = [
   "Apple", 
@@ -91,46 +91,44 @@ let fruits = [
 ];
 ```
 
-The "trailing comma" style makes it easier to insert/remove items, because all lines become alike.
+"trailing comma" dễ dàng hơn cho việc insert/remove items, bởi vì tất cả các dòng đều như nhau.
 ````
 
 
 ## Methods pop/push, shift/unshift
 
-A [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) is one of most common uses of an array. In computer science, this means an ordered collection of elements which supports two operations:
+Một hàng đợi [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) là một trong những cách dùng array phổ biến. Trong khoa học máy tính, hàng đợi là một bộ thứ tự hỗ trợ các hành động:
 
-- `push` appends an element to the end.
-- `shift` get an element from the beginning, advancing the queue, so that the 2nd element becomes the 1st.
+- `push` nối một element vào cuối.
+- `shift` lấy element đầu tiên, và loại nó ra khỏi queue, cho nên 2nd element sẽ trở thành 1st.
 
 ![](queue.png)
 
-Arrays support both operations.
+Arrays hỗ trợ cả hai hành động trên.
 
-In practice we meet it very often. For example, a queue of messages that need to be shown on-screen.
+Trong thực tế ta gặp các queue rất nhiều, ví dụ một message list để in ra màn hình.
 
-There's another use case for arrays -- the data structure named [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)). 
+Có một cách sử dụng khác với arrays -- một cấu trúc dữ liệu có tên là ngăn xếp [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)). 
 
-It supports two operations:
+Nó hỗ trợ hai hành động:
 
-- `push` adds an element to the end.
-- `pop` takes an element to the end.
+- `push` thêm element vào cuối stack.
+- `pop` bõ element cuối stack.
 
-So new elements are added or taken always from the "end".
-
-A stack is usually illustrated as a pack of cards: new cards are added to the top or taken from the top:
+element được thêm hay loại bõ đều ở cuối stack.
 
 ![](stack.png)
 
-For stacks, the latest pushed item is received first, that's also called LIFO (Last-In-First-Out) principle. For queues, we have FIFO (First-In-First-Out).
+Với stack, element được đưa vào cuối cùng sẽ được lấy ra đầu tiên, nguyên tắc này gọi là LIFO (Last-In-First-Out). Với queue, ta có FIFO (First-In-First-Out).
 
-Arrays in JavaScript can work both as a queue and as a stack. They allow to add/remove elements both to/from the beginning or the end. 
+Arrays trong JavaScript có thể hoạt động như queue và stack. Chúng cho phép add/remove elements theo phía bắt đầu lẫn cuối array. 
 
-In computer science the data structure that allows it is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+Trong khoa học máy tính, những cấu trúc dữ liệu như thế được gọi là hàng đợi hai đầu [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
 
-**Methods that work with the end of the array:**
+**Methods hoạt động theo element cuối array:**
 
 `pop`
-: Extracts the last element of the array and returns it:
+: Lấy element cuối cùng ra khỏi array, trả về chính element đó:
 
     ```js run
     let fruits = ["Apple", "Orange", "Pear"];
@@ -141,7 +139,7 @@ In computer science the data structure that allows it is called [deque](https://
     ```
 
 `push`
-: Append the element to the end of the array:
+: thêm element vào cuối array, trả về length của array:
 
     ```js run
     let fruits = ["Apple", "Orange"];
@@ -156,7 +154,7 @@ In computer science the data structure that allows it is called [deque](https://
 **Methods that work with the beginning of the array:**
 
 `shift`
-: Extracts the first element of the array and returns it:
+: Lấy element đầu tiên ra khỏi array, trả về element đó:
 
     ```js
     let fruits = ["Apple", "Orange", "Pear"];
@@ -167,7 +165,7 @@ In computer science the data structure that allows it is called [deque](https://
     ```
 
 `unshift`
-: Add the element to the beginning of the array:
+: thêm element vào đầu array, trả về length của array:
 
     ```js
     let fruits = ["Orange", "Pear"];
@@ -177,7 +175,7 @@ In computer science the data structure that allows it is called [deque](https://
     alert( fruits ); // Apple, Orange, Pear
     ```
 
-Methods `push` and `unshift` can add multiple elements at once:
+Methods `push` và `unshift` có thể add nhiều element trong một lần gọi:
 
 ```js run
 let fruits = ["Apple"];
@@ -191,13 +189,13 @@ alert( fruits );
 
 ## Internals
 
-An array is a special kind of object. The square brackets used to access a property `arr[0]` actually come from the object syntax. Numbers are used as keys. 
+Array là một kiểu object đặc biệt. Cặp ngoặc vuông để truy xuất property `arr[0]` thực sự là đến từ cú pháp của object. Numbers được sử dụng làm keys. 
 
-They extend objects providing special methods to work with ordered collections of data and also the `length` property. But at the core it's still an object.
+Object này được mở rộng để cung cấp thêm các method, cũng như `length` property. Nhưng về cơ bản thì array vẫn là một object.
 
-Remember, there are only 7 basic types in JavaScript. Array is an object and thus behaves like an object. 
+Nên nhớ chỉ có 7 kiểu dữ liệu trong JavaScript. Array chỉ là object, và do đó các hành vi của nó tương tự object. 
 
-For instance, it is copied by reference:
+Ví dụ, nó cũng được copy bởi tham chiếu:
 
 ```js run
 let fruits = ["Banana"]
@@ -211,11 +209,11 @@ arr.push("Pear"); // modify the array by reference
 alert( fruits ); // Banana, Pear - 2 items now
 ```
 
-...But what makes arrays really  special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
+...nhưng cái gì làm cho array trở nên đặc biệt? JavaScript Engine sẽ lưu trữ chúng trong một vùng nhớ liên tục, element này nối tiếp element khác, như cách ta tìm hiểu về JS engine tối ưu ở các chương trước, sử dụng array cũng giúp cho chương trình chạy nhanh hơn là object.
 
-But they all break if we quit working with an array as with an "ordered collection" and start working with it as if it were a regular object.
+Nhưng sẽ là không ổn nếu ta sử dụng array theo cách của object.
 
-For instance, technically we can do this:
+Ví dụ, về kỹ thuật code như bên dưới vẫn chạy được:
 
 ```js
 let fruits = []; // make an array
@@ -225,47 +223,47 @@ fruits[99999] = 5; // assign a property with the index far greater than its leng
 fruits.age = 25; // create a property with an arbitrary name
 ```
 
-That's possible, because arrays are objects at their base. We can add any properties to them.
+Điều này có thể, vì array vẫn là object, nên nó cũng có các property.
 
-But the engine will see that we're working with the array as with a regular object. Array-specific optimizations are not suited for such cases and will be turned off, their benefits disappear.
+Nhưng JS Engine sẽ coi array như một object chính quy. Và những ưu điểm của aray trong việc tối ưu cho chương trình sẽ bị bõ qua.
 
-The ways to misuse an array:
+Những cách lạm dụng array mà ta không nên sử dụng:
 
-- Add a non-numeric property like `arr.test = 5`. 
-- Make holes, like: add `arr[0]` and then `arr[1000]` (and nothing between them).
-- Fill the array in the reverse order, like `arr[1000]`, `arr[999]` and so on.
+- Thêm một non-numeric property như `arr.test = 5`. 
+- Tạo các lỗ trống: add `arr[0]` và sau đó `arr[1000]` (không có gì ở giữa chúng).
+- Lấp đầy array theo thứ tự ngược `arr[1000]`, `arr[999]` ...
 
-Please think of arrays as special structures to work with the *ordered data*. They provide special methods for that. Arrays are carefully tuned inside JavaScript engines to work with contiguous ordered data, please use them this way. And if you need arbitrary keys, chances are high that you actually require a regular object `{}`.
+Hãy suy nghĩ array như với một bộ *dữ liệu có thứ tự*. Chúng cung cấp các method đặc biệt. Arrays được điều chỉnh trong JavaScript engines để làm việc với dữ liệu một cách liên tục, hãy sử dụng chúng với cách này. Nếu muốn sử dụng một key trừu tượng, hãy sử dụng nó với `{}`.
 
 ## Performance
 
-Methods `push/pop` run fast, while `shift/unshift` are slow.
+Methods `push/pop` chạy rất nhanh, nhưng `shift/unshift` thì chậm.
 
 ![](array-speed.png)
 
-Why is it faster to work with the end of an array than with its beginning? Let's see what happens during the execution:
+Tại sao nhanh khi xử lý cuối array và chậm nếu method xử lý đầu aray? Ta sẽ xem xét điều gì xảy ra khi thực hiện các methods này:
 
 ```js
 fruits.shift(); // take 1 element from the start
 ```
 
-It's not enough to take and remove the element with the number `0`. Other elements need to be renumbered as well.
+Sẽ không đủ nếu chỉ bõ element ở vị trí `0`. Các element khác cần được đánh số thứ tự lại.
 
-The `shift` operation must do 3 things:
+Method `shift` sẽ làm 3 bước:
 
-1. Remove the element with the index `0`.
-2. Move all elements to the left, renumber them from the index `1` to `0`, from `2` to `1` and so on.
-3. Update the `length` property.
+1. Xóa element có index `0`.
+2. Di chuyển các element khác sang trái,  `1` đến `0`, từ `2` đến `1` ...
+3. Cập nhật lại `length` property.
 
 ![](array-shift.png)
 
-**The more elements in the array, the more time to move them, more in-memory operations.**
+**Càng có nhiều element trong array, càng di chuyển nhiều , chương trình sẽ càng chậm.**
 
-The similar thing happens with `unshift`: to add an element to the beginning of the array, we need first to move existing elements to the right, increasing their indexes.
+Tương tự với `unshift`: để thêm element vào đầu array, các element sẽ phải di chuyển sang phải.
 
-And what's with `push/pop`? They do not need to move anything. To extract an element from the end, the `pop` method cleans the index and shortens `length`.
+Và với `push/pop`? Các element sẽ không phải di chuyển, mà chỉ thêm/xóa element cuối cùng, và cập nhật lại `length`.
 
-The actions for the `pop` operation:
+Hoạt động của `pop`:
 
 ```js
 fruits.pop(); // take 1 element from the end
@@ -273,13 +271,13 @@ fruits.pop(); // take 1 element from the end
 
 ![](array-pop.png)
 
-**The `pop` method does not need to move anything, because other elements keep their indexes. That's why it's blazingly fast.**
+**Method `pop` không cần di chuyển element, bởi vì chúng vẫn giữ nguyên index. Vì vậy nó chạy rất nhanh.**
 
-The similar thing with the `push` method.
+Tương tự với method `push`.
 
 ## Loops
 
-One of the oldest ways to cycle array items is the `for` loop over indexes:
+Một cách cổ xưa hay dùng là `for` với các indexes của array:
 
 ```js run
 let arr = ["Apple", "Orange", "Pear"];
@@ -291,7 +289,7 @@ for (let i = 0; i < arr.length; i++) {
 }
 ```
 
-But for arrays there is another form of loop, `for..of`:
+Nhưng ta có một cách khác hay hơn là, `for..of`:
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -302,9 +300,9 @@ for(let fruit of fruits) {
 }
 ```
 
-The `for..of` doesn't give access to the number of the current element, just its value, but in most cases that's enough. And it's shorter.
+Lệnh `for..of` không cho ra index của element, chỉ cho giá trị của element. Và hầu hết các trường hợp như thế là quá đủ.
 
-Technically, because arrays are objects, it is also possible to use `for..in`:
+Về mặt kỹ thuậ, vì array là một object nên có thể sử dụng `for..in`:
 
 ```js run
 let arr = ["Apple", "Orange", "Pear"];
@@ -316,22 +314,22 @@ for (let key in arr) {
 }
 ```
 
-But that's actually a bad idea. There are potential problems with it:
+Nhưng đó thực sự là một ý tưởng tồi. Có những vấn đề tiềm ẩn:
 
-1. The loop `for..in` iterates over *all properties*, not only the numeric ones.
+1. Vòng lặp `for..in` lặp qua *tất cả properties*, không chỉ là các numeric property.
 
-    There are so-called "array-like" objects in the browser and in other environments, that *look like arrays*. That is, they have `length` and indexes properties, but they may also have other non-numeric properties and methods, which we usually don't need. The `for..in` loop will list them though. So if we need to work with array-like objects, then these "extra" properties can become a problem.
+    Và trong array sẽ có nhiều property khác như length, các method....
 
-2. The `for..in` loop is optimized for generic objects, not arrays, and thus is 10-100 times slower. Of course, it's still very fast. The speedup may matter only in bottlenecks or just irrelevant. But still we should be aware of the difference.
+2. Vòng lặp `for..in` được tối ưu cho các object tiêu chuẩn, không phải arrays, và do đó sẽ bị chậm 10-100 lần. Tất nhiên vẫn rất nhanh, nhưng nếu như ta dùng một triệu lần như thế thì chương trình sẽ chậm đi quá nhiều đúng không.
 
-Generally, we shouldn't use `for..in` for arrays.
+Nói tóm lại, chỉ nên dùng `for..in` đối với arrays.
 
 
-## A word about "length"
+## Nói về "length"
 
-The `length` property automatically updates when we modify the array. To be precise, it is actually not the count of values in the array, but the greatest numeric index plus one.
+`length` property tự động cập nhật khi ta chỉnh sửa array. Nói tóm lại, giá trị của nó bằng với index lớn nhất, chứ không phải là đếm số index.
 
-For instance, a single element with a large index gives a big length:
+Ví dụ:
 
 ```js run
 let fruits = [];
@@ -340,11 +338,11 @@ fruits[123] = "Apple";
 alert( fruits.length ); // 124
 ```
 
-Note that we usually don't use arrays like that. 
+Chú ý là không sử dụng như ví dụ trên, lấy ra để hiểu vấn đề thôi. 
 
-Another interesting thing about the `length` property is that it's writable.
+Một sự thú vị khác với `length` property là có thể ghi đè.
 
-If we increase it manually, nothing interesting happens. But if we decrease it, the array is truncated. The process is irreversible, here's the example:
+Nếu ta tăng giá trị của length sẽ chẳng có gì xảy ra, nhưng nếu ta giảm giá trị của length, array sẽ bị cắt đi một phần:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -356,22 +354,22 @@ arr.length = 5; // return length back
 alert( arr[3] ); // undefined: the values do not return
 ```
 
-So, the simplest way to clear the array is: `arr.length=0`.
+Nên cách đơn giản nhất để xóa một array là: `arr.length=0`.
 
 
 ## new Array() [#new-array]
 
-There is one more syntax to create an array:
+Có một cú pháp khác để tạo ra một array:
 
 ```js
 let arr = *!*new Array*/!*("Apple", "Pear", "etc");
 ```
 
-It's rarely used, because square brackets `[]` are shorter. Also there's a tricky feature with it.
+Nó ít được sử dụng, vì dùng`[]` sẽ ngắn gọn hơn.
 
-If `new Array` is called with a single argument which is a number, then it creates an array *without items, but with the given length*.
+Nếu `new Array` được gọi với một tham số là số nguyên *sẽ không có items, nhưng độ dài của aray chính là số nguyên đó*.
 
-Let's see how one can shoot himself in the foot:
+Xem ví dụ:
 
 ```js run
 let arr = new Array(2); // will it create an array of [2] ?
@@ -381,13 +379,13 @@ alert( arr[0] ); // undefined! no elements.
 alert( arr.length ); // length 2
 ```
 
-In the code above, `new Array(number)` has all elements `undefined`.
+Trong code trên, `new Array(number)` có các element đều là `undefined`.
 
-To evade such surprises, we usually use square brackets, unless we really know what we're doing.
+Để tránh những điều trên, nên dùng cặp ngoặc vuông để tạo ra array.
 
-## Multidimentional arrays
+## Mãng nhiều chiều
 
-Arrays can have items that are also arrays. We can use it for multidimentional arrays, to store matrices:
+Arrays có thể có các item là arrays. Ta dùng nó để biễu diễn mãng nhiều chiều, như ma trận:
 
 ```js run
 let matrix = [
@@ -401,9 +399,9 @@ alert( matrix[1][1] ); // the central element
 
 ## toString
 
-Arrays have their own implementation of `toString` method that returns a comma-separated list of elements.
+Arrays có method `toString` riêng của nó, trả về các elements được phân tách bởi dấu phẩy.
 
-For instance:
+ví dụ:
 
 
 ```js run
@@ -413,7 +411,7 @@ alert( arr ); // 1,2,3
 alert( String(arr) === '1,2,3' ); // true
 ```
 
-Also, let's try this:
+Thử:
 
 ```js run
 alert( [] + 1 ); // "1"
@@ -421,9 +419,9 @@ alert( [1] + 1 ); // "11"
 alert( [1,2] + 1 ); // "1,21"
 ```
 
-Arrays do not have `Symbol.toPrimitive`, neither a viable `valueOf`, they implement only `toString` conversion, so here `[]` becomes an empty string, `[1]` becomes `"1"` and `[1,2]` becomes `"1,2"`.
+Arrays không có `Symbol.toPrimitive`, và `valueOf`, Chúng chỉ có `toString` conversion, nên ở đây `[]` trở thành một chuỗi rỗng '', và `[1]` thành `"1"` và `[1,2]` thành `"1,2"`.
 
-When the binary plus `"+"` operator adds something to a string, it converts it to a string as well, so the next step looks like this:
+Khi dùng toán tử `"+"`, nếu có một toán hạng là string thì sẽ convert thành string:
 
 ```js run
 alert( "" + 1 ); // "1"
@@ -431,11 +429,11 @@ alert( "1" + 1 ); // "11"
 alert( "1,2" + 1 ); // "1,21"
 ```
 
-## Summary
+## Tổng kết
 
-Array is a special kind of objects, suited to store and manage ordered data items.
+Array là một objects đặc biệt, dùng lưu trữ dữ liệu có thứ tự.
 
-- The declaration:
+- Khai báo:
 
     ```js
     // square brackets (usual)
@@ -445,22 +443,22 @@ Array is a special kind of objects, suited to store and manage ordered data item
     let arr = new Array(item1, item2...);
     ```
 
-    The call to `new Array(number)` creates an array with the given length, but without elements.
+    Gọi `new Array(number)` tạo ra một array với length = number, nhưng không có elements.
 
-- The `length` property is the array length or, to be precise, its last numeric index plus one. It is auto-adjusted by array methods. 
-- If we shorten `length` manually, the array is truncated.
+- `length` property là độ dài của arrat. Nó bằng index lớn nhất, và tự cập nhật khi array thay đổi. 
+- Nếu giảm giá trị `length`, array sẽ bị cắt bỏ một phần.
 
-We can use an array as a deque with the following operations:
+Ta sử dụng array như một deque:
 
-- `push(...items)` adds `items` to the end.
-- `pop()` removes the element from the end and returns it.
-- `shift()` removes the element from the beginning and returns it.
-- `unshift(...items)` adds items to the beginning.
+- `push(...items)` thêm `items` vào cuối.
+- `pop()` xóa item ở cuối và trả về item đó.
+- `shift()` xóa item ở đầu và trả về item đó.
+- `unshift(...items)` thêm item ở đầu.
 
-To loop over the elements of the array:
-  - `for(let i=0; i<arr.length; i++)` -- works fastest, old-browser-compatible.
-  - `for(let item of arr)` -- the modern syntax for items only,
-  - `for(let i in arr)` -- never use.
+Lặp qua các element của array:
+  - `for(let i=0; i<arr.length; i++)` -- chạy nhanh, theo phong cách cũ.
+  - `for(let item of arr)` -- chạy nhanh, theo cách hiện đại,
+  - `for(let i in arr)` -- đừng bao giờ dùng cách này.
 
-We will return to arrays and study more methods to add, remove, extract elements and sort arrays in the chapter <info:array-methods>.
+Ta sẽ học thêm nhiều method của array ở chương <info:array-methods>.
 
