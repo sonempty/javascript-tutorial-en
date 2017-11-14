@@ -378,8 +378,6 @@ alert(arr);  // *!*1, 2, 15*/!*
 
 Bây giờ nó hoạt động như mong muốn.
 
-Let's step aside and think what's happening. The `arr` can be array of anything, right? It may contain numbers or strings or html elements or whatever. We have a set of *something*. To sort it, we need an *ordering function* that knows how to compare its elements. The default is a string order.
-
 Method `arr.sort(fn)` tự thực hiện các thuật toán phân loại. Ta không cần quan tâm nó hoạt động bằng cách nào (Một cách sắp xếp tối ưu [quicksort](https://en.wikipedia.org/wiki/Quicksort) hầu hết thời gian). Nó sẽ lướt qua array, thực hiện các phép so sánh theo hàm `fn` mà ta cung cấp để thực hiện các phép so sánh.
 
 Nhân tiện, nếu chúng ta muốn biết những element nào được so sánh -- không có gì xuất hiện khi alert chúng:
@@ -554,11 +552,9 @@ alert( result ); // 15
 
 Kết quả vẫn thế. Bởi vì nếu không có giá trị khởi tạo, thì `reduce` lấy giá trị element đầu tiên làm giá trị khởi tạo, và lặp tiếp từ element thứ hai.
 
-The calculation table is the same as above, minus the first row.
+Chý ý nếu `arr` là rỗng, thì `reduce` sẽ lỗi nếu không thiết lập giá trị khởi tạo.
 
-But such use requires an extreme care. If the array is empty, then `reduce` call without initial value gives an error.
-
-Here's an example:
+Ví dụ:
 
 ```js run
 let arr = [];
@@ -569,30 +565,30 @@ arr.reduce((sum, current) => sum + current);
 ```
 
 
-So it's advised to always specify the initial value.
+Tốt nhất là nên thiết lập giá trị khởi tạo.
 
-The method [arr.reduceRight](mdn:js/Array/reduceRight) does the same, but goes from right to left.
+Method [arr.reduceRight](mdn:js/Array/reduceRight) cũng tương tự như vậy nhưng thực hiện từ phải sang trái.
 
 
 ## Iterate: forEach
 
-The [arr.forEach](mdn:js/Array/forEach) method allows to run a function for every element of the array.
+Method [arr.forEach](mdn:js/Array/forEach) cho phép gọi một hàm với mỗi element của array.
 
-The syntax:
+Cú pháp:
 ```js
 arr.forEach(function(item, index, array) {
   // ... do something with item
 });
 ```
 
-For instance, this shows each element of the array:
+Ví dụ show mỗi element của array:
 
 ```js run
 // for each element call alert
 ["Bilbo", "Gandalf", "Nazgul"].forEach(alert);
 ```
 
-And this code is more elaborate about their positions in the target array:
+Hay phức tạp hơn:
 
 ```js run
 ["Bilbo", "Gandalf", "Nazgul"].forEach((item, index, array) => {
@@ -600,20 +596,20 @@ And this code is more elaborate about their positions in the target array:
 });
 ```
 
-The result of the function (if it returns any) is thrown away and ignored.
+Kết quả của hàm sẽ bị bõ đi (hàm return cái gì cũng không quan tâm).
 
 ## Array.isArray
 
-Arrays do not form a separate language type. They are based on objects.
+Arrays Không phải là một kiểu riêng. Chúng cũng là objects.
 
-So `typeof` does not help to distinguish a plain object from an array:
+nên `typeof` không giúp ta phân biệt được một array hay không:
 
 ```js run
 alert(typeof {}); // object
 alert(typeof []); // same
 ```
 
-...But arrays are used so often that there's a special method for that: [Array.isArray(value)](mdn:js/Array/isArray). It returns `true` if the `value` is an array, and `false` otherwise.
+...Nhưng array có một method để kiểm tra: [Array.isArray(value)](mdn:js/Array/isArray). Nó trả về `true` nếu `value` thực sự là array, và `false` ngược lại.
 
 ```js run
 alert(Array.isArray({})); // false
@@ -621,13 +617,13 @@ alert(Array.isArray({})); // false
 alert(Array.isArray([])); // true
 ```
 
-## Most methods support "thisArg"
+## "thisArg"
 
-Almost all array methods that call functions -- like `find`, `filter`, `map`, with a notable exception of `sort`, accept an optional additional parameter `thisArg`.
+Hầu hết các array method mà có gọi hàm -- như `find`, `filter`, `map`, với một ngoại lệ là `sort`, chấp nhận tham số tùy chọn `thisArg`.
 
-That parameter is not explained in the sections above, because it's rarely used. But for completeness we have to cover it.
+Tham số này ta chưa học, vì thực sự nó ít khi được dùng. Nhưng để cho hoàn thiện, ta nên biết về nó.
 
-Here's the full syntax of these methods:
+Đây là cú pháp đầy đủ:
 
 ```js
 arr.find(func, thisArg);
@@ -637,9 +633,9 @@ arr.map(func, thisArg);
 // thisArg is the optional last argument
 ```
 
-The value of `thisArg` parameter becomes `this` for `func`.
+Giá trị của tham  số `thisArg` là `this` cho `func`.
 
-For instance, here we use an object method as a filter and `thisArg` comes in handy:
+Ví dụ ta dùng một object method để làm hàm filter và `thisArg` sẽ dùng cho việc này:
 
 ```js run
 let user = {
@@ -663,13 +659,13 @@ let youngerUsers = users.filter(user.younger, user);
 alert(youngerUsers.length); // 2
 ```
 
-In the call above, we use `user.younger` as a filter and also provide `user` as the context for it. If we didn't provide the context, `users.filter(user.younger)` would call `user.younger` as a standalone function, with `this=undefined`. That would mean an instant error.
+Ta dùng `user.younger` như một hàm filter và cung cấp `user` như một ngữ cảnh cho nó. Nếu không có ngữ cảnh, `users.filter(user.younger)` sẽ gọi `user.younger` như một standalone function, với `this=undefined`.
 
-## Summary
+## Tổng kết
 
-A cheatsheet of array methods:
+Một cheatsheet cho array methods:
 
-- To add/remove elements:
+- Để add/remove elements:
   - `push(...items)` -- adds items to the end,
   - `pop()` -- extracts an item from the end,
   - `shift()` -- extracts an item from the beginning,
